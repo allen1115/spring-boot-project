@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
@@ -78,7 +78,7 @@
                         <span id="menu-title">Attendance System</span>
                         <ul id="menu-top" class="nav navbar-nav navbar-right">
                             <li><a class="menu-top-active" href="index.html">Dashboard</a></li>
-                            <li><a href="/upload">Data Upload</a></li>
+                            <li><a shiro:hasPermission="add" href="/upload">Data Upload</a></li>
                             <li><a href="roleM.html">Role Management</a></li>                                                        
                             <li><a href="ui.html">UI Elements</a></li>
                             <li><a href="table.html">Data Tables</a></li>
