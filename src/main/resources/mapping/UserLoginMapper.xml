@@ -1,41 +1,51 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.demo.dao.UserLoginMapper">
     <resultMap id="BaseResultMap" type="com.example.demo.entity.UserLogin">
-        <id column="id" jdbcType="BIGINT" property="id"/>
-        <result column="username" jdbcType="VARCHAR" property="username"/>
-        <result column="password" jdbcType="VARCHAR" property="password"/>
-        <result column="inactive_date" jdbcType="TIMESTAMP" property="inactiveDate"/>
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="inactive_date" property="inactiveDate" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <resultMap type="com.example.demo.entity.UserLogin" id="userMap">
+        <id property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <collection property="roles" ofType="com.example.demo.entity.Role">
+            <id property="rid" column="rid"/>
+            <result property="rname" column="rname"/>
+            <collection property="modules" ofType="com.example.demo.entity.Module">
+                <id property="mid" column="mid"/>
+                <result property="mname" column="mname"/>
+            </collection>
+        </collection>
     </resultMap>
     <sql id="Base_Column_List">
     id, username, password, inactive_date
   </sql>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select
         <include refid="Base_Column_List"/>
         from user_login
         where id = #{id,jdbcType=BIGINT}
     </select>
-
-    <select id="findUserByUsername" parameterType="java.lang.String" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from user_login
-        where username = #{username, jdbcType=VARCHAR}
-    </select>
-
+    <select id="findUserByUsername" parameterType="string" resultMap="userMap">
+    SELECT u.*,r.*,m.* FROM user_login u inner join user_role ur on ur.id=u.id
+    inner join role r on r.rid=ur.rid
+    inner join module_role mr on mr.rid=r.rid
+    inner join module m on mr.mid=m.mid
+    WHERE username=#{username};
+  </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-        delete from user_login
-        where id = #{id,jdbcType=BIGINT}
-    </delete>
-
+    delete from user_login
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
     <insert id="insert" parameterType="com.example.demo.entity.UserLogin">
-        insert into user_login (id, username, password,
-          inactive_date)
-        values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
-          #{inactiveDate,jdbcType=TIMESTAMP})
-    </insert>
-
+    insert into user_login (id, username, password, 
+      inactive_date)
+    values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{inactiveDate,jdbcType=TIMESTAMP})
+  </insert>
     <insert id="insertSelective" parameterType="com.example.demo.entity.UserLogin">
         insert into user_login
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -67,7 +77,6 @@
             </if>
         </trim>
     </insert>
-
     <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.entity.UserLogin">
         update user_login
         <set>
@@ -83,12 +92,11 @@
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
-
     <update id="updateByPrimaryKey" parameterType="com.example.demo.entity.UserLogin">
-        update user_login
-        set username = #{username,jdbcType=VARCHAR},
-          password = #{password,jdbcType=VARCHAR},
-          inactive_date = #{inactiveDate,jdbcType=TIMESTAMP}
-        where id = #{id,jdbcType=BIGINT}
-    </update>
+    update user_login
+    set username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      inactive_date = #{inactiveDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
 </mapper>

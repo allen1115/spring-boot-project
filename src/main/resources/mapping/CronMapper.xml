@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.CronMapper" >
+  <resultMap id="BaseResultMap" type="com.example.demo.entity.Cron" >
+    <id column="cron_id" property="cronId" jdbcType="BIGINT" />
+    <result column="cron" property="cron" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    cron_id, cron
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from cron
+    where cron_id = #{cronId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from cron
+    where cron_id = #{cronId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.entity.Cron" >
+    insert into cron (cron_id, cron)
+    values (#{cronId,jdbcType=BIGINT}, #{cron,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.entity.Cron" >
+    insert into cron
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cronId != null" >
+        cron_id,
+      </if>
+      <if test="cron != null" >
+        cron,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cronId != null" >
+        #{cronId,jdbcType=BIGINT},
+      </if>
+      <if test="cron != null" >
+        #{cron,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.entity.Cron" >
+    update cron
+    <set >
+      <if test="cron != null" >
+        cron = #{cron,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where cron_id = #{cronId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.entity.Cron" >
+    update cron
+    set cron = #{cron,jdbcType=VARCHAR}
+    where cron_id = #{cronId,jdbcType=BIGINT}
+  </update>
+</mapper>

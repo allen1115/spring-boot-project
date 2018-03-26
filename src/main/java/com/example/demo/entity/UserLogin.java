@@ -1,6 +1,8 @@
 package com.example.demo.entity;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 public class UserLogin {
     private Long id;
@@ -10,6 +12,16 @@ public class UserLogin {
     private String password;
 
     private Date inactiveDate;
+
+    private Set<Role> roles = new HashSet<>();
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
 
     public Long getId() {
         return id;
