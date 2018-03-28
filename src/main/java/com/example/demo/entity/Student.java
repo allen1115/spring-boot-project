@@ -13,6 +13,16 @@ public class Student {
 
     private Integer yearOfProgram;
 
+    private Double avgAttendance;
+
+    public Double getAvgAttendance() {
+        return avgAttendance;
+    }
+
+    public void setAvgAttendance(Double avgAttendance) {
+        this.avgAttendance = avgAttendance;
+    }
+
     public Long getId() {
         return id;
     }

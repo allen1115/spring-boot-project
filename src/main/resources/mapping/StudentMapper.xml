@@ -10,7 +10,7 @@
     <result column="year_of_program" jdbcType="INTEGER" property="yearOfProgram" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, email, name, program, status, year_of_program
+    id, email, name, program, status, year_of_program, avg_attendance
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -33,7 +33,7 @@
       program, status, year_of_program
       )
     values (#{id,jdbcType=BIGINT}, #{email,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{program,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{yearOfProgram,jdbcType=INTEGER}
+      #{program,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{yearOfProgram,jdbcType=INTEGER}, #{}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.example.demo.entity.Student">
@@ -108,5 +108,10 @@
       status = #{status,jdbcType=VARCHAR},
       year_of_program = #{yearOfProgram,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateAvgAttendance">
+    UPDATE student
+    set avg_attendance = #{avgAttendance}
+    where id = #{id}
   </update>
 </mapper>

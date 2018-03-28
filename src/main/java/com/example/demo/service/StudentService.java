@@ -7,4 +7,6 @@ public interface StudentService {
     Student findStudentByName(String name);
 
     int addStudent(Student student);
+
+    int updateStudentAvgAttendance(Long studentId);
 }

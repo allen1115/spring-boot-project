@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.AttendanceThresholdConfigMapper" >
+  <resultMap id="BaseResultMap" type="com.example.demo.entity.AttendanceThresholdConfig" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="first_level" property="firstLevel" jdbcType="DOUBLE" />
+    <result column="second_level" property="secondLevel" jdbcType="DOUBLE" />
+    <result column="third_level" property="thirdLevel" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, first_level, second_level, third_level
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from attendance_threshold_config
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from attendance_threshold_config
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.entity.AttendanceThresholdConfig" >
+    insert into attendance_threshold_config (id, first_level, second_level, 
+      third_level)
+    values (#{id,jdbcType=INTEGER}, #{firstLevel,jdbcType=DOUBLE}, #{secondLevel,jdbcType=DOUBLE}, 
+      #{thirdLevel,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.entity.AttendanceThresholdConfig" >
+    insert into attendance_threshold_config
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="firstLevel != null" >
+        first_level,
+      </if>
+      <if test="secondLevel != null" >
+        second_level,
+      </if>
+      <if test="thirdLevel != null" >
+        third_level,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="firstLevel != null" >
+        #{firstLevel,jdbcType=DOUBLE},
+      </if>
+      <if test="secondLevel != null" >
+        #{secondLevel,jdbcType=DOUBLE},
+      </if>
+      <if test="thirdLevel != null" >
+        #{thirdLevel,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.entity.AttendanceThresholdConfig" >
+    update attendance_threshold_config
+    <set >
+      <if test="firstLevel != null" >
+        first_level = #{firstLevel,jdbcType=DOUBLE},
+      </if>
+      <if test="secondLevel != null" >
+        second_level = #{secondLevel,jdbcType=DOUBLE},
+      </if>
+      <if test="thirdLevel != null" >
+        third_level = #{thirdLevel,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.entity.AttendanceThresholdConfig" >
+    update attendance_threshold_config
+    set first_level = #{firstLevel,jdbcType=DOUBLE},
+      second_level = #{secondLevel,jdbcType=DOUBLE},
+      third_level = #{thirdLevel,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

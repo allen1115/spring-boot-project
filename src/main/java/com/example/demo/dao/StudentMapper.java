@@ -1,6 +1,7 @@
 package com.example.demo.dao;
 
 import com.example.demo.entity.Student;
+import org.apache.ibatis.annotations.Param;
 
 public interface StudentMapper {
     int deleteByPrimaryKey(Long id);
@@ -15,6 +16,7 @@ public interface StudentMapper {
 
     int updateByPrimaryKey(Student record);
 
-
     Student findStudentByName(String name);
+
+    int updateAvgAttendance(@Param("id") Long id, @Param("avgAttendance") Double avgAttendance);
 }

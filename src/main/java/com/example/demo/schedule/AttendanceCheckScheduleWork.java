@@ -43,4 +43,8 @@ public class AttendanceCheckScheduleWork implements SchedulingConfigurer {
                 }
         );
     }
+
+    private void checkAttendance() {
+
+    }
 }
