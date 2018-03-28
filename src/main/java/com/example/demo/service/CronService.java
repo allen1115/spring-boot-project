@@ -4,5 +4,5 @@ import com.example.demo.entity.Cron;
 
 public interface CronService {
 
-    Cron getCronExpression();
+    Cron getCronExpression(Long id);
 }

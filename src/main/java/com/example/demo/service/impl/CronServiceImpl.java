@@ -14,7 +14,7 @@ public class CronServiceImpl implements CronService {
     private CronMapper cronMapper;
 
     @Override
-    public Cron getCronExpression() {
-        return cronMapper.selectByPrimaryKey(1L);
+    public Cron getCronExpression(Long id) {
+        return cronMapper.selectByPrimaryKey(id);
     }
 }
