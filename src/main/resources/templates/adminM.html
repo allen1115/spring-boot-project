@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <!--[if IE]>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <![endif]-->
+    <title>Attendance System</title>
+    <!-- BOOTSTRAP CORE STYLE  -->
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <!-- FONT AWESOME ICONS  -->
+    <link href="css/font-awesome.css" rel="stylesheet" />
+    <!-- CUSTOM STYLE  -->
+    <link href="css/style.css" rel="stylesheet" />
+    <script src="js/jquery-1.11.1.js"></script>
+    <!-- BOOTSTRAP SCRIPTS  -->
+    <script src="js/bootstrap.js"></script>
+    <script src="js/index.js"></script>
+    <!-- HTML5 Shiv and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<!-- HEADER END-->
+<div class="navbar navbar-inverse set-radius-zero">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">
+                Attendance System
+            </a>
+
+        </div>
+
+        <div class="left-div">
+            <div class="user-settings-wrapper">
+                <ul class="nav">
+
+                    <li class="dropdown" id="log_info">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                            <span class="glyphicon glyphicon-user" style="font-size: 25px;"></span>
+                        </a>
+                        <div class="dropdown-menu dropdown-settings">
+                            <div class="media">
+                                <div class="media-body">
+                                    <h4 class="media-heading">Jhon Deo Alex </h4>
+                                    <h5>Developer & Designer</h5>
+
+                                </div>
+                            </div>
+                            <hr />
+                            <h5><strong>Personal Bio : </strong></h5>
+                            Anim pariatur cliche reprehen derit.
+                            <hr />
+                            <a href="login.html" class="btn btn-danger btn-sm">Logout</a>
+
+                        </div>
+                    </li>
+
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- body -->
+<!-- LOGO HEADER END-->
+<link rel="stylesheet" href="css/jquery-cron.css">
+<link rel="stylesheet" href="css/jquery-gentleSelect.css">
+
+<section class="menu-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="navbar-collapse collapse ">
+                    <span id="menu-title">Attendance System</span>
+                    <ul id="menu-top" class="nav navbar-nav navbar-right">
+                        <li><a href="/index">Dashboard</a></li>
+                        <li><a href="/upload">Data Upload</a></li>
+                        <li><a href="/role">Role Management</a></li>
+                        <li><a href="/admin" class="menu-top-active">Admin Management</a></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- body -->
+
+
+
+
+<!-- MENU SECTION END-->
+<div class="content-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h4 class="page-head-line">Admin Management</h4>
+            </div>
+        </div>
+        <ul class='row nav nav-tabs'>
+            <li class="active">
+                <a  href="#1" data-toggle="tab">Check timeframe</a>
+            </li>
+            <li><a href="#2" data-toggle="tab">Number of attendance checks</a>
+            </li>
+            <li><a href="#3" data-toggle="tab">Time interval</a>
+            </li>
+            <li><a href="#4" data-toggle="tab">Percentage thresholds</a>
+            </li>
+            <li><a href="#5" data-toggle="tab">Level of attendance</a>
+            </li>
+
+        </ul>
+
+
+
+
+        <div class="row tab-content" id='admin_index'>
+            <div class='col-md-12 tab-pane active' id="1" style="text-align:left">
+
+                <div class='col-md-12'>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <span class="legend">Pick Time</span>
+                        </div>
+                        <div class="col-md-10" data-has-error="time[picker]" id='cronTime'>
+                            <!-- Specific time in the day -->
+                            <div class="radio radio-time radio-specific-time" data-has-error="time[specificTime][hour] time[specificTime][minute]">
+                                <label style="padding-left:unset!important">
+                                    <input type="radio" name="time[picker]" value="specificTime" autocomplete="off" checked="" aria-required="true">
+                                    Specific time in the day
+                                </label>
+                                <div class="specific-time">
+                                    <input type="number" name="time[specificTime][hour]" placeholder="h" autocomplete="off" class="form-control input-hour" min="0" max="23" value="" aria-required="true" > :
+                                    <input type="number" name="time[specificTime][minute]" placeholder="m" autocomplete="off" class="form-control input-minute" min="0" max="59" value="" aria-required="true" >                </div>
+
+
+                                <ul data-error="time[specificTime][hour]" class="error-container"></ul>
+
+                                <ul data-error="time[specificTime][minute]" class="error-container"></ul>
+                            </div>
+
+                            <!-- Every {step} hours at minute {minute} -->
+                            <div class="radio radio-time radio-every-hour" data-has-error="time[everyHour][step] time[everyHour][minute]">
+
+                                <input type="radio" name="time[picker]" value="everyHour" autocomplete="off" >
+                                <span>
+                                        Every
+                                        <input type="number" name="time[everyHour][step]" class="form-control input-step" min="1" max="23" autocomplete="off" value="1" disabled>                    hours at minute
+                                        <input type="number" name="time[everyHour][minute]" autocomplete="off" class="form-control input-minute" min="0" max="59" value="0" aria-required="true" aria-invalid="false" disabled>                </span>
+
+
+                                <ul data-error="time[everyHour][step]" class="error-container"></ul>
+
+                                <ul data-error="time[everyHour][minute]" class="error-container"></ul>
+                            </div>
+
+                            <!-- Every {minute} minutes -->
+                            <div class="radio radio-time radio-every-minute" data-has-error="time[everyMinute][step]">
+
+                                <input type="radio" name="time[picker]" value="everyMinute" autocomplete="off">
+                                <span>
+                                        Every
+                                        <input type="number" name="time[everyMinute][step]" class="form-control input-step" min="1" max="59" autocomplete="off" value="1" aria-required="true" disabled="">                    minutes
+                                    </span>
+
+
+                                <ul data-error="time[everyMinute][step]" class="error-container"></ul>
+                            </div>
+
+
+                            <ul data-error="time[picker]" class="error-container"></ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <span class="legend">Repeat</span>
+                        </div>
+                        <div class="col-md-10" data-has-error="repeat[picker]" style='padding-left:0'>
+                            <select name="repeat[picker]" class="form-control repeat" style="width:100px"><option value="daily" selected="selected">Daily</option>
+                                <option value="weekly">Weekly</option>
+                                <option value="monthly">Monthly</option>
+                                <option value="yearly">Yearly</option></select>        </div>
+                        <div class="col-md-2"></div>
+                        <div class="col-md-10">
+
+                            <ul data-error="repeat[picker]" class="error-container">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class='col-md-12 tab-pane' style="text-align:left" id='2'>
+
+                <div class="col-md-12 dropdown">
+                    <div id='select-button' class='dropdown-toggle' data-target="dropdown" href='#' data-toggle="dropdown"><span>Select Numbers</span></div>
+                    <ul class='dropdown-menu' role="menu" aria-labelledby="dLabel" style="width:700px;margin-left:14px">
+                        <div class='row' id="check_list" style="margin-right:-5px;margin-left:-5px">
+
+
+                        </div>
+                    </ul>
+                </div>
+            </div>
+            <div class='col-md-12 tab-pane' style="text-align:left" id='3'>
+
+                <div class='col-md-12'>
+                    <input type="number" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" class="form-control" style="display:inline-block"><span style="font-weight:bold">&nbsp;day(s)</span>
+                </div>
+            </div>
+            <div class='col-md-12 tab-pane' style="text-align:left" id='4'>
+
+                <div class='col-md-12'>
+                    <input type="number" placeholder="0<=X<=100" style="display:inline-block" class="form-control"><span style="font-weight:bold">&nbsp;%</span>
+                </div>
+            </div>
+            <div class='col-md-12 tab-pane' style="text-align:left" id='5'>
+
+                <div class='col-md-12' id='level_attendance'>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class='col-md-12'>
+                <div style="text-align:center">
+                    <div id="upload_button" style="width:170px">Update Configure</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src='js/adminM.js'></script>
+</body>
+</html>

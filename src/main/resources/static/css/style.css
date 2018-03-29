@@ -1,6 +1,17 @@
 ﻿
 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
 
+    display: none;
+
+}
+input[type=number]{
+    height: 30px;
+    width: 85px;
+    text-align: right;
+    padding: 3px
+}
 /* =============================================================
    GENERAL STYLES
  ============================================================ */
@@ -48,24 +59,24 @@ body {
 }
 .login-icon {
     height: 60px;
-width: 60px;
-padding: 13px;
-border-radius: 50%;
-font-size: 30px;
-margin-bottom: 20px;
-color: #fff;
-text-align: center;
-cursor:pointer;
-background-color:#F0677C;
--webkit-border-radius:50%;
+    width: 60px;
+    padding: 13px;
+    border-radius: 50%;
+    font-size: 30px;
+    margin-bottom: 20px;
+    color: #fff;
+    text-align: center;
+    cursor:pointer;
+    background-color:#F0677C;
+    -webkit-border-radius:50%;
     -moz-border-radius:50%;
 }
 .copyrights{
-	text-indent:-9999px;
-	height:0;
-	line-height:0;
-	font-size:0;
-	overflow:hidden;
+    text-indent:-9999px;
+    height:0;
+    line-height:0;
+    font-size:0;
+    overflow:hidden;
 }
 /* =============================================================
    HEADER SECTION STYLES
@@ -112,42 +123,42 @@ header {
     margin-top: 10px;
 }
 
-    .user-settings-wrapper li {
-        display: inline-block;
-    }
+.user-settings-wrapper li {
+    display: inline-block;
+}
 
-    .user-settings-wrapper .dropdown-settings {
-        width: 300px;
-        padding: 10px;
-    }
+.user-settings-wrapper .dropdown-settings {
+    width: 300px;
+    padding: 10px;
+}
 
-    /* .user-settings-wrapper .nav > li > a:hover,.user-settings-wrapper .nav > li > a:focus {
-        text-decoration: none;
-        background-color: #C36464!important;
-    } */
+/* .user-settings-wrapper .nav > li > a:hover,.user-settings-wrapper .nav > li > a:focus {
+    text-decoration: none;
+    background-color: #C36464!important;
+} */
 
-    .user-settings-wrapper img {
-        height: 64px;
-        width: 64px;
-        border: 1px solid #000000;
-    }
+.user-settings-wrapper img {
+    height: 64px;
+    width: 64px;
+    border: 1px solid #000000;
+}
 
-    .user-settings-wrapper .dropdown-menu {
-        margin: 0px;
-        border-radius: 0px!important;
-        -moz-border-radius: 0px!important;
-        -webkit-border-radius: 0px!important;
-    }
+.user-settings-wrapper .dropdown-menu {
+    margin: 0px;
+    border-radius: 0px!important;
+    -moz-border-radius: 0px!important;
+    -webkit-border-radius: 0px!important;
+}
 
-    .user-settings-wrapper .btn {
-        border-radius: 0px!important;
-        -moz-border-radius: 0px!important;
-        -webkit-border-radius: 0px!important;
-    }
+.user-settings-wrapper .btn {
+    border-radius: 0px!important;
+    -moz-border-radius: 0px!important;
+    -webkit-border-radius: 0px!important;
+}
 
-    .user-settings-wrapper .media-heading {
-        padding-top: 10px;
-    }
+.user-settings-wrapper .media-heading {
+    padding-top: 10px;
+}
 
 /* MENU LINKS SECTION*/
 
@@ -207,13 +218,13 @@ footer {
     background-color: #C36464;
 }
 
-    footer a, footer a:hover {
-        color: #fff;
-        text-decoration: none;
-    }
+footer a, footer a:hover {
+    color: #fff;
+    text-decoration: none;
+}
 
 /*==============================================
-    DASHBOARD  STYLES    
+    DASHBOARD  STYLES
  =============================================*/
 
 /* DASHBOARD ICONS */
@@ -261,9 +272,9 @@ footer {
     margin-bottom: 50px;
 }
 
-    .dashboard-div-wrapper .progress {
-        height: 2px;
-    }
+.dashboard-div-wrapper .progress {
+    height: 2px;
+}
 
 /* NOTICE BOARD */
 
@@ -284,16 +295,16 @@ footer {
     border-bottom: 1px solid #E5E5E5;
 }
 
-    .notice-board li span {
-        margin-right: 10px;
-        border: 1px solid #DBDBDB;
-        padding: 5px;
-    }
+.notice-board li span {
+    margin-right: 10px;
+    border: 1px solid #DBDBDB;
+    padding: 5px;
+}
 
-    .notice-board li a, li a:hover {
-        text-decoration: none;
-        color: #000;
-    }
+.notice-board li a, li a:hover {
+    text-decoration: none;
+    color: #000;
+}
 
 /* SOCIAL BUTTONS */
 .btn-social {
@@ -301,11 +312,11 @@ footer {
     opacity: 0.8;
 }
 
-    .btn-social:hover {
-        color: white;
-        opacity: 1;
-        text-decoration: none;
-    }
+.btn-social:hover {
+    color: white;
+    opacity: 1;
+    text-decoration: none;
+}
 
 .btn-facebook {
     background-color: #3b5998;
@@ -389,4 +400,72 @@ footer {
     border-radius: 2px;
     cursor: pointer;
     color: white
+}
+.paginate_button:hover{
+    background: unset!important;
+}
+.paginate_button{
+    background: unset!important;
+    padding: 0px 10px!important;
+}
+.paginate_button.disabled{
+    cursor: not-allowed!important;
+}
+
+.admin_Q{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#admin_index>div{
+    padding:4px 0;
+
+}
+#select-button span{
+    padding: 1px 20px 1px 20px;
+    background-color: #eee;
+    border: 2px solid #ddd;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    background-repeat: no-repeat;
+    background-position: center right;
+    cursor: pointer;
+    color: #555;
+    white-space: nowrap;
+}
+
+
+.job-add-form .radio-specific-time {
+    margin-top: 0;
+}
+.job-add-form .specific-time {
+    margin: 10px 0 10px 25px;
+}
+.input-hour,.input-minute,.input-day,.input-step {
+    width: 45px!important;
+    display: inline-block;
+    -moz-appearance: textfield;
+    text-align: center!important;
+}
+.job-add-form .radio-every-hour .input-step, .job-add-form .radio-every-hour .input-minute, .job-add-form .radio-every-minute .input-step {
+    margin: 0 5px;
+}
+.job-add-form .repeat {
+    width: 100px;
+}
+.radio input[type="radio"]{
+    margin-left: -15px;
+    margin-top: 9px;
+
+}
+.radio{
+    margin-top: 0;
+}
+.level_width{
+    width: 60px;
+    display: inline-block
+}
+#admin_index{
+    height: 200px;
 }

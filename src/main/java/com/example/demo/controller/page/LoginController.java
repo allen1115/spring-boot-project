@@ -25,7 +25,7 @@ public class LoginController {
             UserLogin user = (UserLogin) subject.getPrincipal();
             session.setAttribute("user", user);
             map.put("user", user);
-            return "index";
+            return "/index";
         } catch (Exception e) {
             return "login";
         }

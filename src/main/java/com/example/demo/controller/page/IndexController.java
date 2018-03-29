@@ -16,6 +16,15 @@ public class IndexController {
         return "login";
     }
 
+    @RequestMapping("/index")
+    public String home() {return "index";}
+
     @RequestMapping("/upload")
     public String upload() {return "upload";}
+
+    @RequestMapping("/role")
+    public String role() {return "roleM";}
+
+    @RequestMapping("/admin")
+    public String admin() {return "adminM";}
 }
