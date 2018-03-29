@@ -2,6 +2,8 @@ package com.example.demo.dao;
 
 import com.example.demo.entity.StudentAttendance;
 
+import java.util.Map;
+
 public interface StudentAttendanceMapper {
     int deleteByPrimaryKey(Long id);
 
@@ -14,4 +16,6 @@ public interface StudentAttendanceMapper {
     int updateByPrimaryKeySelective(StudentAttendance record);
 
     int updateByPrimaryKey(StudentAttendance record);
+
+    Map<Double, Integer> getTotalAttendanceAndCount(Long id);
 }
