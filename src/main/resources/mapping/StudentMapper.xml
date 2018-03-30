@@ -8,6 +8,7 @@
     <result column="program" jdbcType="VARCHAR" property="program" />
     <result column="status" jdbcType="VARCHAR" property="status" />
     <result column="year_of_program" jdbcType="INTEGER" property="yearOfProgram" />
+    <result column="avg_attendance" jdbcType="DOUBLE" property="avgAttendance" />
   </resultMap>
   <sql id="Base_Column_List">
     id, email, name, program, status, year_of_program, avg_attendance
@@ -33,7 +34,7 @@
       program, status, year_of_program
       )
     values (#{id,jdbcType=BIGINT}, #{email,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{program,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{yearOfProgram,jdbcType=INTEGER}, #{}
+      #{program,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{yearOfProgram,jdbcType=INTEGER}, #{avg_attendance,jdbcType=DOUBLE}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.example.demo.entity.Student">

@@ -14,7 +14,7 @@
   </resultMap>
   <resultMap id="sumAttendanceAndCount" type="java.util.HashMap">
     <result column="sumAttendance" jdbcType="BIGINT" property="sumAttendance" />
-    <result column="totalCount" jdbcType="INT" property="totalCount" />
+    <result column="totalCount" jdbcType="INTEGER" property="totalCount" />
   </resultMap>
   <sql id="Base_Column_List">
     id, student_id, course_name, course_code, attended, explained_absence, sessions, 
@@ -29,12 +29,6 @@
   <select id="getTotalAttendanceAndCount" parameterType="java.lang.Long" resultMap="sumAttendanceAndCount">
     select sum(attendance) sumAttendance, count(*) totalCount from student_attendance
     where student_id = #{id,jdbcType=BIGINT}
-  </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from student_attendance
-    where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from student_attendance

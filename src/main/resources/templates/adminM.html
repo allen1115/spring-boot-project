@@ -116,15 +116,15 @@
         </div>
         <ul class='row nav nav-tabs'>
             <li class="active">
-                <a  href="#1" data-toggle="tab">Check timeframe</a>
+                <a  href="#1" data-toggle="tab">Check Timeframe</a>
             </li>
-            <li><a href="#2" data-toggle="tab">Number of attendance checks</a>
+            <li><a href="#2" data-toggle="tab">Number of Attendance Checks</a>
             </li>
-            <li><a href="#3" data-toggle="tab">Time interval</a>
+            <li><a href="#3" data-toggle="tab">Time Interval</a>
             </li>
-            <li><a href="#4" data-toggle="tab">Percentage thresholds</a>
+            <li><a href="#4" data-toggle="tab">Percentage Thresholds</a>
             </li>
-            <li><a href="#5" data-toggle="tab">Level of attendance</a>
+            <li><a href="#5" data-toggle="tab">Level of Attendance</a>
             </li>
 
         </ul>
@@ -208,8 +208,10 @@
                 </div>
             </div>
             <div class='col-md-12 tab-pane' style="text-align:left" id='2'>
-
-                <div class="col-md-12 dropdown">
+                <div class="col-md-4">
+                    The number of attendance checks in a term/year
+                </div>
+                <div class="col-md-8 dropdown">
                     <div id='select-button' class='dropdown-toggle' data-target="dropdown" href='#' data-toggle="dropdown"><span>Select Numbers</span></div>
                     <ul class='dropdown-menu' role="menu" aria-labelledby="dLabel" style="width:700px;margin-left:14px">
                         <div class='row' id="check_list" style="margin-right:-5px;margin-left:-5px">
@@ -220,20 +222,26 @@
                 </div>
             </div>
             <div class='col-md-12 tab-pane' style="text-align:left" id='3'>
-
-                <div class='col-md-12'>
+                <div class="col-md-4">
+                    The time interval between two non-responded emails
+                </div>
+                <div class='col-md-8'>
                     <input type="number" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" class="form-control" style="display:inline-block"><span style="font-weight:bold">&nbsp;day(s)</span>
                 </div>
             </div>
             <div class='col-md-12 tab-pane' style="text-align:left" id='4'>
-
-                <div class='col-md-12'>
+                <div class="col-md-4">
+                    The percentage thresholds for every resulting check
+                </div>
+                <div class='col-md-8'>
                     <input type="number" placeholder="0<=X<=100" style="display:inline-block" class="form-control"><span style="font-weight:bold">&nbsp;%</span>
                 </div>
             </div>
             <div class='col-md-12 tab-pane' style="text-align:left" id='5'>
-
-                <div class='col-md-12' id='level_attendance'>
+                <div class="col-md-4">
+                    Reminding email depending on the level of attendance
+                </div>
+                <div class='col-md-8' id='level_attendance'>
 
 
                 </div>
