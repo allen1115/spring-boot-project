@@ -82,6 +82,7 @@ public class UploadController {
                 s.setAttendance(row.getCell(10).getNumericCellValue() * 100);
 
                 int num = studentAttendanceService.addStudentAttendance(s);
+                studentService.updateStudentAvgAttendance(s.getStudentId());
                 totalNum += num;
             }
 
@@ -136,6 +137,7 @@ public class UploadController {
                 s.setAttendance(Double.parseDouble(ss[10].substring(0, ss[10].length()-1)));
 
                 int num = studentAttendanceService.addStudentAttendance(s);
+                studentService.updateStudentAvgAttendance(s.getId());
                 totalNum += num;
             }
             System.out.println("total number: " + totalNum);

@@ -28,7 +28,7 @@ public class AttendanceCheckScheduleWork implements SchedulingConfigurer {
                 //1.添加任务内容(Runnable)
                 () -> {
                     Thread thread = Thread.currentThread();
-                    System.out.println(thread.getName() + new Date());
+//                    System.out.println(thread.getName() + new Date());
                 },
                 //2.设置执行周期(Trigger)
                 triggerContext -> {

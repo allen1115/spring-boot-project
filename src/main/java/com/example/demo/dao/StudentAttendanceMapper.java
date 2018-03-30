@@ -17,5 +17,5 @@ public interface StudentAttendanceMapper {
 
     int updateByPrimaryKey(StudentAttendance record);
 
-    Map<Double, Integer> getTotalAttendanceAndCount(Long id);
+    Map<String, Object> getTotalAttendanceAndCount(Long id);
 }
