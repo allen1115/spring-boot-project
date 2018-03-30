@@ -50,6 +50,8 @@ $(function(){
             }
             $("#role_table").DataTable().destroy();
             $("#role_table").DataTable(dataTableOption);
+
+
         }
     }
     function init(){

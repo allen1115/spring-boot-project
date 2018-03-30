@@ -20,6 +20,7 @@ $(function(){
             });
             $("#check_list input").on("click",function(e){
                 e.stopPropagation();
+                self.changeCheckList();
             })
 
             $("#cronTime input").on("click",self.pickCronType)
@@ -85,6 +86,14 @@ $(function(){
                 var checked = data[i].checked?'checked':''
                 var html = "<div class='col-md-4'><input type='checkbox'"+checked+">"+data[i].name+"</div>";
                 $("#check_list").append(html)
+            }
+            self.changeCheckList();
+        },
+        changeCheckList:function(){
+            if($("#check_list input[checked]").length>0){
+                $("#select-button span").html($("#check_list input:checked").length+"   number(s) selected")
+            }else{
+                $("#select-button span").html("Select Numbers")
             }
 
         },
