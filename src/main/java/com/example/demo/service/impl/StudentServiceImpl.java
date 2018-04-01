@@ -7,6 +7,7 @@ import com.example.demo.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -36,5 +37,10 @@ public class StudentServiceImpl implements StudentService {
         Integer totalCount = ((Long)map.get("totalCount")).intValue();
         // 更新学生的平均出席率
         return studentMapper.updateAvgAttendance(studentId, sumAttendance / totalCount);
+    }
+
+    @Override
+    public List<Student> findAllUsers() {
+        return studentMapper.selectAllUsers();
     }
 }

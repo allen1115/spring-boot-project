@@ -13,8 +13,11 @@
   <sql id="Base_Column_List">
     id, email, name, program, status, year_of_program, avg_attendance
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
+  <select id="selectAllUsers" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select * from student
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+    select
     <include refid="Base_Column_List" />
     from student
     where id = #{id,jdbcType=BIGINT}
