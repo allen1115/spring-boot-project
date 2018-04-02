@@ -35,9 +35,7 @@ public class AttendanceCheckScheduleWork implements SchedulingConfigurer {
     public void configureTasks(ScheduledTaskRegistrar scheduledTaskRegistrar) {
         scheduledTaskRegistrar.addTriggerTask(
                 //1.添加任务内容(Runnable)
-                () -> {
-                    checkAttendance();
-                },
+                this::checkAttendance,
                 //2.设置执行周期(Trigger)
                 triggerContext -> {
                     //2.1 从数据库获取执行周期
