@@ -44,13 +44,12 @@ spring:
     properties:
       mail:
         smpt:
-          ssl:
-            enabled: true
           auth: true
           starttles:
             enable: true
             required: true
-    port: 465
+    port: 587
+#    password: wlgahihydspbbiec
 mybatis:
   mapper-locations: classpath:mapping/*.xml
   type-aliases-package: com.example.demo.entity
