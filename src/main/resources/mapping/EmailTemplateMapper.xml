@@ -16,6 +16,12 @@
     from email_template
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectByLevel" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from email_template
+    where level = #{level,jdbcType=STRING}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from email_template
     where id = #{id,jdbcType=INTEGER}
