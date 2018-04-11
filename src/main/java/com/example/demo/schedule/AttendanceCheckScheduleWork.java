@@ -3,19 +3,20 @@ package com.example.demo.schedule;
 import com.example.demo.entity.AttendanceThresholdConfig;
 import com.example.demo.entity.EmailTemplate;
 import com.example.demo.entity.Student;
+import com.example.demo.mail.MailContentTypeEnum;
+import com.example.demo.mail.MailSender;
 import com.example.demo.service.AttendanceThresholdConfigService;
 import com.example.demo.service.CronService;
 import com.example.demo.service.EmailTemplateService;
 import com.example.demo.service.StudentService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.SchedulingConfigurer;
 import org.springframework.scheduling.config.ScheduledTaskRegistrar;
 import org.springframework.scheduling.support.CronTrigger;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -33,8 +34,6 @@ public class AttendanceCheckScheduleWork implements SchedulingConfigurer {
     @Autowired
     private EmailTemplateService emailTemplateService;
 
-    @Autowired
-    private JavaMailSender mailSender;
 
 //    @Scheduled(fixedRate = 5000)
 //    public void reportCurrentTime() {
@@ -70,32 +69,36 @@ public class AttendanceCheckScheduleWork implements SchedulingConfigurer {
         List<Student> students = studentService.findAllUsers();
         for (Student student: students) {
             Double avgAttendance = student.getAvgAttendance();
-            SimpleMailMessage message = new SimpleMailMessage();
-            message.setFrom("396881692@qq.com");
-            message.setTo(student.getEmail());
             if(avgAttendance <= thirdLevel) {
                 // 第三级别
                 //TODO 发送第三级别邮件
-                sendEmail(message, "third");
+                sendEmail("third", student);
                 System.out.println("学生姓名: " + student.getName() + " 学生出勤率: " + avgAttendance + " 第三级别");
             } else if(thirdLevel < avgAttendance && avgAttendance <= secondLevel) {
                 // 第二级别
                 // TODO 发送第二级别邮件
-                sendEmail(message, "second");
+                sendEmail("second", student);
                 System.out.println("学生姓名: " + student.getName() + " 学生出勤率: " + avgAttendance + " 第二级别");
             } else if(secondLevel < avgAttendance && avgAttendance <= firstLevel) {
                 // 第一级别
                 // TODO 发送第一级别邮件
-                sendEmail(message, "first");
+                sendEmail("first", student);
                 System.out.println("学生姓名: " + student.getName() + " 学生出勤率: " + avgAttendance + " 第一级别");
             }
         }
     }
 
-    private void sendEmail(SimpleMailMessage message, String level) {
+    private void sendEmail(String level, Student student) {
         EmailTemplate emailTemplate = emailTemplateService.getEmailTemplateByLevel(level);
-        message.setSubject(emailTemplate.getTemplateName());
-        message.setText(emailTemplate.getTemplateBody());
-        mailSender.send(message);
+        try {
+            new MailSender()
+                    .title(emailTemplate.getTemplateName())
+                    .content(emailTemplate.getTemplateBody())
+                    .contentType(MailContentTypeEnum.TEXT)
+                    .targets(new ArrayList<String>(){{add(student.getEmail());}})
+                    .send();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

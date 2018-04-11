@@ -37,19 +37,6 @@ spring:
         content:
           enabled: true
           paths: /**
-  mail:
-    host: smtp.qq.com
-    username: 396881692@qq.com
-    password: sopkvlgpsiykbheb
-    properties:
-      mail:
-        smpt:
-          auth: true
-          starttles:
-            enable: true
-            required: true
-    port: 587
-#    password: wlgahihydspbbiec
 mybatis:
   mapper-locations: classpath:mapping/*.xml
   type-aliases-package: com.example.demo.entity

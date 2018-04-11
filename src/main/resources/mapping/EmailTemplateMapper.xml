@@ -20,7 +20,7 @@
     select
     <include refid="Base_Column_List" />
     from email_template
-    where level = #{level,jdbcType=STRING}
+    where level = #{level,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from email_template
