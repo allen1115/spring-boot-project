@@ -31,13 +31,12 @@ public class ReceiveEmailTest {
 
         Session session = Session.getInstance(prop);
 
-        int total = 0;
         IMAPStore store = (IMAPStore) session.getStore("imap"); // 使用imap会话机制，连接服务器
         store.connect(user, password);
         IMAPFolder folder = (IMAPFolder) store.getFolder("INBOX"); // 收件箱
         folder.open(Folder.READ_WRITE);
         // 获取总邮件数
-        total = folder.getMessageCount();
+        int total = folder.getMessageCount();
         System.out.println("-----------------共有邮件：" + total
                 + " 封--------------");
         System.out.println("---------------共有未读邮件: " + folder.getUnreadMessageCount() + "封-------------");

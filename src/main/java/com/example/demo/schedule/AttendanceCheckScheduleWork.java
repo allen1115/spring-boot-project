@@ -50,9 +50,7 @@ public class AttendanceCheckScheduleWork implements SchedulingConfigurer {
                     //2.1 从数据库获取执行周期
                     String cron = cronService.getCronExpression(1L).getCron();
                     //2.2 合法性校验.
-                    if (StringUtils.isEmpty(cron)) {
-                        // Omitted Code ..
-                    }
+                    StringUtils.isEmpty(cron);
                     //2.3 返回执行周期(Date)
                     return new CronTrigger(cron).nextExecutionTime(triggerContext);
                 }
@@ -74,12 +72,12 @@ public class AttendanceCheckScheduleWork implements SchedulingConfigurer {
                 //TODO 发送第三级别邮件
                 sendEmail("third", student);
                 System.out.println("学生姓名: " + student.getName() + " 学生出勤率: " + avgAttendance + " 第三级别");
-            } else if(thirdLevel < avgAttendance && avgAttendance <= secondLevel) {
+            } else if(avgAttendance <= secondLevel) {
                 // 第二级别
                 // TODO 发送第二级别邮件
                 sendEmail("second", student);
                 System.out.println("学生姓名: " + student.getName() + " 学生出勤率: " + avgAttendance + " 第二级别");
-            } else if(secondLevel < avgAttendance && avgAttendance <= firstLevel) {
+            } else if(avgAttendance <= firstLevel) {
                 // 第一级别
                 // TODO 发送第一级别邮件
                 sendEmail("first", student);

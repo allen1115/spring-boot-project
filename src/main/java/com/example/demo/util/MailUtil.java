@@ -4,7 +4,6 @@ import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-import javax.mail.internet.MimeUtility;
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -58,7 +57,7 @@ public class MailUtil {
      * @throws MessagingException
      */
     public static String getReceiveAddress(MimeMessage msg, Message.RecipientType type) throws MessagingException {
-        StringBuffer receiveAddress = new StringBuffer();
+        StringBuilder receiveAddress = new StringBuilder();
         Address[] address;
         if (type == null) {
             address = msg.getAllRecipients();
@@ -116,9 +115,9 @@ public class MailUtil {
         String[] headers = msg.getHeader("X-Priority");
         if (headers != null) {
             String headerPriority = headers[0];
-            if (headerPriority.indexOf("1") != -1 || headerPriority.indexOf("High") != -1)
+            if (headerPriority.contains("1") || headerPriority.contains("High"))
                 priority = "紧急";
-            else if (headerPriority.indexOf("5") != -1 || headerPriority.indexOf("Low") != -1)
+            else if (headerPriority.contains("5") || headerPriority.contains("Low"))
                 priority = "低";
             else
                 priority = "普通";
@@ -142,7 +141,7 @@ public class MailUtil {
 
     /**
      * 判断邮件中是否包含附件
-     * @param msg 邮件内容
+     * @Param  part 需要被校验的part
      * @return 邮件中存在附件返回true，不存在返回false
      * @throws MessagingException
      * @throws IOException
