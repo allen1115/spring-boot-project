@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    public static final String DEFAULT_ERROR_VIEW = "error";
+    private static final String DEFAULT_ERROR_VIEW = "error";
 
     @ExceptionHandler(value = Exception.class)
     public ModelAndView defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {
@@ -19,7 +19,7 @@ public class GlobalExceptionHandler {
         mav.addObject("exception", e);
         mav.addObject("url", req.getRequestURL());
         mav.setViewName(DEFAULT_ERROR_VIEW);
-        System.out.println(e.toString());
+        e.printStackTrace();
         return mav;
     }
 

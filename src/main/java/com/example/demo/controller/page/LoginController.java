@@ -19,7 +19,6 @@ public class LoginController {
     public String login(@ModelAttribute UserLogin model, Map<String, Object> map, HttpSession session) {
         UsernamePasswordToken utoken = new UsernamePasswordToken(model.getUsername(), model.getPassword());
         Subject subject = SecurityUtils.getSubject();
-
         try {
             subject.login(utoken); // 完成登陆
             UserLogin user = (UserLogin) subject.getPrincipal();

@@ -14,4 +14,6 @@ public interface EmailTemplateMapper {
     int updateByPrimaryKeySelective(EmailTemplate record);
 
     int updateByPrimaryKey(EmailTemplate record);
+
+    EmailTemplate selectByLevel(String level);
 }

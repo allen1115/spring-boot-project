@@ -13,8 +13,11 @@
   <sql id="Base_Column_List">
     id, email, name, program, status, year_of_program, avg_attendance
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
+  <select id="selectAllUsers" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select * from student
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+    select
     <include refid="Base_Column_List" />
     from student
     where id = #{id,jdbcType=BIGINT}
@@ -34,7 +37,7 @@
       program, status, year_of_program
       )
     values (#{id,jdbcType=BIGINT}, #{email,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{program,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{yearOfProgram,jdbcType=INTEGER}, #{avg_attendance,jdbcType=DOUBLE}
+      #{program,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{yearOfProgram,jdbcType=INTEGER}, #{avg_attendance, jdbcType=DOUBLE}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.example.demo.entity.Student">

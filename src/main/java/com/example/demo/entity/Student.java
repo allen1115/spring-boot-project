@@ -15,6 +15,26 @@ public class Student {
 
     private Double avgAttendance;
 
+    private Long emailLogId;
+
+    private EmailLog emailLog;
+
+    public Long getEmailLogId() {
+        return emailLogId;
+    }
+
+    public void setEmailLogId(Long emailLogId) {
+        this.emailLogId = emailLogId;
+    }
+
+    public EmailLog getEmailLog() {
+        return emailLog;
+    }
+
+    public void setEmailLog(EmailLog emailLog) {
+        this.emailLog = emailLog;
+    }
+
     public Double getAvgAttendance() {
         return avgAttendance;
     }
