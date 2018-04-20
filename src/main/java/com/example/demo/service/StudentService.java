@@ -13,4 +13,6 @@ public interface StudentService {
     int updateStudentAvgAttendance(Long studentId);
 
     List<Student> findAllUsers();
+
+    int updateByPrimaryKeySelective(Student student);
 }

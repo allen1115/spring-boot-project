@@ -13,6 +13,8 @@ public class EmailLog {
 
     private Date updateDate;
 
+    private String emailLogId;
+
     private RepliedEmailLog repliedEmailLog;
 
     public RepliedEmailLog getRepliedEmailLog() {
@@ -61,5 +63,13 @@ public class EmailLog {
 
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
+    }
+
+    public String getEmailLogId() {
+        return emailLogId;
+    }
+
+    public void setEmailLogId(String emailLogId) {
+        this.emailLogId = emailLogId == null ? null : emailLogId.trim();
     }
 }

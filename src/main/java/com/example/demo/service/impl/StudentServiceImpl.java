@@ -43,4 +43,9 @@ public class StudentServiceImpl implements StudentService {
     public List<Student> findAllUsers() {
         return studentMapper.selectAllUsers();
     }
+
+    @Override
+    public int updateByPrimaryKeySelective(Student student) {
+        return studentMapper.updateByPrimaryKeySelective(student);
+    }
 }

@@ -15,15 +15,15 @@ public class Student {
 
     private Double avgAttendance;
 
-    private Long emailLogId;
+    private String emailLogId;
 
     private EmailLog emailLog;
 
-    public Long getEmailLogId() {
+    public String getEmailLogId() {
         return emailLogId;
     }
 
-    public void setEmailLogId(Long emailLogId) {
+    public void setEmailLogId(String emailLogId) {
         this.emailLogId = emailLogId;
     }
 

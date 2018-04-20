@@ -13,6 +13,8 @@ public class RepliedEmailLog {
 
     private Date repliedDate;
 
+    private String repliedEmailLogId;
+
     public Long getId() {
         return id;
     }
@@ -51,5 +53,13 @@ public class RepliedEmailLog {
 
     public void setRepliedDate(Date repliedDate) {
         this.repliedDate = repliedDate;
+    }
+
+    public String getRepliedEmailLogId() {
+        return repliedEmailLogId;
+    }
+
+    public void setRepliedEmailLogId(String repliedEmailLogId) {
+        this.repliedEmailLogId = repliedEmailLogId == null ? null : repliedEmailLogId.trim();
     }
 }
