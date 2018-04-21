@@ -114,9 +114,10 @@ public class UnreadEmailCheckScheduleWork implements SchedulingConfigurer {
                     addRepliedEmailLog(repliedEmailLog);
 
                     // 更新email_log表
-                    Student student = studentService.findStudentByEmail(MailUtil.getFrom(msg));
+                    Student student = studentService.findStudentByEmail(MailUtil.getFromAddr(msg));
                     EmailLog emailLog = emailLogService.findEmailLogByEmailLogId(student.getEmailLogId());
                     emailLog.setRepliedEmailId(repliedEmailLog.getRepliedEmailLogId());
+                    emailLog.setIsReplied("TRUE");
                     emailLogService.updateSelective(emailLog);
                     System.out.println("============================更新完成");
                 }

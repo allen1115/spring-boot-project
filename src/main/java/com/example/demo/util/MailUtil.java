@@ -46,6 +46,24 @@ public class MailUtil {
         return from;
     }
 
+
+    /**
+     * 获得邮件发件人的邮箱地址
+     * @param msg
+     * @return 发件邮箱地址
+     * @throws MessagingException
+     */
+    public static String getFromAddr(MimeMessage msg) throws MessagingException{
+        Address[] froms = msg.getFrom();
+        if (froms.length < 1)
+            throw new MessagingException("没有发件人!");
+
+        InternetAddress address = (InternetAddress) froms[0];
+
+        return address.getAddress();
+    }
+
+
     /**
      * 根据收件人类型，获取邮件收件人、抄送和密送地址。如果收件人类型为空，则获得所有的收件人
      * <p>Message.RecipientType.TO  收件人</p>
