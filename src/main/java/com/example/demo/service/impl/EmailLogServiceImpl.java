@@ -16,4 +16,14 @@ public class EmailLogServiceImpl implements EmailLogService {
     public int insertSelective(EmailLog emailLog) {
         return emailLogMapper.insertSelective(emailLog);
     }
+
+    @Override
+    public EmailLog findEmailLogByEmailLogId(String emailLogId) {
+        return emailLogMapper.findEmailLogByEmailLogId(emailLogId);
+    }
+
+    @Override
+    public int updateSelective(EmailLog emailLog) {
+        return emailLogMapper.updateByPrimaryKeySelective(emailLog);
+    }
 }

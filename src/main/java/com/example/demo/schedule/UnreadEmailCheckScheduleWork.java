@@ -1,8 +1,15 @@
 package com.example.demo.schedule;
 
-import com.example.demo.service.CronService;
+import com.example.demo.entity.EmailLog;
+import com.example.demo.entity.RepliedEmailLog;
+import com.example.demo.entity.Student;
+import com.example.demo.service.impl.CronServiceImpl;
+import com.example.demo.service.impl.EmailLogServiceImpl;
+import com.example.demo.service.impl.RepliedEmailLogServiceImpl;
+import com.example.demo.service.impl.StudentServiceImpl;
 import com.example.demo.util.MailUtil;
 import com.example.demo.util.PropertiesUtil;
+import com.example.demo.util.UUIDUtil;
 import com.sun.mail.imap.IMAPFolder;
 import com.sun.mail.imap.IMAPStore;
 import org.apache.commons.lang3.StringUtils;
@@ -14,13 +21,23 @@ import org.springframework.stereotype.Component;
 
 import javax.mail.*;
 import javax.mail.internet.MimeMessage;
+import java.util.Date;
 import java.util.Properties;
 
 @Component
 public class UnreadEmailCheckScheduleWork implements SchedulingConfigurer {
 
     @Autowired
-    private CronService cronService;
+    private CronServiceImpl cronService;
+
+    @Autowired
+    private RepliedEmailLogServiceImpl repliedEmailLogService;
+
+    @Autowired
+    private StudentServiceImpl studentService;
+
+    @Autowired
+    private EmailLogServiceImpl emailLogService;
 
     @Override
     public void configureTasks(ScheduledTaskRegistrar scheduledTaskRegistrar) {
@@ -47,7 +64,7 @@ public class UnreadEmailCheckScheduleWork implements SchedulingConfigurer {
 
         Session session = Session.getInstance(prop);
 
-        IMAPStore store = null; // 使用imap会话机制，连接服务器
+        IMAPStore store; // 使用imap会话机制，连接服务器
         try {
             store = (IMAPStore) session.getStore("imap");
             store.connect(properties.getValue("mail.from.address"), properties.getValue("mail.from.imap.pwd"));
@@ -78,6 +95,7 @@ public class UnreadEmailCheckScheduleWork implements SchedulingConfigurer {
                     boolean isContainerAttachment = MailUtil.isContainAttachment(msg);
                     System.out.println("是否包含附件：" + isContainerAttachment);
                     if (isContainerAttachment) {
+                        // TODO need change directory
                         MailUtil.saveAttachment(msg, "f:\\mailTest\\" + msg.getSubject() + "_" + i + "_"); //保存附件
                     }
                     StringBuffer content = new StringBuffer(30);
@@ -85,9 +103,23 @@ public class UnreadEmailCheckScheduleWork implements SchedulingConfigurer {
                     System.out.println("邮件正文：" + (content.length() > 100 ? content.substring(0, 100) + "..." : content));
                     System.out.println("------------------第" + msg.getMessageNumber() + "封邮件解析结束-------------------- ");
                     System.out.println();
+
+                    // 往replied_email_log表里新增一条记录
+                    RepliedEmailLog repliedEmailLog = new RepliedEmailLog();
+                    repliedEmailLog.setEmailSubject(MailUtil.getSubject(msg));
+                    repliedEmailLog.setEmailBody(content.toString());
+                    repliedEmailLog.setAbsenceReason(extractAbsenceReason(content.toString()));
+                    repliedEmailLog.setRepliedDate(msg.getSentDate());
+                    repliedEmailLog.setRepliedEmailLogId(UUIDUtil.getUUID());
+                    addRepliedEmailLog(repliedEmailLog);
+
+                    // 更新email_log表
+                    Student student = studentService.findStudentByEmail(MailUtil.getFrom(msg));
+                    EmailLog emailLog = emailLogService.findEmailLogByEmailLogId(student.getEmailLogId());
+                    emailLog.setRepliedEmailId(repliedEmailLog.getRepliedEmailLogId());
+                    emailLogService.updateSelective(emailLog);
+                    System.out.println("============================更新完成");
                 }
-
-
             }
 
             // 释放资源
@@ -96,5 +128,14 @@ public class UnreadEmailCheckScheduleWork implements SchedulingConfigurer {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void addRepliedEmailLog(RepliedEmailLog repliedEmailLog) {
+        repliedEmailLogService.insertSelective(repliedEmailLog);
+    }
+
+    private String extractAbsenceReason(String content) {
+        // TODO need add logic to extract reason
+        return "Absence Reason";
     }
 }

@@ -8,6 +8,8 @@ public interface StudentService {
 
     Student findStudentByName(String name);
 
+    Student findStudentByEmail(String email);
+
     int addStudent(Student student);
 
     int updateStudentAvgAttendance(Long studentId);

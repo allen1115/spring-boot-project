@@ -14,8 +14,8 @@
   <sql id="Base_Column_List">
     id, email, name, program, status, year_of_program, avg_attendance, email_log_id
   </sql>
-  <select id="selectAllUsers" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select * from student
+  <select id="selectAllUsers" resultMap="BaseResultMap">
+    select * from student where email_log_id is null
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap">
     select
@@ -28,6 +28,12 @@
     <include refid="Base_Column_List" />
     from student
     where name = #{name,jdbcType=VARCHAR}
+  </select>
+  <select id="findStudentByEmail" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from student
+    where email = #{email,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from student

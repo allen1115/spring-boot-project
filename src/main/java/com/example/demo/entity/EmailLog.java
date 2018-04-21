@@ -5,7 +5,7 @@ import java.util.Date;
 public class EmailLog {
     private Long id;
 
-    private Long repliedEmailId;
+    private String repliedEmailId;
 
     private String isReplied;
 
@@ -33,11 +33,11 @@ public class EmailLog {
         this.id = id;
     }
 
-    public Long getRepliedEmailId() {
+    public String getRepliedEmailId() {
         return repliedEmailId;
     }
 
-    public void setRepliedEmailId(Long repliedEmailId) {
+    public void setRepliedEmailId(String repliedEmailId) {
         this.repliedEmailId = repliedEmailId;
     }
 

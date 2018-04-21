@@ -14,4 +14,6 @@ public interface EmailLogMapper {
     int updateByPrimaryKeySelective(EmailLog record);
 
     int updateByPrimaryKey(EmailLog record);
+
+    EmailLog findEmailLogByEmailLogId(String emailLogId);
 }

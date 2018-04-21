@@ -1,13 +1,12 @@
 package com.example.demo.schedule;
 
-import com.example.demo.dao.EmailLogMapper;
 import com.example.demo.entity.AttendanceThresholdConfig;
 import com.example.demo.entity.EmailLog;
 import com.example.demo.entity.EmailTemplate;
 import com.example.demo.entity.Student;
 import com.example.demo.mail.MailContentTypeEnum;
 import com.example.demo.mail.MailSender;
-import com.example.demo.service.*;
+import com.example.demo.service.impl.*;
 import com.example.demo.util.UUIDUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,19 +23,19 @@ import java.util.List;
 public class AttendanceCheckScheduleWork implements SchedulingConfigurer {
 
     @Autowired
-    private CronService cronService;
+    private CronServiceImpl cronService;
 
     @Autowired
-    private AttendanceThresholdConfigService attendanceThresholdConfigService;
+    private AttendanceThresholdConfigServiceImpl attendanceThresholdConfigService;
 
     @Autowired
-    private StudentService studentService;
+    private StudentServiceImpl studentService;
 
     @Autowired
-    private EmailTemplateService emailTemplateService;
+    private EmailTemplateServiceImpl emailTemplateService;
 
     @Autowired
-    private EmailLogService emailLogService;
+    private EmailLogServiceImpl emailLogService;
 
 
 //    @Scheduled(fixedRate = 5000)
@@ -71,21 +70,19 @@ public class AttendanceCheckScheduleWork implements SchedulingConfigurer {
         List<Student> students = studentService.findAllUsers();
         for (Student student: students) {
             Double avgAttendance = student.getAvgAttendance();
-            String level = "";
             if(avgAttendance <= thirdLevel) {
                 // 第三级别
-                level = "third";
+                sendEmail("third", student);
                 System.out.println("学生姓名: " + student.getName() + " 学生出勤率: " + avgAttendance + " 第三级别");
             } else if(avgAttendance <= secondLevel) {
                 // 第二级别
-                level = "second";
+                sendEmail("second", student);
                 System.out.println("学生姓名: " + student.getName() + " 学生出勤率: " + avgAttendance + " 第二级别");
             } else if(avgAttendance <= firstLevel) {
                 // 第一级别
-                level = "first";
+                sendEmail("first", student);
                 System.out.println("学生姓名: " + student.getName() + " 学生出勤率: " + avgAttendance + " 第一级别");
             }
-            sendEmail(level, student);
         }
     }
 

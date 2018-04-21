@@ -25,6 +25,11 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public Student findStudentByEmail(String email) {
+        return studentMapper.findStudentByEmail(email);
+    }
+
+    @Override
     public int addStudent(Student student) {
         return studentMapper.insertSelective(student);
     }
