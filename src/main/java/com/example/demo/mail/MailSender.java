@@ -79,6 +79,7 @@ public class MailSender {
         final Properties props = new Properties();
         // 表示SMTP发送邮件, 必须进行身份验证
         props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
         // 此处填写SMTP服务器
         props.put("mail.smtp.host", properties.getValue("mail.smtp.service"));
         // 设置端口号
