@@ -4,6 +4,8 @@ import com.example.demo.entity.Module;
 import com.example.demo.entity.Role;
 import com.example.demo.entity.UserLogin;
 import com.example.demo.service.UserLoginService;
+import com.example.demo.service.impl.SysPermissionInitServiceImpl;
+import com.example.demo.service.impl.UserLoginServiceImpl;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -18,7 +20,7 @@ import java.util.Set;
 public class AuthRealm extends AuthorizingRealm {
 
     @Autowired
-    private UserLoginService userLoginService;
+    private UserLoginServiceImpl userLoginService;
 
     // 授权
     @Override
@@ -27,9 +29,11 @@ public class AuthRealm extends AuthorizingRealm {
         UserLogin user = (UserLogin) principalCollection.fromRealm(this.getClass().getName()).iterator().next();
         // 获取用户的角色和权限
         List<String> permissions = new ArrayList<>();
+        List<String> roleList = new ArrayList<>();
         Set<Role> roles = user.getRoles();
         if(roles.size() > 0) {
             for (Role role : roles) {
+                roleList.add(role.getRname());
                 Set<Module> modules = role.getModules();
                 if(modules.size() > 0) {
                     for (Module module : modules) {
@@ -40,6 +44,7 @@ public class AuthRealm extends AuthorizingRealm {
         }
 
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+        info.addRoles(roleList);
         info.addStringPermissions(permissions);
         return info;
     }

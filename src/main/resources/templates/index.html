@@ -77,7 +77,7 @@
                         <span id="menu-title">Attendance System</span>
                         <ul id="menu-top" class="nav navbar-nav navbar-right">
                             <li><a class="menu-top-active" href="/index">Dashboard</a></li>
-                            <li><a shiro:hasPermission="add" href="/upload">Data Upload</a></li>
+                            <li><a shiro:hasRole="admin" href="/upload">Data Upload</a></li>
                             <li><a href="/role">Role Management</a></li>
                             <li><a href="/admin">Admin Management</a></li>
                         </ul>
