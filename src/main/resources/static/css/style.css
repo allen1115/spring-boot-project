@@ -204,6 +204,7 @@ header {
     /*border-color: transparent;*/
     background: url(../images/bbb.jpg)no-repeat;
     background-position: 0%;
+    background-size: cover;
 }
 
 .navbar-toggle {
