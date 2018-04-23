@@ -7,14 +7,15 @@
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="program" jdbcType="VARCHAR" property="program" />
     <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="email_log_id" jdbcType="VARCHAR" property="emailLogId" />
     <result column="year_of_program" jdbcType="INTEGER" property="yearOfProgram" />
     <result column="avg_attendance" jdbcType="DOUBLE" property="avgAttendance" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, email, name, program, status, year_of_program, avg_attendance
+    id, email, name, program, status, year_of_program, avg_attendance, email_log_id
   </sql>
-  <select id="selectAllUsers" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select * from student
+  <select id="selectAllUsers" resultMap="BaseResultMap">
+    select * from student where email_log_id is null
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap">
     select
@@ -27,6 +28,12 @@
     <include refid="Base_Column_List" />
     from student
     where name = #{name,jdbcType=VARCHAR}
+  </select>
+  <select id="findStudentByEmail" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from student
+    where email = #{email,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from student
@@ -100,6 +107,9 @@
       </if>
       <if test="yearOfProgram != null">
         year_of_program = #{yearOfProgram,jdbcType=INTEGER},
+      </if>
+      <if test="emailLogId != null">
+        email_log_id = #{emailLogId,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}

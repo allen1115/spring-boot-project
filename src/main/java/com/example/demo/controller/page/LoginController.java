@@ -23,6 +23,9 @@ public class LoginController {
             subject.login(utoken); // 完成登陆
             UserLogin user = (UserLogin) subject.getPrincipal();
             session.setAttribute("user", user);
+            // 设置session timeout时间
+            subject.getSession().setTimeout(1800);
+            session.setMaxInactiveInterval(1800);
             map.put("user", user);
             return "/index";
         } catch (Exception e) {

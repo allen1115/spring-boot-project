@@ -23,4 +23,6 @@ public interface StudentMapper {
     int updateAvgAttendance(@Param("id") Long id, @Param("avgAttendance") Double avgAttendance);
 
     List<Student> selectAllUsers();
+
+    Student findStudentByEmail(String email);
 }

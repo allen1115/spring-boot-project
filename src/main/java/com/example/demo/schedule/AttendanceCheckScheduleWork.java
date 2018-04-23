@@ -1,14 +1,13 @@
 package com.example.demo.schedule;
 
 import com.example.demo.entity.AttendanceThresholdConfig;
+import com.example.demo.entity.EmailLog;
 import com.example.demo.entity.EmailTemplate;
 import com.example.demo.entity.Student;
 import com.example.demo.mail.MailContentTypeEnum;
 import com.example.demo.mail.MailSender;
-import com.example.demo.service.AttendanceThresholdConfigService;
-import com.example.demo.service.CronService;
-import com.example.demo.service.EmailTemplateService;
-import com.example.demo.service.StudentService;
+import com.example.demo.service.impl.*;
+import com.example.demo.util.UUIDUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.SchedulingConfigurer;
@@ -17,22 +16,26 @@ import org.springframework.scheduling.support.CronTrigger;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Component
 public class AttendanceCheckScheduleWork implements SchedulingConfigurer {
 
     @Autowired
-    private CronService cronService;
+    private CronServiceImpl cronService;
 
     @Autowired
-    private AttendanceThresholdConfigService attendanceThresholdConfigService;
+    private AttendanceThresholdConfigServiceImpl attendanceThresholdConfigService;
 
     @Autowired
-    private StudentService studentService;
+    private StudentServiceImpl studentService;
 
     @Autowired
-    private EmailTemplateService emailTemplateService;
+    private EmailTemplateServiceImpl emailTemplateService;
+
+    @Autowired
+    private EmailLogServiceImpl emailLogService;
 
 
 //    @Scheduled(fixedRate = 5000)
@@ -69,17 +72,14 @@ public class AttendanceCheckScheduleWork implements SchedulingConfigurer {
             Double avgAttendance = student.getAvgAttendance();
             if(avgAttendance <= thirdLevel) {
                 // 第三级别
-                //TODO 发送第三级别邮件
                 sendEmail("third", student);
                 System.out.println("学生姓名: " + student.getName() + " 学生出勤率: " + avgAttendance + " 第三级别");
             } else if(avgAttendance <= secondLevel) {
                 // 第二级别
-                // TODO 发送第二级别邮件
                 sendEmail("second", student);
                 System.out.println("学生姓名: " + student.getName() + " 学生出勤率: " + avgAttendance + " 第二级别");
             } else if(avgAttendance <= firstLevel) {
                 // 第一级别
-                // TODO 发送第一级别邮件
                 sendEmail("first", student);
                 System.out.println("学生姓名: " + student.getName() + " 学生出勤率: " + avgAttendance + " 第一级别");
             }
@@ -95,8 +95,23 @@ public class AttendanceCheckScheduleWork implements SchedulingConfigurer {
                     .contentType(MailContentTypeEnum.TEXT)
                     .targets(new ArrayList<String>(){{add(student.getEmail());}})
                     .send();
+            // 往email_log表中新增一条记录
+            EmailLog emailLog = new EmailLog();
+            emailLog.setIsReplied("FALSE");
+            emailLog.setCreateDate(new Date());
+            emailLog.setUpdateDate(new Date());
+            emailLog.setEmailLogId(UUIDUtil.getUUID());
+            addEmailLog(emailLog);
+            // 更新student信息
+            student.setEmailLogId(emailLog.getEmailLogId());
+            studentService.updateByPrimaryKeySelective(student);
+            System.out.println("===========================更新完成");
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void addEmailLog(EmailLog emailLog) {
+        emailLogService.insertSelective(emailLog);
     }
 }

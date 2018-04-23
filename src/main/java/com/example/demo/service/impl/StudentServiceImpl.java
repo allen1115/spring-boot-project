@@ -25,6 +25,11 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public Student findStudentByEmail(String email) {
+        return studentMapper.findStudentByEmail(email);
+    }
+
+    @Override
     public int addStudent(Student student) {
         return studentMapper.insertSelective(student);
     }
@@ -42,5 +47,10 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<Student> findAllUsers() {
         return studentMapper.selectAllUsers();
+    }
+
+    @Override
+    public int updateByPrimaryKeySelective(Student student) {
+        return studentMapper.updateByPrimaryKeySelective(student);
     }
 }

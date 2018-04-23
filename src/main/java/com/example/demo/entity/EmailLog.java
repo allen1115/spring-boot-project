@@ -5,13 +5,15 @@ import java.util.Date;
 public class EmailLog {
     private Long id;
 
-    private Long repliedEmailId;
+    private String repliedEmailId;
 
     private String isReplied;
 
     private Date createDate;
 
     private Date updateDate;
+
+    private String emailLogId;
 
     private RepliedEmailLog repliedEmailLog;
 
@@ -31,11 +33,11 @@ public class EmailLog {
         this.id = id;
     }
 
-    public Long getRepliedEmailId() {
+    public String getRepliedEmailId() {
         return repliedEmailId;
     }
 
-    public void setRepliedEmailId(Long repliedEmailId) {
+    public void setRepliedEmailId(String repliedEmailId) {
         this.repliedEmailId = repliedEmailId;
     }
 
@@ -61,5 +63,13 @@ public class EmailLog {
 
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
+    }
+
+    public String getEmailLogId() {
+        return emailLogId;
+    }
+
+    public void setEmailLogId(String emailLogId) {
+        this.emailLogId = emailLogId == null ? null : emailLogId.trim();
     }
 }
