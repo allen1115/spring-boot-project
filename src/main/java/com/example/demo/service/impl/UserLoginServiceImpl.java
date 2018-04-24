@@ -6,6 +6,8 @@ import com.example.demo.service.UserLoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserLoginServiceImpl implements UserLoginService {
 
@@ -15,5 +17,10 @@ public class UserLoginServiceImpl implements UserLoginService {
     @Override
     public UserLogin findUserByUsername(String username) {
         return userLoginMapper.findUserByUsername(username);
+    }
+
+    @Override
+    public List<UserLogin> findAllUsers() {
+        return userLoginMapper.selectAll();
     }
 }

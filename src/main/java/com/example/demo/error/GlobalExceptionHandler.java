@@ -31,6 +31,7 @@ public class GlobalExceptionHandler {
         r.setCode(ErrorInfo.ERROR);
         r.setData("some data");
         r.setUrl(req.getRequestURL().toString());
+        e.printStackTrace();
         return r;
     }
 }
