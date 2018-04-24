@@ -310,10 +310,7 @@ footer a, footer a:hover {
     padding: 5px;
 }
 
-.notice-board li a, li a:hover {
-    text-decoration: none;
-    color: #000;
-}
+
 
 /* SOCIAL BUTTONS */
 .btn-social {
@@ -516,3 +513,98 @@ input[type="search"]{
     text-align: right;
     width: 85px;
 }
+#admin_tab > li.active > a{
+    border: none!important;
+
+}
+#admin_tab > li > a{
+    font-weight: 700;
+}
+#admin_tab > li > a:hover{
+    background-color: transparent!important;
+    border: transparent!important;
+    color: #555!important;
+}
+#admin_tab > li{
+    width: 100%;
+}
+#admin_tab > li.active{
+    border-right: 1px solid #fff;
+}
+#admin_tab{
+    padding-left: 15px;
+}
+
+ul li{
+    list-style: none;
+}
+.hide{display: none}
+.width150{
+    width: 150px;
+    position: relative;
+}
+.width150 input[type="text"]{
+    width: 100%;
+    height: 32px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding-left: 12px;
+}
+.width150 ul{
+    width: 100%;
+    padding: 0 0 0 0;
+    margin: 0;
+    border: 1px solid #ccc;
+    max-height: 200px;
+    overflow: auto;
+    position: absolute;
+    z-index: 1000;
+    background-color: white;
+}
+.width150 li{
+    padding: 0 5px;
+}
+.width150 li+li{
+    border-top: 1px solid #ccc;
+}
+.width150 li label{
+    margin: 0!important;
+}
+.width150 li input{
+    margin: 0 10px 0 0!important;
+}
+.email_box{
+    padding: 5px 10px;
+    margin-top: 5px;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #ababab;
+}
+.email_box div{
+    display: inline-block;
+
+
+}
+.email_box div:nth-child(1) {
+    width: 40%;
+    font-weight: 600;
+    font-size: 14px;
+}
+.email_box div:nth-child(2){
+width: 35%;
+}
+.email_box div:nth-child(3){
+    text-align: center;
+    width: 20%;
+    cursor: pointer;
+    font-size: 18px;
+}
+.modal-body{
+    font-size: 18px;
+}
+#name{
+    font-size: 16px;
+}
+#date{
+    font-size: 12px;
+ }

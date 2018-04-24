@@ -17,7 +17,11 @@ $(function(){
         var alertHtml = "<div id='showAlert'><div id='showAlert_text'>"+msg+"</div><div id='showAlert_button'>OK</div><div>";
         $("body").append(alertHtml);
         $("#showAlert_button").on("click",function(){
-        $("#showAlert").remove();
-    })
+            $("#showAlert").remove();
+        })
     }
+
+
+
+
 })

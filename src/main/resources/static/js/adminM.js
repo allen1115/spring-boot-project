@@ -28,8 +28,8 @@ $(function(){
 
             $("#check_list input[type=checkbox]").on("click",self.select_number)
 
-            $("#level_attendance .fa-edit").on("click",self.change_level)
-            $("#level_attendance .fa-save").on("click",self.save_level)
+            $("#level_attendance .fa-edit").on("click",self.change_setting)
+            $("#level_attendance .fa-save").on("click",self.save_setting)
 
         },
         sortNumber:function(a,b){
@@ -42,13 +42,12 @@ $(function(){
         select_number:function(){
 
         },
-        change_level:function(e){
-            $(e.currentTarget).parentElement().find(".data-area").hide();
-            $(e.currentTarget).parentElement().find(".change-area").show();
-            $(e.currentTarget).parentElement().find(".fa-edit").hide();
-            $(e.currentTarget).parentElement().find(".fa-save").show();
+        change_setting:function(e){
+            $("#no-r_time").removeAttr("disabled");
+            $("#percentageSort").removeAttr("disabled");
+            $("#check_list input").attr("disabled")
         },
-        save_level:function(e){
+        save_setting:function(e){
             $(e.currentTarget).parentElement().find(".change-area").hide();
             $(e.currentTarget).parentElement().find(".data-area").show();
             $("#add_new_level input").html("");
@@ -69,7 +68,7 @@ $(function(){
                 {'name':"kelvin","checked":true},
                 {'name':"dou","checked":false},
                 {'name':"colin","checked":false}
-            ]
+            ];
             return data;
         },
 
@@ -102,6 +101,12 @@ $(function(){
             var data = typeof data=="object"?self.getNORES_time():data;
             $("#no-r_time").val(data);
             $("#no-r_data").val(data);
+            $("#no-r_time").attr("disabled",true);
+        },
+        initPercentage:function(data){
+
+          $("#percentageSort").val(data).attr("disabled",true);
+
         },
         changeCheckList:function(){
             if($("#check_list input[checked]").length>0){
@@ -109,7 +114,7 @@ $(function(){
             }else{
                 $("#select-button span").html("Select Numbers")
             }
-
+            $("#check_list input").attr("disabled")
         },
         addLevel:function(){
 
