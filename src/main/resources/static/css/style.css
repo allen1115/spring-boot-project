@@ -203,6 +203,8 @@ header {
     background-color: #01183a;
     /*border-color: transparent;*/
     background: url(../images/bbb.jpg)no-repeat;
+    background-position: 0%;
+    background-size: cover;
 }
 
 .navbar-toggle {
@@ -496,4 +498,21 @@ input[type="search"]{
     -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
     -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
     transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+.click_button{
+    color: #FA4659;
+    cursor: pointer;
+    padding-left: 6px;
+}
+.fa-save{
+    display: none;
+}
+.data-area{
+    text-align: right;
+    width: 85px;
+}
+.change-area{
+    display: none;
+    text-align: right;
+    width: 85px;
 }

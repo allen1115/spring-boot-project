@@ -78,8 +78,8 @@
 
 <!-- body -->
 <!-- LOGO HEADER END-->
-<link rel="stylesheet" href="css/jquery-cron.css">
-<link rel="stylesheet" href="css/jquery-gentleSelect.css">
+<!--<link rel="stylesheet" href="css/jquery-cron.css">-->
+<!--<link rel="stylesheet" href="css/jquery-gentleSelect.css">-->
 
 <section class="menu-section">
     <div class="container">
@@ -226,7 +226,8 @@
                     The time interval between two non-responded emails
                 </div>
                 <div class='col-md-8'>
-                    <input type="number" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" class="form-control" style="display:inline-block"><span style="font-weight:bold">&nbsp;day(s)</span>
+                    <div class="data-area" id="no-r_data"></div>
+                    <input type="number" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" class="form-control change-area" style="display:inline-block" id="no-r_time"><span style="font-weight:bold" >&nbsp;day(s) </span><span class="fa fa-edit click_button"></span><span class="fa fa-save click_button"></span>
                 </div>
             </div>
             <div class='col-md-12 tab-pane' style="text-align:left" id='4'>
