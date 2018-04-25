@@ -4,12 +4,15 @@
   <resultMap id="BaseResultMap" type="com.example.demo.entity.Module" >
     <id column="mid" property="mid" jdbcType="INTEGER" />
     <result column="mname" property="mname" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="permission_init" property="permissionInit" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    mid, mname
+    mid, mname, url, permission_init, sort
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from module
     where mid = #{mid,jdbcType=INTEGER}
@@ -24,8 +27,10 @@
     where mid = #{mid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.example.demo.entity.Module" >
-    insert into module (mid, mname)
-    values (#{mid,jdbcType=INTEGER}, #{mname,jdbcType=VARCHAR})
+    insert into module (mid, mname, url,
+      permission_init, sort)
+    values (#{mid,jdbcType=INTEGER}, #{mname,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR},
+      #{permissionInit,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.example.demo.entity.Module" >
     insert into module
@@ -36,6 +41,15 @@
       <if test="mname != null" >
         mname,
       </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="permissionInit != null" >
+        permission_init,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="mid != null" >
@@ -43,6 +57,15 @@
       </if>
       <if test="mname != null" >
         #{mname,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionInit != null" >
+        #{permissionInit,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -52,12 +75,24 @@
       <if test="mname != null" >
         mname = #{mname,jdbcType=VARCHAR},
       </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionInit != null" >
+        permission_init = #{permissionInit,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
     </set>
     where mid = #{mid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.example.demo.entity.Module" >
     update module
-    set mname = #{mname,jdbcType=VARCHAR}
+    set mname = #{mname,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      permission_init = #{permissionInit,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER}
     where mid = #{mid,jdbcType=INTEGER}
   </update>
 </mapper>

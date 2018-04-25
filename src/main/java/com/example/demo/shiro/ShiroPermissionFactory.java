@@ -1,7 +1,7 @@
 package com.example.demo.shiro;
 
-import com.example.demo.entity.SysPermissionInit;
-import com.example.demo.service.impl.SysPermissionInitServiceImpl;
+import com.example.demo.entity.Module;
+import com.example.demo.service.impl.ModuleServiceImpl;
 import org.apache.shiro.config.Ini;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.util.CollectionUtils;
@@ -17,7 +17,7 @@ public class ShiroPermissionFactory extends ShiroFilterFactoryBean {
 
     /** 权限service **/
     @Autowired
-    private SysPermissionInitServiceImpl sysPermissionInitService;
+    private ModuleServiceImpl moduleService;
 
     /**
      * 从数据库动态读取权限
@@ -26,12 +26,13 @@ public class ShiroPermissionFactory extends ShiroFilterFactoryBean {
     public void setFilterChainDefinitions(String definitions) {
         ShiroPermissionFactory.definitions = definitions;
         // 数据库动态权限
-        List<SysPermissionInit> sysPermissionInitList = sysPermissionInitService.selectAll();
+        List<Module> sysPermissionInitList = moduleService.findAllModules();
         StringBuilder definitionsBuilder = new StringBuilder(definitions);
-        for (SysPermissionInit s : sysPermissionInitList) {
+        for (Module m : sysPermissionInitList) {
             // 字符串拼接权限
-            definitionsBuilder.append(s.getUrl()).append(" = ").append(s.getPermissionInit()).append("\r");
+            definitionsBuilder.append(m.getUrl()).append(" = ").append(m.getPermissionInit()).append("\r");
         }
+        definitionsBuilder.append("/**").append(" = ").append("authc");
         definitions = definitionsBuilder.toString();
 
         // 从配置文件加载权限配置

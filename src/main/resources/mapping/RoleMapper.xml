@@ -46,6 +46,12 @@
       </if>
     </trim>
   </insert>
+  <insert id="assignRoleToUser" parameterType="java.lang.Long" >
+    insert into user_role value (#{uid}, #{rid})
+  </insert>
+  <insert id="assignRoleModule" parameterType="java.lang.Long" >
+    insert into module_role value (#{rid}, #{mid})
+  </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.entity.Role" >
     update role
     <set >
