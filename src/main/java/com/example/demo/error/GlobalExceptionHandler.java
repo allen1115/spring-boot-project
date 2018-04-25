@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    public static final String DEFAULT_ERROR_VIEW = "error";
+    private static final String DEFAULT_ERROR_VIEW = "error";
 
     @ExceptionHandler(value = Exception.class)
     public ModelAndView defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {
@@ -31,6 +31,7 @@ public class GlobalExceptionHandler {
         r.setCode(ErrorInfo.ERROR);
         r.setData("some data");
         r.setUrl(req.getRequestURL().toString());
+        e.printStackTrace();
         return r;
     }
 }

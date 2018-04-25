@@ -11,31 +11,29 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.LinkedHashMap;
-
 /**
  * Shiro的配置类
  */
 @Configuration
 public class ShiroConfiguration {
+
     @Bean(name = "shiroFilter")
-    public ShiroFilterFactoryBean shiroFilter(@Qualifier("securityManager") SecurityManager securityManager) {
-        ShiroFilterFactoryBean bean = new ShiroFilterFactoryBean();
+    public ShiroFilterFactoryBean shiroFilter(@Qualifier("securityManager") SecurityManager securityManager, @Qualifier("shiroFilterFactoryBean") ShiroFilterFactoryBean bean) {
         bean.setSecurityManager(securityManager);
         // 配置登陆的url和登陆成功的url
         bean.setLoginUrl("/login");
         bean.setSuccessUrl("/index");
+        bean.setUnauthorizedUrl("/unauthorized");
         // 配置权限访问
-        LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
-        filterChainDefinitionMap.put("/login", "anon"); // 表示可以匿名访问
-        filterChainDefinitionMap.put("/css/**", "anon");
-        filterChainDefinitionMap.put("/DataTables/**", "anon");
-        filterChainDefinitionMap.put("/fonts/**", "anon");
-        filterChainDefinitionMap.put("/images/**", "anon");
-        filterChainDefinitionMap.put("/js/**", "anon");
-        filterChainDefinitionMap.put("/**", "authc"); // 表示需要认证才可以访问
-        bean.setFilterChainDefinitionMap(filterChainDefinitionMap);
+        bean.setFilterChainDefinitions("");
+        System.out.println("Shiro拦截器工厂类注入成功");
         return bean;
+    }
+
+    // 配置自定义ShiroFilterFactoryBean
+    @Bean (name = "shiroFilterFactoryBean")
+    public ShiroFilterFactoryBean shiroFilterFactoryBean(){
+        return new ShiroPermissionFactory();
     }
 
     // 配置核心安全事务管理器

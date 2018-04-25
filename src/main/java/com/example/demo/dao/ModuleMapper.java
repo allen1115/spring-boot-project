@@ -2,6 +2,8 @@ package com.example.demo.dao;
 
 import com.example.demo.entity.Module;
 
+import java.util.List;
+
 public interface ModuleMapper {
     int deleteByPrimaryKey(Integer mid);
 
@@ -14,4 +16,6 @@ public interface ModuleMapper {
     int updateByPrimaryKeySelective(Module record);
 
     int updateByPrimaryKey(Module record);
+
+    List<Module> selectAll();
 }

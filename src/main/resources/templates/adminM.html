@@ -62,7 +62,7 @@
                             <h5><strong>Personal Bio : </strong></h5>
                             Anim pariatur cliche reprehen derit.
                             <hr />
-                            <a href="login.html" class="btn btn-danger btn-sm">Logout</a>
+                            <a href="/logout" class="btn btn-danger btn-sm">Logout</a>
 
                         </div>
                     </li>
@@ -78,8 +78,8 @@
 
 <!-- body -->
 <!-- LOGO HEADER END-->
-<link rel="stylesheet" href="css/jquery-cron.css">
-<link rel="stylesheet" href="css/jquery-gentleSelect.css">
+<!--<link rel="stylesheet" href="css/jquery-cron.css">-->
+<!--<link rel="stylesheet" href="css/jquery-gentleSelect.css">-->
 
 <section class="menu-section">
     <div class="container">
@@ -109,144 +109,152 @@
 <!-- MENU SECTION END-->
 <div class="content-wrapper">
     <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h4 class="page-head-line">Admin Management</h4>
+        <div class="row page-head-line" style="margin-left: 0;margin-right: 0">
+            <div class="col-md-11" style="padding-left: 0">
+                <h4 class="" style="font-size: 20px;font-weight: 900;">Admin Management</h4>
+            </div>
+            <div class="col-md-1">
+                <span class="fa fa-edit click_button"></span><span class="fa fa-save click_button"></span>
             </div>
         </div>
-        <ul class='row nav nav-tabs'>
-            <li class="active">
-                <a  href="#1" data-toggle="tab">Check Timeframe</a>
-            </li>
-            <li><a href="#2" data-toggle="tab">Number of Attendance Checks</a>
-            </li>
-            <li><a href="#3" data-toggle="tab">Time Interval</a>
-            </li>
-            <li><a href="#4" data-toggle="tab">Percentage Thresholds</a>
-            </li>
-            <li><a href="#5" data-toggle="tab">Level of Attendance</a>
-            </li>
+        <div class="row"  style="margin-left: 0;margin-right: 0">
+            <ul class='row nav nav-tabs col-md-2' style="border-bottom: none;" id="admin_tab">
+                <li class="active">
+                    <a  href="#1" data-toggle="tab">Check Timeframe</a>
+                </li>
+                <li><a href="#2" data-toggle="tab">Number of Attendance Checks</a>
+                </li>
+                <li><a href="#3" data-toggle="tab">Time Interval</a>
+                </li>
+                <li><a href="#4" data-toggle="tab">Percentage Thresholds</a>
+                </li>
+                <li><a href="#5" data-toggle="tab">Level of Attendance</a>
+                </li>
 
-        </ul>
-
-
-
-
-        <div class="row tab-content" id='admin_index'>
-            <div class='col-md-12 tab-pane active' id="1" style="text-align:left">
-
-                <div class='col-md-12'>
-                    <div class="row">
-                        <div class="col-md-2">
-                            <span class="legend">Pick Time</span>
-                        </div>
-                        <div class="col-md-10" data-has-error="time[picker]" id='cronTime'>
-                            <!-- Specific time in the day -->
-                            <div class="radio radio-time radio-specific-time" data-has-error="time[specificTime][hour] time[specificTime][minute]">
-                                <label style="padding-left:unset!important">
-                                    <input type="radio" name="time[picker]" value="specificTime" autocomplete="off" checked="" aria-required="true">
-                                    Specific time in the day
-                                </label>
-                                <div class="specific-time">
-                                    <input type="number" name="time[specificTime][hour]" placeholder="h" autocomplete="off" class="form-control input-hour" min="0" max="23" value="" aria-required="true" > :
-                                    <input type="number" name="time[specificTime][minute]" placeholder="m" autocomplete="off" class="form-control input-minute" min="0" max="59" value="" aria-required="true" >                </div>
+            </ul>
 
 
-                                <ul data-error="time[specificTime][hour]" class="error-container"></ul>
 
-                                <ul data-error="time[specificTime][minute]" class="error-container"></ul>
+
+            <div class="row tab-content col-md-9" id='admin_index'>
+                <div class='col-md-12 tab-pane active' id="1" style="text-align:left">
+
+                    <div class='col-md-12'>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <span class="legend">Pick Time</span>
                             </div>
+                            <div class="col-md-10" data-has-error="time[picker]" id='cronTime'>
+                                <!-- Specific time in the day -->
+                                <div class="radio radio-time radio-specific-time" data-has-error="time[specificTime][hour] time[specificTime][minute]">
+                                    <label style="padding-left:unset!important">
+                                        <input type="radio" name="time[picker]" value="specificTime" autocomplete="off" checked="" aria-required="true">
+                                        Specific time in the day
+                                    </label>
+                                    <div class="specific-time">
+                                        <input type="number" name="time[specificTime][hour]" placeholder="h" autocomplete="off" class="form-control input-hour" min="0" max="23" value="" aria-required="true" > :
+                                        <input type="number" name="time[specificTime][minute]" placeholder="m" autocomplete="off" class="form-control input-minute" min="0" max="59" value="" aria-required="true" >                </div>
 
-                            <!-- Every {step} hours at minute {minute} -->
-                            <div class="radio radio-time radio-every-hour" data-has-error="time[everyHour][step] time[everyHour][minute]">
 
-                                <input type="radio" name="time[picker]" value="everyHour" autocomplete="off" >
-                                <span>
+                                    <ul data-error="time[specificTime][hour]" class="error-container"></ul>
+
+                                    <ul data-error="time[specificTime][minute]" class="error-container"></ul>
+                                </div>
+
+                                <!-- Every {step} hours at minute {minute} -->
+                                <div class="radio radio-time radio-every-hour" data-has-error="time[everyHour][step] time[everyHour][minute]">
+
+                                    <input type="radio" name="time[picker]" value="everyHour" autocomplete="off" >
+                                    <span>
                                         Every
                                         <input type="number" name="time[everyHour][step]" class="form-control input-step" min="1" max="23" autocomplete="off" value="1" disabled>                    hours at minute
                                         <input type="number" name="time[everyHour][minute]" autocomplete="off" class="form-control input-minute" min="0" max="59" value="0" aria-required="true" aria-invalid="false" disabled>                </span>
 
 
-                                <ul data-error="time[everyHour][step]" class="error-container"></ul>
+                                    <ul data-error="time[everyHour][step]" class="error-container"></ul>
 
-                                <ul data-error="time[everyHour][minute]" class="error-container"></ul>
-                            </div>
+                                    <ul data-error="time[everyHour][minute]" class="error-container"></ul>
+                                </div>
 
-                            <!-- Every {minute} minutes -->
-                            <div class="radio radio-time radio-every-minute" data-has-error="time[everyMinute][step]">
+                                <!-- Every {minute} minutes -->
+                                <div class="radio radio-time radio-every-minute" data-has-error="time[everyMinute][step]">
 
-                                <input type="radio" name="time[picker]" value="everyMinute" autocomplete="off">
-                                <span>
+                                    <input type="radio" name="time[picker]" value="everyMinute" autocomplete="off">
+                                    <span>
                                         Every
                                         <input type="number" name="time[everyMinute][step]" class="form-control input-step" min="1" max="59" autocomplete="off" value="1" aria-required="true" disabled="">                    minutes
                                     </span>
 
 
-                                <ul data-error="time[everyMinute][step]" class="error-container"></ul>
+                                    <ul data-error="time[everyMinute][step]" class="error-container"></ul>
+                                </div>
+
+
+                                <ul data-error="time[picker]" class="error-container"></ul>
                             </div>
-
-
-                            <ul data-error="time[picker]" class="error-container"></ul>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-2">
-                            <span class="legend">Repeat</span>
-                        </div>
-                        <div class="col-md-10" data-has-error="repeat[picker]" style='padding-left:0'>
-                            <select name="repeat[picker]" class="form-control repeat" style="width:100px"><option value="daily" selected="selected">Daily</option>
-                                <option value="weekly">Weekly</option>
-                                <option value="monthly">Monthly</option>
-                                <option value="yearly">Yearly</option></select>        </div>
-                        <div class="col-md-2"></div>
-                        <div class="col-md-10">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <span class="legend">Repeat</span>
+                            </div>
+                            <div class="col-md-10" data-has-error="repeat[picker]" style='padding-left:0'>
+                                <select name="repeat[picker]" class="form-control repeat" style="width:100px"><option value="daily" selected="selected">Daily</option>
+                                    <option value="weekly">Weekly</option>
+                                    <option value="monthly">Monthly</option>
+                                    <option value="yearly">Yearly</option></select>        </div>
+                            <div class="col-md-2"></div>
+                            <div class="col-md-10">
 
-                            <ul data-error="repeat[picker]" class="error-container">
-                            </ul>
+                                <ul data-error="repeat[picker]" class="error-container">
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class='col-md-12 tab-pane' style="text-align:left" id='2'>
-                <div class="col-md-4">
-                    The number of attendance checks in a term/year
-                </div>
-                <div class="col-md-8 dropdown">
-                    <div id='select-button' class='dropdown-toggle' data-target="dropdown" href='#' data-toggle="dropdown"><span>Select Numbers</span></div>
-                    <ul class='dropdown-menu' role="menu" aria-labelledby="dLabel" style="width:700px;margin-left:14px">
-                        <div class='row' id="check_list" style="margin-right:-5px;margin-left:-5px">
+                <div class='col-md-12 tab-pane' style="text-align:left" id='2'>
+                    <div class="col-md-6">
+                        The number of attendance checks in a term/year :
+                    </div>
+                    <div class="col-md-6 dropdown">
+                        <div id='select-button' class='dropdown-toggle' data-target="dropdown" href='#' data-toggle="dropdown"><span>Select Numbers</span></div>
+                        <ul class='dropdown-menu' role="menu" aria-labelledby="dLabel" style="width:700px;margin-left:14px">
+                            <div class='row' id="check_list" style="margin-right:-5px;margin-left:-5px">
 
 
-                        </div>
-                    </ul>
+                            </div>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            <div class='col-md-12 tab-pane' style="text-align:left" id='3'>
-                <div class="col-md-4">
-                    The time interval between two non-responded emails
+                <div class='col-md-12 tab-pane' style="text-align:left" id='3'>
+                    <div class="col-md-6">
+                        The time interval between two non-responded emails :
+                    </div>
+                    <div class='col-md-6'>
+                        <div class="data-area" id="no-r_data"></div>
+                        <input type="number" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" class="form-control change-area" style="display:inline-block" id="no-r_time"><span style="font-weight:bold" >&nbsp;day(s) </span>
+
+                    </div>
                 </div>
-                <div class='col-md-8'>
-                    <input type="number" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" class="form-control" style="display:inline-block"><span style="font-weight:bold">&nbsp;day(s)</span>
+                <div class='col-md-12 tab-pane' style="text-align:left" id='4'>
+                    <div class="col-md-6">
+                        The percentage thresholds for every resulting check :
+                    </div>
+                    <div class='col-md-6'>
+                        <input type="number" placeholder="0<=X<=100" style="display:inline-block" class="form-control"><span style="font-weight:bold" id="percentageSort">&nbsp;%</span>
+                    </div>
                 </div>
-            </div>
-            <div class='col-md-12 tab-pane' style="text-align:left" id='4'>
-                <div class="col-md-4">
-                    The percentage thresholds for every resulting check
-                </div>
-                <div class='col-md-8'>
-                    <input type="number" placeholder="0<=X<=100" style="display:inline-block" class="form-control"><span style="font-weight:bold">&nbsp;%</span>
-                </div>
-            </div>
-            <div class='col-md-12 tab-pane' style="text-align:left" id='5'>
-                <div class="col-md-4">
-                    Reminding email depending on the level of attendance
-                </div>
-                <div class='col-md-8' id='level_attendance'>
+                <div class='col-md-12 tab-pane' style="text-align:left" id='5'>
+                    <div class="col-md-6">
+                        Reminding email depending on the level of attendance :
+                    </div>
+                    <div class='col-md-6' id='level_attendance'>
 
 
+                    </div>
                 </div>
             </div>
         </div>
+
         <div class="row">
             <div class='col-md-12'>
                 <div style="text-align:center">

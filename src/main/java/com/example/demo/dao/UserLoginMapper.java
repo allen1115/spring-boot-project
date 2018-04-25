@@ -2,6 +2,8 @@ package com.example.demo.dao;
 
 import com.example.demo.entity.UserLogin;
 
+import java.util.List;
+
 public interface UserLoginMapper {
     int deleteByPrimaryKey(Long id);
 
@@ -16,4 +18,6 @@ public interface UserLoginMapper {
     int updateByPrimaryKey(UserLogin record);
 
     UserLogin findUserByUsername(String username);
+
+    List<UserLogin> selectAll();
 }

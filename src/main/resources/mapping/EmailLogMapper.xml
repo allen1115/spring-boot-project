@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.EmailLogMapper" >
+  <resultMap id="BaseResultMap" type="com.example.demo.entity.EmailLog" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="replied_email_id" property="repliedEmailId" jdbcType="VARCHAR" />
+    <result column="is_replied" property="isReplied" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="email_log_id" property="emailLogId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, replied_email_id, is_replied, create_date, update_date, email_log_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from email_log
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="findEmailLogByEmailLogId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from email_log
+    where email_log_id = #{emailLogId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from email_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.entity.EmailLog" >
+    insert into email_log (id, replied_email_id, is_replied,
+      create_date, update_date, email_log_id
+      )
+    values (#{id,jdbcType=BIGINT}, #{repliedEmailId,jdbcType=VARCHAR}, #{isReplied,jdbcType=VARCHAR},
+      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, #{emailLogId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.entity.EmailLog" >
+    insert into email_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="repliedEmailId != null" >
+        replied_email_id,
+      </if>
+      <if test="isReplied != null" >
+        is_replied,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="emailLogId != null" >
+        email_log_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="repliedEmailId != null" >
+        #{repliedEmailId,jdbcType=VARCHAR},
+      </if>
+      <if test="isReplied != null" >
+        #{isReplied,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="emailLogId != null" >
+        #{emailLogId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.entity.EmailLog" >
+    update email_log
+    <set >
+      <if test="repliedEmailId != null" >
+        replied_email_id = #{repliedEmailId,jdbcType=VARCHAR},
+      </if>
+      <if test="isReplied != null" >
+        is_replied = #{isReplied,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="emailLogId != null" >
+        email_log_id = #{emailLogId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.entity.EmailLog" >
+    update email_log
+    set replied_email_id = #{repliedEmailId,jdbcType=VARCHAR},
+      is_replied = #{isReplied,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      email_log_id = #{emailLogId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
