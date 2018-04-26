@@ -1,5 +1,6 @@
 package com.example.demo.controller.rest;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.example.demo.entity.Module;
 import com.example.demo.entity.Role;
@@ -10,7 +11,7 @@ import com.example.demo.service.impl.UserLoginServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.*;
 
 @RestController
 @RequestMapping("/permission")
@@ -55,9 +56,48 @@ public class PermissionController {
      */
     @RequestMapping(value = "/addRole", method = RequestMethod.POST)
     public int addRole(@RequestBody JSONObject param) {
-        String role = param.getString("role");
-        // TODO add role
-        System.out.println(role);
-        return 1;
+        Role role = new Role();
+        role.setRname(param.getString("role"));
+        return roleService.addRole(role);
+    }
+
+    /**
+     * 新增权限
+     */
+    @RequestMapping(value = "/addModule", method = RequestMethod.POST)
+    public int addModule(@RequestBody JSONObject param) {
+        Module module = new Module();
+        module.setMname(param.getString("moduleName"));
+        module.setUrl(param.getString("url"));
+        module.setPermissionInit("authc,roles[" + param.getString("permission") + "]");
+        return moduleService.addModule(module);
+    }
+
+    /**
+     * 给用户assign角色
+     */
+    @RequestMapping(value = "/assignUserRole", method = RequestMethod.POST)
+    public int assignUserRole(@RequestBody JSONObject param) {
+        Long uid = param.getLong("uid");
+        Long rid = param.getLong("rid");
+        JSONArray test = param.getJSONArray("test");
+        return roleService.assignRoleToUser(rid, uid);
+    }
+
+    /**
+     * 给角色新增权限(Module)
+     */
+    @RequestMapping(value = "/assignRoleModule", method = RequestMethod.POST)
+    public int assignRoleModule(@RequestBody JSONObject param) {
+        Long rid = param.getLong("rid");
+        JSONArray permissionArray = param.getJSONArray("permissions");
+        int total = 0;
+        for (Object aTest : permissionArray) {
+            JSONObject permission = (JSONObject) aTest;
+            Long pid = permission.getLong("pid");
+            int i = roleService.assignRoleModule(rid, pid);
+            total += i;
+        }
+        return total;
     }
 }

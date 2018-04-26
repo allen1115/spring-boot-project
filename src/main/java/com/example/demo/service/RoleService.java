@@ -12,4 +12,7 @@ public interface RoleService {
 
     int deleteRoleById(Integer id);
 
+    int assignRoleToUser(Long rid, Long uid);
+
+    int assignRoleModule(Long rid, Long pid);
 }

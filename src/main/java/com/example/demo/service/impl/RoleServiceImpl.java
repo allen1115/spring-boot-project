@@ -28,4 +28,14 @@ public class RoleServiceImpl implements RoleService {
     public int deleteRoleById(Integer id) {
         return roleMapper.deleteByPrimaryKey(id);
     }
+
+    @Override
+    public int assignRoleToUser(Long rid, Long uid) {
+        return roleMapper.assignRoleToUser(rid, uid);
+    }
+
+    @Override
+    public int assignRoleModule(Long rid, Long pid) {
+        return roleMapper.assignRoleModule(rid, pid);
+    }
 }

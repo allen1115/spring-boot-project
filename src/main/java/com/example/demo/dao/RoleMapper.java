@@ -1,6 +1,7 @@
 package com.example.demo.dao;
 
 import com.example.demo.entity.Role;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -18,4 +19,8 @@ public interface RoleMapper {
     int updateByPrimaryKey(Role record);
 
     List<Role> selectAll();
+
+    int assignRoleToUser(@Param("rid") Long rid, @Param("uid") Long uid);
+
+    int assignRoleModule(@Param("rid") Long rid, @Param("pid") Long pid);
 }

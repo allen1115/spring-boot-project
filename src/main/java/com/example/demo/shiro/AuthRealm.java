@@ -3,8 +3,6 @@ package com.example.demo.shiro;
 import com.example.demo.entity.Module;
 import com.example.demo.entity.Role;
 import com.example.demo.entity.UserLogin;
-import com.example.demo.service.UserLoginService;
-import com.example.demo.service.impl.SysPermissionInitServiceImpl;
 import com.example.demo.service.impl.UserLoginServiceImpl;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;

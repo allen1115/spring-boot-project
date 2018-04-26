@@ -1,7 +1,7 @@
 package com.example.demo.shiro;
 
-import com.example.demo.entity.SysPermissionInit;
-import com.example.demo.service.impl.SysPermissionInitServiceImpl;
+import com.example.demo.entity.Module;
+import com.example.demo.service.impl.ModuleServiceImpl;
 import org.apache.shiro.web.filter.mgt.DefaultFilterChainManager;
 import org.apache.shiro.web.filter.mgt.PathMatchingFilterChainResolver;
 import org.apache.shiro.web.servlet.AbstractShiroFilter;
@@ -21,7 +21,7 @@ public class ShiroService {
     private ShiroPermissionFactory shiroPermissionFactory;
 
     @Autowired
-    SysPermissionInitServiceImpl sysPermissionInitService;
+    ModuleServiceImpl moduleService;
 
     /**
      * 初始化权限
@@ -29,11 +29,12 @@ public class ShiroService {
     public Map<String, String> loadFilterChainDefinitions() {
         // 权限控制map 从数据库获取
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
-        List<SysPermissionInit> list = sysPermissionInitService.selectAll();
+        List<Module> list = moduleService.findAllModules();
 
-        for (SysPermissionInit s : list) {
-            filterChainDefinitionMap.put(s.getUrl(), s.getPermissionInit());
+        for (Module m: list) {
+            filterChainDefinitionMap.put(m.getUrl(), m.getPermissionInit());
         }
+        filterChainDefinitionMap.put("/**", "authc");
         return filterChainDefinitionMap;
     }
 

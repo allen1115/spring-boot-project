@@ -9,4 +9,5 @@ public interface UserLoginService {
     UserLogin findUserByUsername(String username);
 
     List<UserLogin> findAllUsers();
+
 }

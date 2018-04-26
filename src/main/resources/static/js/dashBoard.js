@@ -165,6 +165,7 @@ $(function(){
 
 //init third table
     function init(){
+        // TODO add real data for student table
         var role = {
         data:[
             {
@@ -198,6 +199,7 @@ $(function(){
                 'Attendance':"70%"
             },
         ],
+
         initRoleTable : function(data){
             var dataTableOption={
                 dom: '<"top"<"pull-left"l><"toolbar"><"pull-right"f><"pull-right create">>rt<"bottom"<"pull-left"i><"pull-right"p>><"clear">',
@@ -231,8 +233,6 @@ $(function(){
             }
             $("#role_table").DataTable().destroy();
             $("#role_table").DataTable(dataTableOption);
-
-
         }
     }
         role.initRoleTable(role.data);
@@ -240,6 +240,7 @@ $(function(){
 
 //second table data
     function getEmailBox() {
+        // TODO add real data for replied email
         var data = [
             {
                 "name":"sony1",

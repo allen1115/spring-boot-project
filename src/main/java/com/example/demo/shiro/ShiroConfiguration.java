@@ -11,6 +11,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 /**
  * Shiro的配置类
  */
@@ -26,7 +29,7 @@ public class ShiroConfiguration {
         bean.setUnauthorizedUrl("/unauthorized");
         // 配置权限访问
         bean.setFilterChainDefinitions("");
-        System.out.println("Shiro拦截器工厂类注入成功");
+        System.err.println("Shiro拦截器工厂类注入成功");
         return bean;
     }
 
