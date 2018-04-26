@@ -4,6 +4,12 @@
   <resultMap id="BaseResultMap" type="com.example.demo.entity.Role" >
     <id column="rid" property="rid" jdbcType="INTEGER" />
     <result column="rname" property="rname" jdbcType="VARCHAR" />
+    <collection property="modules" ofType="com.example.demo.entity.Module">
+      <id property="mid" column="mid"/>
+      <result property="mname" column="mname" />
+      <result property="url" column="url" />
+      <result property="permissionInit" column="permission_init" />
+    </collection>
   </resultMap>
   <sql id="Base_Column_List" >
     rid, rname
@@ -15,9 +21,8 @@
     where rid = #{rid,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap" >
-    select
-    <include refid="Base_Column_List" />
-    from role
+    SELECT m.*,r.* FROM role r inner join module_role mr on r.rid=mr.rid
+    inner join module m on mr.mid = m.mid where m.sort > 7 order by m.sort asc
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from role

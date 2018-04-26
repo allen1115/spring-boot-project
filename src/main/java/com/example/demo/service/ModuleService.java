@@ -11,4 +11,6 @@ public interface ModuleService {
     List<Module> findAllModules();
 
     int deleteModuleById(Integer id);
+
+    List<Module> findAllModulesForConfig();
 }

@@ -18,4 +18,6 @@ public interface ModuleMapper {
     int updateByPrimaryKey(Module record);
 
     List<Module> selectAll();
+
+    List<Module> findAllModulesForConfig();
 }

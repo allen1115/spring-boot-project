@@ -40,7 +40,7 @@ public class PermissionController {
      */
     @RequestMapping(value = "/getAllModules", method = RequestMethod.GET)
     public List<Module> getAllModules() {
-        return moduleService.findAllModules();
+        return moduleService.findAllModulesForConfig();
     }
 
     /**

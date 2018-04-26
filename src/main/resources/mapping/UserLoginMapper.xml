@@ -29,10 +29,9 @@
         from user_login
         where id = #{id,jdbcType=BIGINT}
     </select>
-    <select id="selectAll" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from user_login
+    <select id="selectAll" resultMap="userMap">
+    SELECT u.*,r.* FROM user_login u inner join user_role ur on ur.id=u.id
+    inner join role r on r.rid=ur.rid
     </select>
     <select id="findUserByUsername" parameterType="string" resultMap="userMap">
     SELECT u.*,r.*,m.* FROM user_login u inner join user_role ur on ur.id=u.id

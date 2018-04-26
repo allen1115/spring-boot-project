@@ -25,6 +25,11 @@ public class ModuleServiceImpl implements ModuleService {
     }
 
     @Override
+    public List<Module> findAllModulesForConfig() {
+        return moduleMapper.findAllModulesForConfig();
+    }
+
+    @Override
     public int deleteModuleById(Integer id) {
         return moduleMapper.deleteByPrimaryKey(id);
     }
