@@ -3,6 +3,8 @@ $(function(){
     initSelect();
     init();
     initEmailBox();
+
+    //init first table
     var myChart;
     function initChart(){
         var ctx = document.getElementById("bar_chart").getContext('2d');
@@ -60,7 +62,7 @@ $(function(){
     }
 
 
-
+//first table data
     function initSelect() {
         var str = '';
         var arr = [
@@ -120,7 +122,7 @@ $(function(){
 
 
 
-
+//close select dropdown
     $(document).on('click',function() {
         if($("#yearId").css("display")==="block"){
             var name = '';
@@ -161,7 +163,7 @@ $(function(){
     }
 
 
-
+//init third table
     function init(){
         var role = {
         data:[
@@ -236,7 +238,7 @@ $(function(){
         role.initRoleTable(role.data);
     }
 
-
+//second table data
     function getEmailBox() {
         var data = [
             {

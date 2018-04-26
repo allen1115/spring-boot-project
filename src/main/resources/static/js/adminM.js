@@ -3,7 +3,7 @@ $(function(){
         init:function(){
 
             $('#select-button').dropdown();
-            self.initLevel();
+            // self.initLevel();
             self.initCheckNumber();
             self.addEvent();
             self.initNORESdate({});

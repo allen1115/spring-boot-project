@@ -519,6 +519,7 @@ input[type="search"]{
 }
 #admin_tab > li > a{
     font-weight: 700;
+    border: unset!important;
 }
 #admin_tab > li > a:hover{
     background-color: transparent!important;
@@ -529,7 +530,7 @@ input[type="search"]{
     width: 100%;
 }
 #admin_tab > li.active{
-    border-right: 1px solid #fff;
+    border-right: 1px solid #fa4659;
 }
 #admin_tab{
     padding-left: 15px;
@@ -608,3 +609,35 @@ width: 35%;
 #date{
     font-size: 12px;
  }
+
+.privilegeList{
+    display: inline-block;
+    width: 200px;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+.fa-edit{
+    font-size: 20px;
+    top: -6px;
+    position: relative;
+    cursor: pointer;
+}
+.checkbox_role{
+    display: inline-block;
+    width: 50%;
+}
+.fa-remove{
+    cursor: pointer;
+}
+.addButton{
+    display: inline-block;
+    float: right;
+    border: 1px solid #F0677C;
+    padding:5px 20px;
+    background-color: #F0677C;
+    color: white;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}

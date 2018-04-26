@@ -110,20 +110,17 @@
 <div class="content-wrapper">
     <div class="container">
         <div class="row page-head-line" style="margin-left: 0;margin-right: 0">
-            <div class="col-md-11" style="padding-left: 0">
+            <div class="col-md-12" style="padding-left: 0">
                 <h4 class="" style="font-size: 20px;font-weight: 900;">Admin Management</h4>
             </div>
-            <div class="col-md-1">
-                <span class="fa fa-edit click_button"></span><span class="fa fa-save click_button"></span>
-            </div>
+
         </div>
         <div class="row"  style="margin-left: 0;margin-right: 0">
-            <ul class='row nav nav-tabs col-md-2' style="border-bottom: none;" id="admin_tab">
+            <ul class='row nav nav-tabs col-md-3' style="border-bottom: none;" id="admin_tab">
                 <li class="active">
                     <a  href="#1" data-toggle="tab">Check Timeframe</a>
                 </li>
-                <li><a href="#2" data-toggle="tab">Number of Attendance Checks</a>
-                </li>
+
                 <li><a href="#3" data-toggle="tab">Time Interval</a>
                 </li>
                 <li><a href="#4" data-toggle="tab">Percentage Thresholds</a>
@@ -247,10 +244,10 @@
                     <div class="col-md-6">
                         Reminding email depending on the level of attendance :
                     </div>
-                    <div class='col-md-6' id='level_attendance'>
-
-
-                    </div>
+                    <div class="col-md-6" id="level_attendance">
+                        <div data-level="80"><span class="level_width">Level 1:</span> attendance lower than <input type="number" value="80">%   <span class="fa fa-icon-edit" style="color:#FA4659;cursor:pointer;margin-left:10px"></span></div>
+                        <div data-level="60"><span class="level_width">Level 2:</span> attendance lower than <input type="number" value="60">%   <span class="fa fa-icon-edit" style="color:#FA4659;cursor:pointer;margin-left:10px"></span></div>
+                        <div data-level="40"><span class="level_width">Level 3:</span> attendance lower than <input type="number" value="40">%   <span class="fa fa-icon-edit" style="color:#FA4659;cursor:pointer;margin-left:10px"></span></div></div>
                 </div>
             </div>
         </div>

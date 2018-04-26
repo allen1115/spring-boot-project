@@ -19,6 +19,25 @@ $(function(){
         $("#showAlert_button").on("click",function(){
             $("#showAlert").remove();
         })
+    };
+    window.getObj = function(Key,value,arr) {
+        arr.map(function (index,keyValue) {
+            if(index.Key===value){
+                return index
+            }
+        })
+        return false;
+    }
+
+    $.func = {
+        getObj: function(Key,value,arr) {
+            arr.map(function (index,keyValue) {
+                if(index.Key===value){
+                    return index
+                }
+            })
+            return false;
+        }
     }
 
 

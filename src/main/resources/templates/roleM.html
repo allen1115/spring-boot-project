@@ -101,20 +101,145 @@
                     <h4 class="page-head-line">Role Management</h4>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <table id="role_table" class="datatable">
-                        <thead>
-                        <tr>
-                            <th>User Name</th>
-                            <th>User Description</th>
-                            <th>Student Role</th>
-                        </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
+            <div class="row"  style="margin-left: 0;margin-right: 0">
+                <ul class='row nav nav-tabs col-md-3' style="border-bottom: none;" id="admin_tab">
+                    <li class="active">
+                        <a href="#1" data-toggle="tab">Role Assignments</a>
+                    </li>
+                    <li>
+                        <a href="#6" data-toggle="tab">Role Management</a>
+                    </li>
+                    <li>
+                        <a href="#4" data-toggle="tab">Privilege Assignments</a>
+                    </li>
+                    <li>
+                        <a href="#5" data-toggle="tab">Privilege Management</a>
+                    </li>
+
+                </ul>
+
+
+
+
+                <div class="row tab-content col-md-8 col-md-push-1" id='admin_index'>
+                    <div class='col-md-12 tab-pane active' id="1" style="text-align:left">
+
+                        <table id="role_table" class="datatable">
+                            <thead>
+                            <tr>
+                                <th>User Name</th>
+                                <th>Role</th>
+                            </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+
+                    <div class='col-md-12 tab-pane' style="text-align:left" id='6'>
+
+
+                        <div><div class="addButton" id="addRole">Add Role</div></div>
+                        <table id="role_list_table" class="datatable">
+                            <thead>
+                            <tr>
+                                <th>Role Name</th>
+                                <th>Delete</th>
+                            </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+
+                    <div class='col-md-12 tab-pane' style="text-align:left" id='4'>
+                        <table id="privilege_table" class="datatable">
+                            <thead>
+                            <tr>
+                                <th>Role Name</th>
+                                <th>Privilege</th>
+                            </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+
+                    <div class='col-md-12 tab-pane' style="text-align:left" id='5'>
+
+                        <div><div class="addButton" id="addPri">Add Role</div></div>
+                        <table id="pri_list_table" class="datatable">
+                            <thead>
+                            <tr>
+                                <th>Privilege Name</th>
+                                <th>Delete</th>
+                            </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
+
+        </div>
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Privilege Assessment</h4>
+
+                    </div>
+                    <div class="modal-body">
+
+                    </div>
+                    <!--<div class="modal-footer">-->
+                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>-->
+                    <!--<button type="button" class="btn btn-primary">提交更改</button>-->
+                    <!--</div>-->
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+        </div>
+        <div class="modal fade" id="myModal_add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel_add">Role Management</h4>
+
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <span id="title">Add Role :</span>
+                            <input type="text">
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Submit</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+        </div>
+        <div class="modal fade" id="myModal_addpri" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel_addpri">Privilege Management</h4>
+
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <span id="title_pri">Add Privilege :</span>
+                            <input type="text">
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Submit</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
         </div>
     </div>
     <!-- CONTENT-WRAPPER SECTION END-->
