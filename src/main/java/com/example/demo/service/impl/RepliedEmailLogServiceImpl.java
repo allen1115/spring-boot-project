@@ -6,6 +6,8 @@ import com.example.demo.service.RepliedEmailLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class RepliedEmailLogServiceImpl implements RepliedEmailLogService {
 
@@ -16,4 +18,10 @@ public class RepliedEmailLogServiceImpl implements RepliedEmailLogService {
     public int insertSelective(RepliedEmailLog repliedEmailLog) {
         return repliedEmailLogMapper.insertSelective(repliedEmailLog);
     }
+
+    @Override
+    public List<RepliedEmailLog> findAllRepliedEmailsOrderByDate() {
+        return repliedEmailLogMapper.findAllRepliedEmailsOrderByDate();
+    }
+
 }

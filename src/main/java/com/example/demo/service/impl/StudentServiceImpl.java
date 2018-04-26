@@ -45,8 +45,13 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<Student> findAllUsers() {
-        return studentMapper.selectAllUsers();
+    public List<Student> findAllUsersWithNullEmailId() {
+        return studentMapper.selectAllUsersWithNullEmailId();
+    }
+
+    @Override
+    public List<Student> findAllStudents() {
+        return studentMapper.selectAllStudents();
     }
 
     @Override

@@ -67,7 +67,7 @@ public class AttendanceCheckScheduleWork implements SchedulingConfigurer {
         Double secondLevel = config.getSecondLevel();
         Double thirdLevel = config.getThirdLevel();
         // 获取每一个学生的出勤率
-        List<Student> students = studentService.findAllUsers();
+        List<Student> students = studentService.findAllUsersWithNullEmailId();
         for (Student student: students) {
             Double avgAttendance = student.getAvgAttendance();
             if(avgAttendance <= thirdLevel) {

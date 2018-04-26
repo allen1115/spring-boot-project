@@ -22,7 +22,9 @@ public interface StudentMapper {
 
     int updateAvgAttendance(@Param("id") Long id, @Param("avgAttendance") Double avgAttendance);
 
-    List<Student> selectAllUsers();
+    List<Student> selectAllUsersWithNullEmailId();
+
+    List<Student> selectAllStudents();
 
     Student findStudentByEmail(String email);
 }

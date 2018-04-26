@@ -14,8 +14,11 @@
   <sql id="Base_Column_List">
     id, email, name, program, status, year_of_program, avg_attendance, email_log_id
   </sql>
-  <select id="selectAllUsers" resultMap="BaseResultMap">
+  <select id="selectAllUsersWithNullEmailId" resultMap="BaseResultMap">
     select * from student where email_log_id is null
+  </select>
+  <select id="selectAllStudents" resultMap="BaseResultMap">
+    select * from student
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap">
     select
