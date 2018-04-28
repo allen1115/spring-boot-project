@@ -20,12 +20,12 @@ public class AuthRealm extends AuthorizingRealm {
     @Autowired
     private UserLoginServiceImpl userLoginService;
 
-    // 授权
+    // authorize
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        // 获取Session中的用户
+        // get user from Session
         UserLogin user = (UserLogin) principalCollection.fromRealm(this.getClass().getName()).iterator().next();
-        // 获取用户的角色和权限
+        // get user roles and modules
         List<String> permissions = new ArrayList<>();
         List<String> roleList = new ArrayList<>();
         Set<Role> roles = user.getRoles();
@@ -48,14 +48,14 @@ public class AuthRealm extends AuthorizingRealm {
     }
 
 
-    // 认证, 登陆
+    // authenticate, login
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-        // 获取用户输入的token
+        // get token
         UsernamePasswordToken utoken = (UsernamePasswordToken) authenticationToken;
         String username = utoken.getUsername();
         UserLogin user = userLoginService.findUserByUsername(username);
-        // 放入shiro, 调用credentialsMatcher校验密码
+        // validation username and password
         return new SimpleAuthenticationInfo(user, user.getPassword(), this.getClass().getName());
     }
 }

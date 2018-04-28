@@ -8,7 +8,7 @@ public class PropertiesUtil {
     private final String fileName;
 
     /**
-     * 构造函数实例化部分对象, 获取文件资源对象
+     * Initialize
      * @param fileName
      */
     public PropertiesUtil( String fileName) {
@@ -18,7 +18,7 @@ public class PropertiesUtil {
     }
 
     /**
-     * 根据传入的key获取对象的值
+     * get value from key
      * @param key
      * @return
      */

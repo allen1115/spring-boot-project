@@ -36,11 +36,11 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public int updateStudentAvgAttendance(Long studentId) {
-        // 查询学生的总出席率和出席次数, 计算平均数
+        // query total of students' attendance and calculate avg
         Map<String, Object> map = studentAttendanceMapper.getTotalAttendanceAndCount(studentId);
         Double sumAttendance = (Double) map.get("sumAttendance");
         Integer totalCount = ((Long)map.get("totalCount")).intValue();
-        // 更新学生的平均出席率
+        // update students' avg attendance
         return studentMapper.updateAvgAttendance(studentId, sumAttendance / totalCount);
     }
 

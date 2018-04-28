@@ -26,10 +26,10 @@ public class Swagger2 {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("Spring Boot中使用Swagger2构建RESTful APIs")
+                .title("Use Swagger2 to build RESTful APIs in spring boot")
                 .description("Swagger2 Test")
                 .termsOfServiceUrl("")
-                .contact("Allen Shen")
+                .contact("Wanqi Cao")
                 .version("1.0")
                 .build();
     }

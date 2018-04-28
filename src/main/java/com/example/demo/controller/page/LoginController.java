@@ -20,10 +20,10 @@ public class LoginController {
         UsernamePasswordToken utoken = new UsernamePasswordToken(model.getUsername(), model.getPassword());
         Subject subject = SecurityUtils.getSubject();
         try {
-            subject.login(utoken); // 完成登陆
+            subject.login(utoken); // complete login
             UserLogin user = (UserLogin) subject.getPrincipal();
             session.setAttribute("user", user);
-            // 设置session timeout时间
+            // set session timeout
             subject.getSession().setTimeout(1800);
             session.setMaxInactiveInterval(1800);
             map.put("user", user);

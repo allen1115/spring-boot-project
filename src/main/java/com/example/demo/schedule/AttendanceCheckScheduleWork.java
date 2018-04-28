@@ -37,51 +37,45 @@ public class AttendanceCheckScheduleWork implements SchedulingConfigurer {
     @Autowired
     private EmailLogServiceImpl emailLogService;
 
-
-//    @Scheduled(fixedRate = 5000)
-//    public void reportCurrentTime() {
-//        System.out.println("现在时间：" + dateFormat.format(new Date()));
-//    }
-
     @Override
     public void configureTasks(ScheduledTaskRegistrar scheduledTaskRegistrar) {
         scheduledTaskRegistrar.addTriggerTask(
-                //1.添加任务内容(Runnable)
+                //1.add task content(Runnable)
                 this::checkAttendance,
-                //2.设置执行周期(Trigger)
+                //2.set period(Trigger)
                 triggerContext -> {
-                    //2.1 从数据库获取执行周期
+                    //2.1 get cron from database
                     String cron = cronService.getCronExpression(1L).getCron();
-                    //2.2 合法性校验.
+                    //2.2 validation
                     StringUtils.isEmpty(cron);
-                    //2.3 返回执行周期(Date)
+                    //2.3 return cron(Date)
                     return new CronTrigger(cron).nextExecutionTime(triggerContext);
                 }
         );
     }
 
     private void checkAttendance() {
-        // 获取设定的attendance threshold
+        // get attendance threshold
         AttendanceThresholdConfig config = attendanceThresholdConfigService.getAttendanceThresholdConfigById(1);
         Double firstLevel = config.getFirstLevel();
         Double secondLevel = config.getSecondLevel();
         Double thirdLevel = config.getThirdLevel();
-        // 获取每一个学生的出勤率
+        // get attendance for each student
         List<Student> students = studentService.findAllUsersWithNullEmailId();
         for (Student student: students) {
             Double avgAttendance = student.getAvgAttendance();
             if(avgAttendance <= thirdLevel) {
-                // 第三级别
+                // third level
                 sendEmail("third", student);
-                System.out.println("学生姓名: " + student.getName() + " 学生出勤率: " + avgAttendance + " 第三级别");
+                System.out.println("Student name: " + student.getName() + " Attendance: " + avgAttendance + " third level");
             } else if(avgAttendance <= secondLevel) {
-                // 第二级别
+                // second level
                 sendEmail("second", student);
-                System.out.println("学生姓名: " + student.getName() + " 学生出勤率: " + avgAttendance + " 第二级别");
+                System.out.println("Student name: " + student.getName() + " Attendance: " + avgAttendance + " second level");
             } else if(avgAttendance <= firstLevel) {
-                // 第一级别
+                // first level
                 sendEmail("first", student);
-                System.out.println("学生姓名: " + student.getName() + " 学生出勤率: " + avgAttendance + " 第一级别");
+                System.out.println("Student name: " + student.getName() + " Attendance: " + avgAttendance + " first level");
             }
         }
     }
@@ -95,17 +89,17 @@ public class AttendanceCheckScheduleWork implements SchedulingConfigurer {
                     .contentType(MailContentTypeEnum.TEXT)
                     .targets(new ArrayList<String>(){{add(student.getEmail());}})
                     .send();
-            // 往email_log表中新增一条记录
+            // add record to email_log
             EmailLog emailLog = new EmailLog();
             emailLog.setIsReplied("FALSE");
             emailLog.setCreateDate(new Date());
             emailLog.setUpdateDate(new Date());
             emailLog.setEmailLogId(UUIDUtil.getUUID());
             addEmailLog(emailLog);
-            // 更新student信息
+            // update student info
             student.setEmailLogId(emailLog.getEmailLogId());
             studentService.updateByPrimaryKeySelective(student);
-            System.out.println("===========================更新完成");
+            System.out.println("===========================update completed");
         } catch (Exception e) {
             e.printStackTrace();
         }

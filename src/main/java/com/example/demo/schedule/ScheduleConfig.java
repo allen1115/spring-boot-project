@@ -11,7 +11,7 @@ public class ScheduleConfig implements SchedulingConfigurer{
 
     @Override
     public void configureTasks(ScheduledTaskRegistrar scheduledTaskRegistrar) {
-        // 将线程池最大数设置为5
+        // set max thread number in pool to 5
         scheduledTaskRegistrar.setScheduler(Executors.newScheduledThreadPool(5));
     }
 }

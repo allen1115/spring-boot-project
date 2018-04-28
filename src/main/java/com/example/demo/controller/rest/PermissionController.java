@@ -27,7 +27,7 @@ public class PermissionController {
     private ModuleServiceImpl moduleService;
 
     /**
-     * 获取所有的role
+     * get all roles
      * @return
      */
     @RequestMapping(value = "/getAllRoles", method = RequestMethod.GET)
@@ -36,7 +36,7 @@ public class PermissionController {
     }
 
     /**
-     * 获取所有的module (权限)
+     * get all modules
      */
     @RequestMapping(value = "/getAllModules", method = RequestMethod.GET)
     public List<Module> getAllModules() {
@@ -44,7 +44,7 @@ public class PermissionController {
     }
 
     /**
-     * 获取所有的user
+     * get all users
      */
     @RequestMapping(value = "/getAllUser", method = RequestMethod.GET)
     public List<UserLogin> getAllUsers() {
@@ -52,7 +52,7 @@ public class PermissionController {
     }
 
     /**
-     * 新增role
+     * add role
      */
     @RequestMapping(value = "/addRole", method = RequestMethod.POST)
     public int addRole(@RequestBody JSONObject param) {
@@ -62,7 +62,7 @@ public class PermissionController {
     }
 
     /**
-     * 新增权限
+     * add module
      */
     @RequestMapping(value = "/addModule", method = RequestMethod.POST)
     public int addModule(@RequestBody JSONObject param) {
@@ -74,7 +74,7 @@ public class PermissionController {
     }
 
     /**
-     * 给用户assign角色
+     * assign role to specific user
      */
     @RequestMapping(value = "/assignUserRole", method = RequestMethod.POST)
     public int assignUserRole(@RequestBody JSONObject param) {
@@ -85,7 +85,7 @@ public class PermissionController {
     }
 
     /**
-     * 给角色新增权限(Module)
+     * assign module to specific role
      */
     @RequestMapping(value = "/assignRoleModule", method = RequestMethod.POST)
     public int assignRoleModule(@RequestBody JSONObject param) {

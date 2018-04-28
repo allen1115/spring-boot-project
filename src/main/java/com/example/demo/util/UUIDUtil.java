@@ -5,7 +5,7 @@ import java.util.UUID;
 public class UUIDUtil {
 
     /**
-     * 获取指定数量的uuid
+     * get specific number of uuid
      * @param number uuid的数量
      * @return
      */
@@ -21,7 +21,7 @@ public class UUIDUtil {
     }
 
     /**
-     * 获得一个UUID
+     * get one uuid
      * @return
      */
     public static String getUUID() {

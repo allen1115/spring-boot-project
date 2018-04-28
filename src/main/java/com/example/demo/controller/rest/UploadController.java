@@ -35,22 +35,22 @@ public class UploadController {
         String suffix = fileName.substring(fileName.indexOf("."), fileName.length());
         if(suffix.equals(".xlsx")) {
             FileInputStream fs = (FileInputStream)uploadFile.getInputStream();
-            // 获取Excel对象
+            // get Excel object
             XSSFWorkbook wb = new XSSFWorkbook(fs);
 
-            // 获取一个Sheet对象
+            // get Sheet object
             XSSFSheet sheet = wb.getSheetAt(0);
             int totalNum = 0;
 
-            // 循环读取excel数据
+            // read excel data
             for (int i = 1; i <= sheet.getLastRowNum(); i ++) {
                 XSSFRow row = sheet.getRow(i);
                 StudentAttendance s = new StudentAttendance();
-                // 获取学生名字, 查询并返回ID, 若不存在则新建学生记录并返回ID
+                // get student name & id, if not exist, create new student
                 String name = row.getCell(2).toString();
                 Student student = studentService.findStudentByName(name);
                 if(student == null) {
-                    // 记录不存在, 新建学生
+                    // create new student
                     Student newStudent = new Student();
                     newStudent.setEmail(row.getCell(3).toString());
                     newStudent.setName(name);
@@ -88,7 +88,7 @@ public class UploadController {
 
             System.out.println("total number: " + totalNum);
         } else {
-            // 是CSV文件
+            // CSV file
             File f = null;
             f = File.createTempFile("temp", null);
             uploadFile.transferTo(f);
@@ -100,11 +100,10 @@ public class UploadController {
             int totalNum = 0;
             for (String[] ss: list) {
                 StudentAttendance s = new StudentAttendance();
-                // 获取学生名字, 查询并返回ID, 若不存在则新建学生记录并返回ID
                 String name = ss[2];
                 Student student = studentService.findStudentByName(name);
                 if(student == null) {
-                    // 记录不存在, 新建学生
+                    // create new student
                     Student newStudent = new Student();
                     newStudent.setEmail(ss[3]);
                     newStudent.setName(name);

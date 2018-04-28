@@ -42,15 +42,10 @@ public class UnreadEmailCheckScheduleWork implements SchedulingConfigurer {
     @Override
     public void configureTasks(ScheduledTaskRegistrar scheduledTaskRegistrar) {
         scheduledTaskRegistrar.addTriggerTask(
-                //1.添加任务内容(Runnable)
                 this::checkUnreadEmail,
-                //2.设置执行周期(Trigger)
                 triggerContext -> {
-                    //2.1 从数据库获取执行周期
                     String cron = cronService.getCronExpression(3L).getCron();
-                    //2.2 合法性校验.
                     StringUtils.isEmpty(cron);
-                    //2.3 返回执行周期(Date)
                     return new CronTrigger(cron).nextExecutionTime(triggerContext);
                 }
         );
@@ -64,47 +59,45 @@ public class UnreadEmailCheckScheduleWork implements SchedulingConfigurer {
 
         Session session = Session.getInstance(prop);
 
-        IMAPStore store; // 使用imap会话机制，连接服务器
+        IMAPStore store; // use imap
         try {
             store = (IMAPStore) session.getStore("imap");
             store.connect(properties.getValue("mail.from.address"), properties.getValue("mail.from.imap.pwd"));
-            IMAPFolder folder = (IMAPFolder) store.getFolder("INBOX"); // 收件箱
+            IMAPFolder folder = (IMAPFolder) store.getFolder("INBOX"); // Inbox
             folder.open(Folder.READ_WRITE);
-            // 获取总邮件数
+            // get total numbers of email
             int total = folder.getMessageCount();
-            System.out.println("-----------------共有邮件：" + total
-                    + " 封--------------");
-            System.out.println("---------------共有未读邮件: " + folder.getUnreadMessageCount() + "封-------------");
-            // 得到收件箱文件夹信息，获取邮件列表
-            System.out.println("未读邮件数：" + folder.getUnreadMessageCount());
+            System.out.println("-----------------Total ：" + total
+                    + " emails--------------");
+            System.out.println("---------------Total : " + folder.getUnreadMessageCount() + "unread emails-------------");
             Message[] messages = folder.getMessages(folder.getMessageCount() - folder.getUnreadMessageCount() + 1, folder.getMessageCount());
             for (int i = 0, count = messages.length; i < count; i++) {
                 MimeMessage msg = (MimeMessage) messages[i];
                 Flags flags = messages[i].getFlags();
                 if (!flags.contains(Flags.Flag.SEEN)) {
-                    // 设置邮件已读
+                    // set email to read
                     msg.setFlag(Flags.Flag.SEEN, true);
-                    System.out.println("------------------解析第" + msg.getMessageNumber() + "封未读邮件-------------------- ");
-                    System.out.println("主题: " + MailUtil.getSubject(msg));
-                    System.out.println("发件人: " + MailUtil.getFrom(msg));
-                    System.out.println("收件人：" + MailUtil.getReceiveAddress(msg, null));
-                    System.out.println("发送时间：" + MailUtil.getSentDate(msg, null));
-                    System.out.println("邮件优先级：" + MailUtil.getPriority(msg));
-                    System.out.println("是否需要回执：" + MailUtil.isReplySign(msg));
-                    System.out.println("邮件大小：" + msg.getSize() * 1024 + "kb");
+                    System.out.println("------------------Analyse the " + msg.getMessageNumber() + "of unread email-------------------- ");
+                    System.out.println("Subject: " + MailUtil.getSubject(msg));
+                    System.out.println("From: " + MailUtil.getFrom(msg));
+                    System.out.println("To：" + MailUtil.getReceiveAddress(msg, null));
+                    System.out.println("Date：" + MailUtil.getSentDate(msg, null));
+                    System.out.println("Priority：" + MailUtil.getPriority(msg));
+                    System.out.println("Need reply：" + MailUtil.isReplySign(msg));
+                    System.out.println("Mail size：" + msg.getSize() * 1024 + "kb");
                     boolean isContainerAttachment = MailUtil.isContainAttachment(msg);
-                    System.out.println("是否包含附件：" + isContainerAttachment);
+                    System.out.println("Include attachment：" + isContainerAttachment);
                     if (isContainerAttachment) {
                         // TODO need change directory
                         MailUtil.saveAttachment(msg, "f:\\mailTest\\" + msg.getSubject() + "_" + i + "_"); //保存附件
                     }
                     StringBuffer content = new StringBuffer(30);
                     MailUtil.getMailTextContent(msg, content);
-                    System.out.println("邮件正文：" + (content.length() > 100 ? content.substring(0, 100) + "..." : content));
-                    System.out.println("------------------第" + msg.getMessageNumber() + "封邮件解析结束-------------------- ");
+                    System.out.println("Content：" + (content.length() > 100 ? content.substring(0, 100) + "..." : content));
+                    System.out.println("------------------The" + msg.getMessageNumber() + "of unread analyze finish-------------------- ");
                     System.out.println();
 
-                    // 往replied_email_log表里新增一条记录
+                    // add record to replied_email_log
                     RepliedEmailLog repliedEmailLog = new RepliedEmailLog();
                     repliedEmailLog.setEmailSubject(MailUtil.getSubject(msg));
                     repliedEmailLog.setEmailBody(content.toString());
@@ -113,13 +106,13 @@ public class UnreadEmailCheckScheduleWork implements SchedulingConfigurer {
                     repliedEmailLog.setRepliedEmailLogId(UUIDUtil.getUUID());
                     addRepliedEmailLog(repliedEmailLog);
 
-                    // 更新email_log表
+                    // update email_log
                     Student student = studentService.findStudentByEmail(MailUtil.getFromAddr(msg));
                     EmailLog emailLog = emailLogService.findEmailLogByEmailLogId(student.getEmailLogId());
                     emailLog.setRepliedEmailId(repliedEmailLog.getRepliedEmailLogId());
                     emailLog.setIsReplied("TRUE");
                     emailLogService.updateSelective(emailLog);
-                    System.out.println("============================更新完成");
+                    System.out.println("============================update completed");
                 }
             }
 

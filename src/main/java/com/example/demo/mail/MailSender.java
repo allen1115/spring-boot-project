@@ -15,7 +15,7 @@ public class MailSender {
     private static MailEntity mail = new MailEntity();
 
     /**
-     * 设置邮件标题
+     * set title
      * @param title
      * @return
      */
@@ -25,7 +25,7 @@ public class MailSender {
     }
 
     /**
-     * 设置邮件内容
+     * set content
      * @param content
      * @return
      */
@@ -35,7 +35,7 @@ public class MailSender {
     }
 
     /**
-     * 设置邮件格式
+     * set content type
      * @param typeEnum
      * @return
      */
@@ -45,7 +45,7 @@ public class MailSender {
     }
 
     /**
-     * 设置收件人
+     * set receiver
      * @param targets
      * @return
      */
@@ -55,11 +55,11 @@ public class MailSender {
     }
 
     /**
-     * 执行发送邮件
+     * send email
      * @throws Exception
      */
     public void send() throws Exception {
-        // 默认使用HTML发送
+        // default content type HTML
         if(mail.getContentType() == null) {
             mail.setContentType(MailContentTypeEnum.HTML.getValue());
         }
@@ -73,63 +73,60 @@ public class MailSender {
             throw new Exception("No Email Receiver");
         }
 
-        // 读取resource/mail_zh_CN.properties文件内容
+        // read resource/mail_zh_CN.properties
         final PropertiesUtil properties = new PropertiesUtil("mail");
-        // 创建properties类用于记录邮箱的一些属性
+        // create properties class to record some attributes of email
         final Properties props = new Properties();
-        // 表示SMTP发送邮件, 必须进行身份验证
+        // authenticate for SMTP
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
-        // 此处填写SMTP服务器
+        // set SMTP server
         props.put("mail.smtp.host", properties.getValue("mail.smtp.service"));
-        // 设置端口号
+        // set port number
         props.put("mail.smtp.port", properties.getValue("mail.smtp.port"));
-        // 设置发送邮箱
+        // set email address to send email
         props.put("mail.user", properties.getValue("mail.from.address"));
-        // 设置发送邮箱的16位SMTP口令
+        // pwd
         props.put("mail.password", properties.getValue("mail.from.smtp.pwd"));
-        // 构建授权信息, 用于进行SMTP进行身份验证
         Authenticator authenticator = new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                // 用户名, 密码
                 String userName = props.getProperty("mail.user");
                 String password = props.getProperty("mail.password");
                 return new PasswordAuthentication(userName, password);
             }
         };
-        // 使用环境属性和授权信息, 创建邮件会话
+        // create session
         Session mailSession = Session.getInstance(props, authenticator);
-        // 创建邮件消息
+        // create email message
         MimeMessage message = new MimeMessage(mailSession);
-        // 设置发件人
+        // set email sender
         String nickName = MimeUtility.encodeText(properties.getValue("mail.from.nickname"));
         InternetAddress from = new InternetAddress(nickName + " <" + props.getProperty("mail.user") + ">");
         message.setFrom(from);
 
-        // 设置邮件标题
+        // set title
         message.setSubject(mail.getTitle());
 
-        // html发送邮件
+        // send email
         if(mail.getContentType().equals(MailContentTypeEnum.HTML.getValue())) {
-            // 设置邮件的内容体
+            // set content
             message.setContent(mail.getContent(), mail.getContentType());
         }else {
-            // 使用文本发送邮件
+            // send email by plain text
             message.setText(mail.getContent());
         }
 
-        // 收件人地址
+        // receivers list
         List<String> targets = mail.getList();
         for (String target : targets) {
             try {
-                // 设置收件人的邮箱
+                // email address
                 InternetAddress to = new InternetAddress(target);
                 message.setRecipient(Message.RecipientType.TO, to);
-                // 发送邮件
+                // send email
                 Transport.send(message);
-            } catch (Exception e) {
-                continue;
+            } catch (Exception ignored) {
             }
         }
     }

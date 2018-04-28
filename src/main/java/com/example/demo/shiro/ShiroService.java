@@ -24,11 +24,10 @@ public class ShiroService {
     ModuleServiceImpl moduleService;
 
     /**
-     * 初始化权限
+     * initialize privilege
      */
-    public Map<String, String> loadFilterChainDefinitions() {
-        // 权限控制map 从数据库获取
-        Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
+    private Map<String, String> loadFilterChainDefinitions() {
+        Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         List<Module> list = moduleService.findAllModules();
 
         for (Module m: list) {
@@ -39,7 +38,7 @@ public class ShiroService {
     }
 
     /**
-     * 重新加载权限
+     * reload privilege
      */
     public void updatePermission() {
         synchronized (shiroPermissionFactory) {
@@ -53,11 +52,11 @@ public class ShiroService {
             PathMatchingFilterChainResolver filterChainResolver = (PathMatchingFilterChainResolver) shiroFilter.getFilterChainResolver();
             DefaultFilterChainManager manager = (DefaultFilterChainManager) filterChainResolver.getFilterChainManager();
 
-            // 清空老的权限控制
+            // clear old privilege
             manager.getFilterChains().clear();
             shiroPermissionFactory.setFilterChainDefinitionMap(loadFilterChainDefinitions());
 
-            // 重新构建生成
+            // reload
             Map<String, String> chains = shiroPermissionFactory.getFilterChainDefinitionMap();
             for (Map.Entry<String, String> entry : chains.entrySet()) {
                 String url = entry.getKey();
@@ -65,7 +64,7 @@ public class ShiroService {
                 manager.createChain(url, chainDefinition);
             }
 
-            System.out.println("更新权限成功!");
+            System.out.println("Reload privilege successfully!");
         }
     }
 }

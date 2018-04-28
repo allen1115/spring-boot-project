@@ -23,32 +23,32 @@ public class ShiroConfiguration {
     @Bean(name = "shiroFilter")
     public ShiroFilterFactoryBean shiroFilter(@Qualifier("securityManager") SecurityManager securityManager, @Qualifier("shiroFilterFactoryBean") ShiroFilterFactoryBean bean) {
         bean.setSecurityManager(securityManager);
-        // 配置登陆的url和登陆成功的url
+        // set url for each scenario
         bean.setLoginUrl("/login");
         bean.setSuccessUrl("/index");
         bean.setUnauthorizedUrl("/unauthorized");
-        // 配置权限访问
+        // set privilege
         bean.setFilterChainDefinitions("");
-        System.err.println("Shiro拦截器工厂类注入成功");
+        System.err.println("ShiroInterceptorFactory wired successfully");
         return bean;
     }
 
-    // 配置自定义ShiroFilterFactoryBean
+    // Config cunstom ShiroFilterFactoryBean
     @Bean (name = "shiroFilterFactoryBean")
     public ShiroFilterFactoryBean shiroFilterFactoryBean(){
         return new ShiroPermissionFactory();
     }
 
-    // 配置核心安全事务管理器
+    // config shiro securityManager
     @Bean(name = "securityManager")
     public SecurityManager securityManager(@Qualifier("authRealm") AuthRealm authRealm) {
-        System.err.println("--------------------------shiro已经加载--------------------------");
+        System.err.println("--------------------------shiro already loaded--------------------------");
         DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
         manager.setRealm(authRealm);
         return manager;
     }
 
-    // 配置自定义的权限登录器
+    // config custom authRealm
     @Bean(name = "authRealm")
     public AuthRealm authRealm(@Qualifier("credentialsMatcher") CredentialsMatcher matcher) {
         AuthRealm authRealm = new AuthRealm();
@@ -56,7 +56,7 @@ public class ShiroConfiguration {
         return authRealm;
     }
 
-    // 配置自定义的密码比较器
+    // config custome credentialsMatcher
     @Bean(name = "credentialsMatcher")
     public CredentialsMatcher credentialsMatcher() {
         return new CredentialsMatcher();
@@ -82,7 +82,7 @@ public class ShiroConfiguration {
     }
 
     /**
-     * ShiroDialect，为了在thymeleaf里使用shiro的标签的bean
+     * ShiroDialect
      * @return
      */
     @Bean
