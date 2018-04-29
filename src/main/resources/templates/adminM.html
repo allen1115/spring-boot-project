@@ -229,10 +229,18 @@
                         The time interval between two non-responded emails :
                     </div>
                     <div class='col-md-6'>
-                        <div class="data-area" id="no-r_data"></div>
+                        <!--<div class="data-area" id="no-r_data"></div>-->
                         <input type="number" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" class="form-control change-area" style="display:inline-block" id="no-r_time"><span style="font-weight:bold" >&nbsp;day(s) </span>
 
                     </div>
+
+                    <div class='col-md-12'>
+                        <div style="text-align:center">
+                            <div id="upload_button_days" style="width:170px">Update Configure</button>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
                 <div class='col-md-12 tab-pane' style="text-align:left" id='6'>
                     <div class="col-md-12">E-mail Template</div>
@@ -249,14 +257,22 @@
                     </div>
                 </div>
                 <div class='col-md-12 tab-pane' style="text-align:left" id='5'>
-                    <div class="col-md-6">
+                    <div class="col-md-6" style="margin-top: 5px">
                         Reminding email depending on the level of attendance :
                     </div>
                     <div class="col-md-6" id="level_attendance">
-                        <div data-level="80"><span class="level_width">Level 1:</span> attendance lower than <input type="number" value="80">%   <span class="fa fa-icon-edit" style="color:#FA4659;cursor:pointer;margin-left:10px"></span></div>
-                        <div data-level="60"><span class="level_width">Level 2:</span> attendance lower than <input type="number" value="60">%   <span class="fa fa-icon-edit" style="color:#FA4659;cursor:pointer;margin-left:10px"></span></div>
-                        <div data-level="40"><span class="level_width">Level 3:</span> attendance lower than <input type="number" value="40">%   <span class="fa fa-icon-edit" style="color:#FA4659;cursor:pointer;margin-left:10px"></span></div></div>
+                        <div data-level="80"><span class="level_width">Level 1:</span> attendance lower than <input type="number" value="" class="form-control" style="display: inline-block">%   <span class="fa fa-icon-edit" style="color:#FA4659;cursor:pointer;margin-left:10px"></span></div>
+                        <div data-level="60"><span class="level_width">Level 2:</span> attendance lower than <input type="number" value="" class="form-control" style="display: inline-block">%   <span class="fa fa-icon-edit" style="color:#FA4659;cursor:pointer;margin-left:10px"></span></div>
+                        <div data-level="40"><span class="level_width">Level 3:</span> attendance lower than <input type="number" value="" class="form-control" style="display: inline-block">%   <span class="fa fa-icon-edit" style="color:#FA4659;cursor:pointer;margin-left:10px"></span></div>
+                    </div>
+                    <div class='col-md-12'>
+                        <div style="text-align:center">
+                            <div id="upload_button_per" style="width:170px">Update Configure</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
             </div>
         </div>
 

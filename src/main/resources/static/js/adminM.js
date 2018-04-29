@@ -7,8 +7,9 @@ $(function(){
             // self.initLevel();
             self.initCheckNumber();
             self.addEvent();
-            self.initNORESdate({});
-            self.initEmailBox()
+            self.getNORES_time();
+            self.initEmailBox();
+            self.getLavel();
         },
         addEvent:function(){
             $("#upload_button").on("click",function(){
@@ -33,6 +34,58 @@ $(function(){
             $("#level_attendance .fa-edit").on("click",self.change_setting)
             $("#level_attendance .fa-save").on("click",self.save_setting)
 
+            $("#upload_button_days").on("click",function () {
+                if($("#no-r_time").val()===""){
+                    $("#no-r_time").attr("placeholder","Enter a number")
+                    return ;
+                }
+                $.ajax({
+                    url:"",
+                    data:{
+                        "time":$("#no-r_time").val()
+                    },
+                    method:"post",
+                    success:function (res) {
+                        self.getNORES_time()
+                    }
+                })
+            })
+
+            $("#upload_button_per").on("click",function(){
+                if($("#level_attendance input").eq(0).val()===""){
+                    $("#level_attendance input").eq(0).attr("placeholder","Percentage")
+                    return
+                }if($("#level_attendance input").eq(1).val()===""){
+                    $("#level_attendance input").eq(1).attr("placeholder","Percentage")
+                    return
+                }if($("#level_attendance input").eq(2).val()===""){
+                    $("#level_attendance input").eq(2).attr("placeholder","Percentage")
+                    return
+                }
+                if($("#level_attendance input").eq(0).val()<=$("#level_attendance input").eq(0).val()){
+                    alert("First number must greater than second one")
+                    return
+                }
+                if($("#level_attendance input").eq(1).val()<=$("#level_attendance input").eq(2).val()){
+                    alert("Second number must greater than third one")
+                    return
+                }
+                if($("#level_attendance input").eq(0).val()<0||$("#level_attendance input").eq(1).val()<0||$("#level_attendance input").eq(2).val()<0){
+                    alert("Number must greater than 0")
+                    return
+                }
+                var data = [$("#level_attendance input").eq(0).val(),$("#level_attendance input").eq(1).val(),$("#level_attendance input").eq(2).val()]
+                $.ajax({
+                    url:"",
+                    method:"post",
+                    data:data,
+                    success:function (res) {
+                        self.getLavel();
+                        
+                    }
+                })
+            })
+
         },
         sortNumber:function(a,b){
             return a - b
@@ -56,10 +109,20 @@ $(function(){
             self.initLevel();
         },
         getLavel:function(){
-            var data = [
-                "40","60","80"
-            ]
-            return data
+            //TODO
+            //get info in third tab and init
+            $.ajax({
+                url:"",
+                method:"get",
+                success:function(res){
+                    //res is a array like ["80","60","40"]
+                    self.initLevel(res)
+                },
+                error:function(){
+
+                }
+
+            })
         },
         getCheckNumber:function(){
             var data = [
@@ -75,12 +138,22 @@ $(function(){
         },
 
         getNORES_time:function(){
-            data = 3
-            return data
+            //TODO
+            //get info in second tab
+            $.ajax({
+                url:"",
+                method:"get",
+                success:function(res){
+                    //res.data = number
+                    self.initNORESdate(res.data)
+                }
+
+            })
+
         },
 
-        initLevel:function() {
-            var data = self.getLavel().sort(self.sortNumber);
+        initLevel:function(data) {
+            var data = data.sort(self.sortNumber);
             $("#level_attendance").html("");
             for(var i=0;i<data.length;i++){
                 var html = "<div data-level='"+data[i]+"'><span class='level_width'>Level "+(data.length-i)+":</span> attendance lower than "+data[i]+"%   <span class='fa fa-icon-edit' style='color:#FA4659;cursor:pointer;margin-left:10px'></span></div>";
@@ -100,10 +173,10 @@ $(function(){
             self.changeCheckList();
         },
         initNORESdate:function(data){
-            var data = typeof data=="object"?self.getNORES_time():data;
+            var data = typeof data=="object"?0:data;
             $("#no-r_time").val(data);
-            $("#no-r_data").val(data);
-            $("#no-r_time").attr("disabled",true);
+            // $("#no-r_data").val(data);
+
         },
         initPercentage:function(data){
 
@@ -118,9 +191,7 @@ $(function(){
             }
             $("#check_list input").attr("disabled")
         },
-        addLevel:function(){
 
-        },
 
 
         initEmailBox:function () {

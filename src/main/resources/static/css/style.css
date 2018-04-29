@@ -653,3 +653,13 @@ width: 35%;
 #table_body td{
     padding: 8px!important;
 }
+
+#upload_button_days,#upload_button_per{
+    width: 170px;
+    margin: 30px auto 0;
+    padding: 5px 10px;
+    background-color: #FA4659;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
