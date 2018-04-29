@@ -88,6 +88,10 @@ $(function(){
                 })
             })
 
+            $("#upload_button_time").on("click",function(){
+                alert("Update Success")
+            })
+
         },
         sortNumber:function(a,b){
             return a - b

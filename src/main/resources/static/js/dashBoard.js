@@ -14,7 +14,7 @@ $(function () {
         myChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                labels: ["Week1", "Week2", "Week3", "Week4", "Week5", "Week6", "Week7", "Week8", "Week9", "Week10", "Week11", "Week12"],
                 datasets: [{
                     label: 'Attendance over a period',
                     data: [77, 15, 40, 58, 27, 60, 50, 89, 70, 56, 50, 40],
@@ -69,18 +69,18 @@ $(function () {
     function initSelect() {
         var str = '';
         var arr = [
-            {name: 'Jun', id: 1, value: 77},
-            {name: 'Feb', id: 2, value: 15},
-            {name: 'Mar', id: 3, value: 40},
-            {name: 'Apr', id: 4, value: 58},
-            {name: 'May', id: 5, value: 27},
-            {name: 'Jun', id: 6, value: 60},
-            {name: 'Jul', id: 7, value: 50},
-            {name: 'Aug', id: 8, value: 89},
-            {name: 'Sep', id: 9, value: 70},
-            {name: 'Oct', id: 10, value: 56},
-            {name: 'Nov', id: 11, value: 50},
-            {name: 'Dec', id: 12, value: 40}
+            {name: 'Week1', id: 1, value: 77},
+            {name: 'Week2', id: 2, value: 15},
+            {name: 'Week3', id: 3, value: 40},
+            {name: 'Week4', id: 4, value: 58},
+            {name: 'Week5', id: 5, value: 27},
+            {name: 'Week6', id: 6, value: 60},
+            {name: 'Week7', id: 7, value: 50},
+            {name: 'Week8', id: 8, value: 89},
+            {name: 'Week9', id: 9, value: 70},
+            {name: 'Week10', id: 10, value: 56},
+            {name: 'Week11', id: 11, value: 50},
+            {name: 'Week12', id: 12, value: 40}
         ];
         str+="<li><label id='select_all'>Select All</label></li>"
         for (var i = 0; i < arr.length; i++) {
@@ -150,7 +150,7 @@ $(function () {
                 addData(myChart, label, data)
             }
             if ($("#yearId input:checked").length > 3) {
-                $("#yearInput").val($("#yearId input:checked").length + " months are selected")
+                $("#yearInput").val($("#yearId input:checked").length + " weeks are selected")
             } else {
                 $("#yearInput").val(name.slice(0, -1));//去除最后的逗号
             }

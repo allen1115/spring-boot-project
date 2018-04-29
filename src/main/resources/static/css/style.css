@@ -654,7 +654,7 @@ width: 35%;
     padding: 8px!important;
 }
 
-#upload_button_days,#upload_button_per{
+#upload_button_days,#upload_button_per,#upload_button_time{
     width: 170px;
     margin: 30px auto 0;
     padding: 5px 10px;
