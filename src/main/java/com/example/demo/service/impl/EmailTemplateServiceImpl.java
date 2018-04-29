@@ -6,6 +6,8 @@ import com.example.demo.service.EmailTemplateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class EmailTemplateServiceImpl implements EmailTemplateService {
 
@@ -15,5 +17,10 @@ public class EmailTemplateServiceImpl implements EmailTemplateService {
     @Override
     public EmailTemplate getEmailTemplateByLevel(String level) {
         return emailTemplateMapper.selectByLevel(level);
+    }
+
+    @Override
+    public List<EmailTemplate> getAllEmailTemplates() {
+        return emailTemplateMapper.selectAll();
     }
 }

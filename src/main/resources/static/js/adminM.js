@@ -112,7 +112,7 @@ $(function(){
             //TODO
             //get info in third tab and init
             $.ajax({
-                url:"",
+                url:"/admin/getThresholdConfig",
                 method:"get",
                 success:function(res){
                     //res is a array like ["80","60","40"]
@@ -196,22 +196,22 @@ $(function(){
 
         initEmailBox:function () {
             $.ajax({
-                url : "",//get email template
+                url : "/admin/getAllEmailTemplate",//get email template
                 method : 'GET',
                 success : function(res) {
-
-                    res = [
-                        {
-                            "template":"template",
-                            "subject":"subject",
-                            "id":1
-                        },
-                        {
-                            "template":"template2",
-                            "subject":"subject2",
-                            "id":2
-                        }
-                    ]
+debugger
+                    // res = [
+                    //     {
+                    //         "template":"template",
+                    //         "subject":"subject",
+                    //         "id":1
+                    //     },
+                    //     {
+                    //         "template":"template2",
+                    //         "subject":"subject2",
+                    //         "id":2
+                    //     }
+                    // ]
 
 
                     self.emailData = res;
@@ -232,7 +232,7 @@ $(function(){
                 //     "                                <div class=\"info-date\">" + moment(data[i].date).format('YYYY-MM-DD') + "</div>\n" +
                 //     "                                <div data-email='" + data[i].email + "' data-subject='" + data[i].email_subject + "' data-content='" + data[i].absence_reason + "' ><i class=\"fa fa-eye\"></i></div>\n" +
                 //     "                            </div>";
-                var html = '<tr><td>'+data[i].subject+'</td><td><i class="fa fa-edit" data-id="'+data[i].id+'" data-subject="'+data[i].subject+'" data-template="'+data[i].template+'"></i></td></tr>'
+                var html = '<tr><td>'+data[i].templateName+'</td><td>' + data[i].level + '</td><td><i class="fa fa-edit" data-id="'+data[i].id+'" data-subject="'+data[i].templateName+'" data-template="'+data[i].templateBody+'"></i></td></tr>'
                 $("#table_body").append(html);
             }
 

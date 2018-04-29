@@ -2,6 +2,8 @@ package com.example.demo.dao;
 
 import com.example.demo.entity.AttendanceThresholdConfig;
 
+import java.util.List;
+
 public interface AttendanceThresholdConfigMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,6 @@ public interface AttendanceThresholdConfigMapper {
     int updateByPrimaryKeySelective(AttendanceThresholdConfig record);
 
     int updateByPrimaryKey(AttendanceThresholdConfig record);
+
+    AttendanceThresholdConfig getAllConfig();
 }

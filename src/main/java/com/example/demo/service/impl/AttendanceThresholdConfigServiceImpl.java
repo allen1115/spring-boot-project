@@ -6,6 +6,8 @@ import com.example.demo.service.AttendanceThresholdConfigService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AttendanceThresholdConfigServiceImpl implements AttendanceThresholdConfigService {
 
@@ -15,5 +17,10 @@ public class AttendanceThresholdConfigServiceImpl implements AttendanceThreshold
     @Override
     public AttendanceThresholdConfig getAttendanceThresholdConfigById(int id) {
         return attendanceThresholdConfigMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public AttendanceThresholdConfig getAllConfig() {
+        return attendanceThresholdConfigMapper.getAllConfig();
     }
 }

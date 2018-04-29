@@ -16,6 +16,11 @@
     from attendance_threshold_config
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="getAllConfig" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from attendance_threshold_config
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from attendance_threshold_config
     where id = #{id,jdbcType=INTEGER}
