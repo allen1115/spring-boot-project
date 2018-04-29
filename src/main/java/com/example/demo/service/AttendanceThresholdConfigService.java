@@ -9,4 +9,6 @@ public interface AttendanceThresholdConfigService {
     AttendanceThresholdConfig getAttendanceThresholdConfigById(int id);
 
     AttendanceThresholdConfig getAllConfig();
+
+    int updateConfig(AttendanceThresholdConfig attendanceThresholdConfig);
 }

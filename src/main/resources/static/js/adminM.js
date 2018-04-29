@@ -74,12 +74,14 @@ $(function(){
                     alert("Number must greater than 0")
                     return
                 }
-                var data = [$("#level_attendance input").eq(0).val(),$("#level_attendance input").eq(1).val(),$("#level_attendance input").eq(2).val()]
+                var data = {first:$("#level_attendance input").eq(0).val(), second: $("#level_attendance input").eq(1).val(), third:$("#level_attendance input").eq(2).val()};
                 $.ajax({
-                    url:"",
+                    url:"/admin/updateLvlOfAttendance",
                     method:"post",
-                    data:data,
+                    contentType : 'application/json',
+                    data:JSON.stringify(data),
                     success:function (res) {
+                        alert('Update Successfully.');
                         self.getLavel();
                         
                     }
@@ -153,7 +155,7 @@ $(function(){
         },
 
         initLevel:function(data) {
-            data = ["80","60","40"]
+            // data = ["80","60","40"]
             var data = data.sort(self.sortNumber);
             $("#level_attendance").html("");
             for(var i=0;i<data.length;i++){
@@ -200,7 +202,6 @@ $(function(){
                 url : "/admin/getAllEmailTemplate",//get email template
                 method : 'GET',
                 success : function(res) {
-debugger
                     // res = [
                     //     {
                     //         "template":"template",
@@ -261,11 +262,13 @@ debugger
                     "template":$("#template").val()
                 }
                 $.ajax({
-                    url:"",
-                    data:data,
+                    url:"/admin/updateEmailTemplateByID",
+                    contentType : 'application/json',
+                    data:JSON.stringify(data),
                     method:"post",
                     success:function (res) {
                         $("#myModal").modal("hide");
+                        alert('Update Successfully.');
                         self.initEmailBox();
                     }
                 })

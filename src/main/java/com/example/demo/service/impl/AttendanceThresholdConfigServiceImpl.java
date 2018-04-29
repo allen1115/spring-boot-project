@@ -23,4 +23,9 @@ public class AttendanceThresholdConfigServiceImpl implements AttendanceThreshold
     public AttendanceThresholdConfig getAllConfig() {
         return attendanceThresholdConfigMapper.getAllConfig();
     }
+
+    @Override
+    public int updateConfig(AttendanceThresholdConfig attendanceThresholdConfig) {
+        return attendanceThresholdConfigMapper.updateByPrimaryKeySelective(attendanceThresholdConfig);
+    }
 }

@@ -75,7 +75,7 @@
         third_level = #{thirdLevel,jdbcType=DOUBLE},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = 1
   </update>
   <update id="updateByPrimaryKey" parameterType="com.example.demo.entity.AttendanceThresholdConfig" >
     update attendance_threshold_config

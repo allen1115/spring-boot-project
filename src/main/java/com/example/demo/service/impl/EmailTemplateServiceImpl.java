@@ -23,4 +23,9 @@ public class EmailTemplateServiceImpl implements EmailTemplateService {
     public List<EmailTemplate> getAllEmailTemplates() {
         return emailTemplateMapper.selectAll();
     }
+
+    @Override
+    public int updateEmailTemplateByID(EmailTemplate emailTemplate) {
+        return emailTemplateMapper.updateByPrimaryKeySelective(emailTemplate);
+    }
 }

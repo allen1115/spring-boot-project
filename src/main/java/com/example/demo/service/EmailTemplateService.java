@@ -8,4 +8,6 @@ public interface EmailTemplateService {
     EmailTemplate getEmailTemplateByLevel(String level);
 
     List<EmailTemplate> getAllEmailTemplates();
+
+    int updateEmailTemplateByID(EmailTemplate emailTemplate);
 }
