@@ -1,5 +1,6 @@
 $(function(){
     self={
+        emailData:[],
         init:function(){
 
             $('#select-button').dropdown();
@@ -7,6 +8,7 @@ $(function(){
             self.initCheckNumber();
             self.addEvent();
             self.initNORESdate({});
+            self.initEmailBox()
         },
         addEvent:function(){
             $("#upload_button").on("click",function(){
@@ -118,6 +120,84 @@ $(function(){
         },
         addLevel:function(){
 
+        },
+
+
+        initEmailBox:function () {
+            $.ajax({
+                url : "",//get email template
+                method : 'GET',
+                success : function(res) {
+
+                    res = [
+                        {
+                            "template":"template",
+                            "subject":"subject",
+                            "id":1
+                        },
+                        {
+                            "template":"template2",
+                            "subject":"subject2",
+                            "id":2
+                        }
+                    ]
+
+
+                    self.emailData = res;
+                    self.generateEmailBox(self.emailData);
+                },
+                error : function(err) {
+                    alert(err);
+                }
+            })
+
+        },
+
+        generateEmailBox:function (data) {
+        $("#table_body").empty();
+            for (var i = 0; i < data.length; i++) {
+                // var html = "<div class=\"email_box\">\n" +
+                //     "                                <div class=\"info-name\">" + data[i].name + "</div>\n" +
+                //     "                                <div class=\"info-date\">" + moment(data[i].date).format('YYYY-MM-DD') + "</div>\n" +
+                //     "                                <div data-email='" + data[i].email + "' data-subject='" + data[i].email_subject + "' data-content='" + data[i].absence_reason + "' ><i class=\"fa fa-eye\"></i></div>\n" +
+                //     "                            </div>";
+                var html = '<tr><td>'+data[i].subject+'</td><td><i class="fa fa-edit" data-id="'+data[i].id+'" data-subject="'+data[i].subject+'" data-template="'+data[i].template+'"></i></td></tr>'
+                $("#table_body").append(html);
+            }
+
+            $("#table_body .fa-edit").on("click", function (e) {
+
+                $("#myModal").modal("show");
+                $("#email_subject").val($(e.currentTarget).attr("data-subject"))
+                $("#template").val($(e.currentTarget).attr("data-template"))
+                $("#submit_email").attr("data-id",$(e.currentTarget).attr("data-id"))
+            })
+
+            $("#submit_email").on("click",function () {
+                if($("#email_subject").val()===""){
+                    $("#email_subject").attr("placeholder","Enter Subject")
+                    return
+                }
+
+                if($("#template").val()===""){
+                    $("#template").attr("placeholder","Enter Template")
+                    return
+                }
+                var data={
+                    "id":$("#submit_email").attr("data-id"),
+                    "subject":$("#email_subject").val(),
+                    "template":$("#template").val()
+                }
+                $.ajax({
+                    url:"",
+                    data:data,
+                    method:"post",
+                    success:function (res) {
+                        $("#myModal").modal("hide");
+                        self.initEmailBox();
+                    }
+                })
+            })
         }
     }
 

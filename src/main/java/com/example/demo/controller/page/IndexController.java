@@ -41,4 +41,7 @@ public class IndexController {
 
     @RequestMapping("/admin")
     public String admin() {return "adminM";}
+
+    @RequestMapping("/attendance")
+    public String attendance() {return "attendance";}
 }
