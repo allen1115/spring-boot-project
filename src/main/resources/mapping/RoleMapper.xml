@@ -21,11 +21,15 @@
     where rid = #{rid,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap" >
-    SELECT m.*,r.* FROM role r inner join module_role mr on r.rid=mr.rid
-    inner join module m on mr.mid = m.mid where m.sort > 7 order by m.sort asc
+    SELECT m.*,r.* FROM role r left join module_role mr on r.rid=mr.rid
+    left join module m on mr.mid = m.mid
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from role
+    where rid = #{rid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteRoleModule" parameterType="java.lang.Integer" >
+    delete from module_role
     where rid = #{rid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.example.demo.entity.Role" >
@@ -52,6 +56,9 @@
     </trim>
   </insert>
   <insert id="assignRoleToUser" parameterType="java.lang.Long" >
+    update user_role set rid = #{rid} where id = #{uid}
+  </insert>
+  <insert id="addRoleToUser" parameterType="java.lang.Long" >
     insert into user_role value (#{uid}, #{rid})
   </insert>
   <insert id="assignRoleModule" parameterType="java.lang.Long" >

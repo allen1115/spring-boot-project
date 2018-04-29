@@ -14,5 +14,9 @@ public interface RoleService {
 
     int assignRoleToUser(Long rid, Long uid);
 
+    int addRoleToUser(Long rid, Long uid);
+
+    int deleteRoleModule(Integer rid);
+
     int assignRoleModule(Long rid, Long pid);
 }

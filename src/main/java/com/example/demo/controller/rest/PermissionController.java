@@ -80,8 +80,13 @@ public class PermissionController {
     public int assignUserRole(@RequestBody JSONObject param) {
         Long uid = param.getLong("uid");
         Long rid = param.getLong("rid");
-        JSONArray test = param.getJSONArray("test");
-        return roleService.assignRoleToUser(rid, uid);
+        // check user role first
+        int num = roleService.assignRoleToUser(rid, uid);
+        if(num == 0) {
+            return roleService.addRoleToUser(rid, uid);
+        } else {
+            return num;
+        }
     }
 
     /**
@@ -99,5 +104,16 @@ public class PermissionController {
             total += i;
         }
         return total;
+    }
+
+    /**
+     * Delete specific Role
+     */
+    @RequestMapping(value = "/deleteRole", method = RequestMethod.POST)
+    public int deleteRole(@RequestBody JSONObject param) {
+        // delete role_module first
+        Integer rid = param.getInteger("rid");
+        roleService.deleteRoleModule(rid);
+        return roleService.deleteRoleById(rid);
     }
 }

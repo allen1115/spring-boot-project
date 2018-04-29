@@ -16,7 +16,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public int addRole(Role role) {
-        return roleMapper.insert(role);
+        return roleMapper.insertSelective(role);
     }
 
     @Override
@@ -32,6 +32,16 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public int assignRoleToUser(Long rid, Long uid) {
         return roleMapper.assignRoleToUser(rid, uid);
+    }
+
+    @Override
+    public int addRoleToUser(Long rid, Long uid) {
+        return roleMapper.addRoleToUser(rid, uid);
+    }
+
+    @Override
+    public int deleteRoleModule(Integer rid) {
+        return roleMapper.deleteRoleModule(rid);
     }
 
     @Override

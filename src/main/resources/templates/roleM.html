@@ -164,11 +164,11 @@
 
                     <div class='col-md-12 tab-pane' style="text-align:left" id='5'>
 
-                        <div><div class="addButton" id="addPri">Add Role</div></div>
+                        <div><div class="addButton" id="addPri">Add Permission</div></div>
                         <table id="pri_list_table" class="datatable">
                             <thead>
                             <tr>
-                                <th>Privilege Name</th>
+                                <th>Permission Name</th>
                                 <th>Delete</th>
                             </tr>
                             </thead>
@@ -208,13 +208,13 @@
                     <div class="modal-body">
                         <div>
                             <span id="title">Add Role :</span>
-                            <input type="text">
+                            <input type="text" id="rname">
                         </div>
 
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Submit</button>
+                        <button type="button" class="btn btn-primary" id="addRole_btn">Submit</button>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal -->
@@ -224,19 +224,26 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="myModalLabel_addpri">Privilege Management</h4>
+                        <h4 class="modal-title" id="myModalLabel_addpri">Permission Management</h4>
 
                     </div>
                     <div class="modal-body">
                         <div>
-                            <span id="title_pri">Add Privilege :</span>
-                            <input type="text">
+                            <span id="title_pri_name">Add Permission:</span>
+                            <input type="text" >
                         </div>
-
+                        <div>
+                            <span id="title_pri_url">Add Permission:</span>
+                            <input type="text" >
+                        </div>
+                        <div>
+                            <span id="title_pri">Add Permission:</span>
+                            <input type="text" >
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Submit</button>
+                        <button type="button" class="btn btn-primary" >Submit</button>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal -->

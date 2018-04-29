@@ -20,7 +20,11 @@ public interface RoleMapper {
 
     List<Role> selectAll();
 
+    int addRoleToUser(@Param("rid") Long rid, @Param("uid") Long uid);
+
     int assignRoleToUser(@Param("rid") Long rid, @Param("uid") Long uid);
+
+    int deleteRoleModule(@Param("rid") Integer rid);
 
     int assignRoleModule(@Param("rid") Long rid, @Param("pid") Long pid);
 }

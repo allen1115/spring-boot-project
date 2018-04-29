@@ -4,18 +4,18 @@ $(function(){
             var id=$(e.currentTarget).attr("data-id");
             var user_role = {}
             privilege.data.map(function (index,keyValue) {
-                if(index.ROLE_ID===id){
+                if(index.rid == id){
                     user_role = index;
                     return
                 }
             })
 
-            var idList = user_role.PRI_LIST;
+            var idList = user_role.modules;
             $("#myModal .modal-body").empty();
             var html = "<div id=''>"
             for(var i=0;i<privilege.PRIList.length;i++){
 
-                html+="<div class='checkbox_role'><input type='checkbox' data-id='"+privilege.PRIList[i].PRI_ID+"' value='"+privilege.PRIList[i].PRI_NAME+"'>"+privilege.PRIList[i].PRI_NAME+"</div>"
+                html+="<div class='checkbox_role'><input type='checkbox' data-id='"+privilege.PRIList[i].mid+"' value='"+privilege.PRIList[i].mname+"'>"+privilege.PRIList[i].mname+"</div>"
 
             }
 
@@ -43,6 +43,41 @@ $(function(){
             $("#myModal_addpri").modal("show");
 
         })
+
+        $(document).off('click', '.deleteRole').on('click', '.deleteRole', function(el){
+            $.ajax({
+                url : "/permission/deleteRole",
+                method : 'POST',
+                contentType : 'application/json',
+                data : JSON.stringify({rid : el.target.dataset.id}),
+                success : function(res) {
+                    role_func.initRole();
+                    privilege.getPrivilegeList();
+                    alert('Delete Role Successfully');
+                },
+                error : function(err) {
+                    console.error(err);
+                }
+            })
+        })
+
+        $('#addRole_btn').on('click', function() {
+            var rname = $('#rname').val();
+            $.ajax({
+                url : "/permission/addRole",
+                method : "POST",
+                contentType : 'application/json',
+                data : JSON.stringify({role : rname}),
+                success : function(res) {
+                    alert('Add Role Successfully');
+                    $("#myModal_add").modal("hide");
+                    role_func.initRole();
+                },
+                error : function(err){
+                    console.error(err);
+                }
+            })
+        })
     }
 
     var privilege = {
@@ -52,25 +87,6 @@ $(function(){
                 method:"get",
                 success:function (res) {
                     privilege.PRIList = res;
-                    // privilege.PRIList = [
-                    //     {
-                    //         "PRI_NAME":"read",
-                    //         "PRI_ID":"1"
-                    //     },
-                    //     {
-                    //         "PRI_NAME":"write",
-                    //         "PRI_ID":"2"
-                    //     },
-                    //     {
-                    //         "PRI_NAME":"add",
-                    //         "PRI_ID":"3"
-                    //     },
-                    //     {
-                    //         "PRI_NAME":"delete",
-                    //         "PRI_ID":"4"
-                    //     }
-                    //
-                    // ]
                     privilege.initRoleList()
                 },
                 error:function () {
@@ -85,30 +101,6 @@ $(function(){
                 method:"get",
                 success:function (data) {
                     privilege.data = data;
-                    // privilege.data =[
-                    //     {
-                    //         'ROLE_NAME':'student',
-                    //         'ROLE_ID':"1",
-                    //         "PRI_LIST":[
-                    //             "1"
-                    //         ]
-                    //     },
-                    //     {
-                    //         'ROLE_NAME':'teacher',
-                    //         'ROLE_ID':"2",
-                    //         "PRI_LIST":[
-                    //             "1","2","3","4"
-                    //         ]
-                    //     },
-                    //     {
-                    //         'ROLE_NAME':'admin',
-                    //         'ROLE_ID':"3",
-                    //         "PRI_LIST":[
-                    //             "1","3","4"
-                    //         ]
-                    //     },
-                    // ]
-
                     privilege.initTable();
 
                 },
@@ -147,7 +139,7 @@ $(function(){
                                 }
                             }
                             html = html.slice(0,html.length-2);
-                            html +="</span><span class='fa fa-edit' data-id='"+row.ROLE_ID+"'></span>"
+                            html +="</span><span class='fa fa-edit' data-id='"+row.rid+"'></span>"
 
                             // var html = "<input type=\"text\" placeholder=\"Select Privilege\" readonly class='select_box'>" +
                             //     "                                <ul  class=\"hide\" id='select_box"+row.ROLE_ID+"'>\n";
@@ -183,21 +175,6 @@ $(function(){
                 method:"get",
                 success:function (res) {
                     role.roleList = res;
-                    // role.roleList = [
-                    //     {
-                    //         "ROLE_NAME":"student",
-                    //         "ROLE_ID":"1"
-                    //     },
-                    //     {
-                    //         "ROLE_NAME":"teacher",
-                    //         "ROLE_ID":"2"
-                    //     },
-                    //     {
-                    //         "ROLE_NAME":"admin",
-                    //         "ROLE_ID":"3"
-                    //     }
-                    //
-                    // ]
                     role.initUserList()
                 },
                 error:function () {
@@ -215,29 +192,24 @@ $(function(){
                 method:"get",
                 success:function (data) {
                     role.data = data;
-                    // role.data =[
-                    //     {
-                    //         'USER_NAME':'sony',
-                    //         'USER_DES':'student',
-                    //         'USER_ROLE_ID':"1",
-                    //         "USER_ID":"1"
-                    //     },
-                    //     {
-                    //         'USER_NAME':'allen',
-                    //         'USER_DES':'teacher',
-                    //         'USER_ROLE_ID':"2",
-                    //         "USER_ID":"2"
-                    //     },
-                    //     {
-                    //         'USER_NAME':'peter',
-                    //         'USER_DES':'teacher',
-                    //         'USER_ROLE_ID':"3",
-                    //         "USER_ID":"3"
-                    //     },
-                    // ]
-
-
-                    role.initTable();
+                    role.initTable(function(){
+                        $('.roleDropDown').off('change').on('change', function(el){
+                        console.log(el.currentTarget.dataset.uid);
+                        console.log(el.target.options[el.target.selectedIndex].value);
+                        $.ajax({
+                            url : '/permission/assignUserRole',
+                            type : 'POST',
+                            contentType: 'application/json',
+                            data : JSON.stringify({uid : el.currentTarget.dataset.uid, rid: el.target.options[el.target.selectedIndex].value}),
+                            success: function(res){
+                                alert("Assign Successfully");
+                            },
+                            error : function(err) {
+                                console.error(err);
+                            }
+                        })
+                    })
+                    });
 
                 },
                 error:function () {
@@ -248,7 +220,7 @@ $(function(){
 
 
         },
-        initTable:function () {
+        initTable:function (callback) {
             var dataTableOption={
                 dom: '<"top"<"pull-left"l><"toolbar"><"pull-right"f><"pull-right create">>rt<"bottom"<"pull-left"i><"pull-right"p>><"clear">',
                 iDisplayLength: 10,
@@ -267,9 +239,10 @@ $(function(){
                         "data":"id",
                         width:"100px",
                         render:function(data,type,row,meta){
-                            var selectHtml = "<select id='"+row.id+"'>";
+                            var selectHtml = "<select class='roleDropDown' data-uid='" + row.id + "'>";
+                            selectHtml += "<option>Please select one role</option>"
                             for (var i=0;i<role.roleList.length;i++){
-                                if(role.roleList[i].rid === row.roles[0].rid){
+                                if(row.roles[0] && role.roleList[i].rid === row.roles[0].rid){
                                     selectHtml += "<option value='"+role.roleList[i].rid+"' selected>"+role.roleList[i].rname+"</option>"
                                 }else{
                                     selectHtml += "<option value='"+role.roleList[i].rid+"'>"+role.roleList[i].rname+"</option>"
@@ -286,6 +259,8 @@ $(function(){
             }
             $("#role_table").DataTable().destroy();
             $("#role_table").DataTable(dataTableOption);
+
+            callback();
         }
 
     }
@@ -296,21 +271,6 @@ $(function(){
                 method:"GET",
                 success:function (res) {
                     role_func.data = res;
-                    // role_func.data = [
-                    //     {
-                    //         "ROLE_NAME":"student",
-                    //         "ROLE_ID":"1"
-                    //     },
-                    //     {
-                    //         "ROLE_NAME":"teacher",
-                    //         "ROLE_ID":"2"
-                    //     },
-                    //     {
-                    //         "ROLE_NAME":"admin",
-                    //         "ROLE_ID":"3"
-                    //     }
-                    // ]
-
                     role_func.initTable()
                 },
                 error:function (err) {
@@ -337,7 +297,7 @@ $(function(){
                         "data":"rid",
                         width:"100px",
                         render:function(data,type,row,meta){
-                            return "<span class='fa fa-remove' data-id='"+data+"'></span>"
+                            return "<span class='fa fa-remove deleteRole' data-id='"+data+"'></span>"
                         }
                     },
                 ],
