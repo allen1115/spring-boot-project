@@ -13,4 +13,6 @@ public interface ModuleService {
     int deleteModuleById(Integer id);
 
     List<Module> findAllModulesForConfig();
+
+    Integer getCurrentSort();
 }

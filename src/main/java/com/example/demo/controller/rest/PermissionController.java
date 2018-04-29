@@ -66,10 +66,12 @@ public class PermissionController {
      */
     @RequestMapping(value = "/addModule", method = RequestMethod.POST)
     public int addModule(@RequestBody JSONObject param) {
+        Integer sort = moduleService.getCurrentSort();
         Module module = new Module();
         module.setMname(param.getString("moduleName"));
         module.setUrl(param.getString("url"));
-        module.setPermissionInit("authc,roles[" + param.getString("permission") + "]");
+        module.setPermissionInit("authc,roles[admin]");
+        module.setSort(sort + 1);
         return moduleService.addModule(module);
     }
 

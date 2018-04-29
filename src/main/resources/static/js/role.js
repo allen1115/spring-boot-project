@@ -61,6 +61,10 @@ $(function(){
             })
         })
 
+        $('#addPrivilege').on('click', function() {
+            alert(222);
+        })
+
         $('#addRole_btn').on('click', function() {
             var rname = $('#rname').val();
             $.ajax({
