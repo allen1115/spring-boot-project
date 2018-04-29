@@ -1,5 +1,6 @@
 $(function () {
     init();
+    event_binding();
     //init third table
     function init() {
         // TODO add real data for student table
@@ -13,25 +14,33 @@ $(function () {
                     bSort: true,
                     bFilterOnEnter: true,
                     processing: false,
-                    order: [[0, "desc"]],
+                    order: [[1, "desc"]],
                     columns: [
                         {
-                            "data": "name",
-                            width: "25%"
+                            "data": "name"
                         },
                         {
-                            "data": "email",
-                            width: "25%"
+                            "data": "email"
                         },
                         {
-                            "data": "program",
-                            width: "40%"
+                            "data": "program"
                         },
                         {
                             "data": "avgAttendance",
-                            width: "10%",
                             render : function(data) {
                                 return data + "%"
+                            }
+                        },
+                        {
+                            "data": "flag",
+                            render : function(data) {
+                                if(data === 'red') {
+                                    return '<span><i class="fa fa-flag fa-2x pull-left" style="color: red;"></i></span>'
+                                } else if (data === 'blue') {
+                                    return '<span><i class="fa fa-flag fa-2x pull-left" style="color: blue;"></i></span>'
+                                } else {
+                                    return '';
+                                }
                             }
                         }
                     ],
@@ -40,6 +49,9 @@ $(function () {
                 };
                 $("#role_table").DataTable().destroy();
                 $("#role_table").DataTable(dataTableOption);
+                $('#role_table tbody').off('click','tr').on('click', 'tr', function () {
+                    $(this).toggleClass('selected');
+                })
             }
         };
         $.ajax({
@@ -53,5 +65,51 @@ $(function () {
             }
         })
 
+    }
+
+    function event_binding(){
+        $('#red_btn').on('click', function() {
+            var Dtable = $('#role_table').DataTable();
+            var arr = [];
+            for(var i=0; i<Dtable.rows('.selected').data().length; i++) {
+                arr.push(Dtable.rows('.selected').data()[i].id)
+            }
+            console.log(arr);
+            $.ajax({
+                url : '/student/markAsRed',
+                method : 'POST',
+                data : {data: arr},
+                success : function() {
+                    alert('Mark Red Successfully.');
+                    init();
+                },
+                error : function(err){
+                    console.error(err);
+                }
+            })
+
+        })
+
+        $('#blue_btn').on('click', function() {
+            var Dtable = $('#role_table').DataTable();
+            var arr = [];
+            for(var i=0; i<Dtable.rows('.selected').data().length; i++) {
+                arr.push(Dtable.rows('.selected').data()[i].id)
+            }
+            console.log(arr);
+            $.ajax({
+                url : '/student/markAsBlue',
+                method : 'POST',
+                data : {data: arr},
+                success : function() {
+                    alert('Mark Blue Successfully.');
+                    init();
+                },
+                error : function(err){
+                    console.error(err);
+                }
+            })
+
+        })
     }
 })

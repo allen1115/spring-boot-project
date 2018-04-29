@@ -10,6 +10,7 @@
     <result column="email_log_id" jdbcType="VARCHAR" property="emailLogId" />
     <result column="year_of_program" jdbcType="INTEGER" property="yearOfProgram" />
     <result column="avg_attendance" jdbcType="DOUBLE" property="avgAttendance" />
+    <result column="flag" jdbcType="VARCHAR" property="flag" />
   </resultMap>
   <sql id="Base_Column_List">
     id, email, name, program, status, year_of_program, avg_attendance, email_log_id
@@ -129,6 +130,16 @@
   <update id="updateAvgAttendance">
     UPDATE student
     set avg_attendance = #{avgAttendance}
+    where id = #{id}
+  </update>
+  <update id="markAsRedById">
+    UPDATE student
+    set flag = 'red'
+    where id = #{id}
+  </update>
+  <update id="markAsBlueById">
+    UPDATE student
+    set flag = 'blue'
     where id = #{id}
   </update>
 </mapper>

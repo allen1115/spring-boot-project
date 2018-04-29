@@ -58,4 +58,14 @@ public class StudentServiceImpl implements StudentService {
     public int updateByPrimaryKeySelective(Student student) {
         return studentMapper.updateByPrimaryKeySelective(student);
     }
+
+    @Override
+    public int markAsRedById(Long aLong) {
+        return studentMapper.markAsRedById(aLong);
+    }
+
+    @Override
+    public int markAsBlueById(Long aLong) {
+        return studentMapper.markAsBlueById(aLong);
+    }
 }

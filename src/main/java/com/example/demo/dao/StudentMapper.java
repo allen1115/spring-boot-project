@@ -27,4 +27,8 @@ public interface StudentMapper {
     List<Student> selectAllStudents();
 
     Student findStudentByEmail(String email);
+
+    int markAsRedById(Long aLong);
+
+    int markAsBlueById(Long aLong);
 }

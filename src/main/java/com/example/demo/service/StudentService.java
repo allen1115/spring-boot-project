@@ -19,4 +19,8 @@ public interface StudentService {
     List<Student> findAllStudents();
 
     int updateByPrimaryKeySelective(Student student);
+
+    int markAsRedById(Long aLong);
+
+    int markAsBlueById(Long aLong);
 }

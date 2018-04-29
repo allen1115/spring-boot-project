@@ -17,6 +17,16 @@ public class Student {
 
     private String emailLogId;
 
+    private String flag;
+
+    public String getFlag() {
+        return flag;
+    }
+
+    public void setFlag(String flag) {
+        this.flag = flag;
+    }
+
     private EmailLog emailLog;
 
     public String getEmailLogId() {
