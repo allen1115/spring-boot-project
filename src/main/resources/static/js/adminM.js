@@ -62,7 +62,7 @@ $(function(){
                     $("#level_attendance input").eq(2).attr("placeholder","Percentage")
                     return
                 }
-                if($("#level_attendance input").eq(0).val()<=$("#level_attendance input").eq(0).val()){
+                if($("#level_attendance input").eq(0).val()<=$("#level_attendance input").eq(1).val()){
                     alert("First number must greater than second one")
                     return
                 }
@@ -153,10 +153,11 @@ $(function(){
         },
 
         initLevel:function(data) {
+            data = ["80","60","40"]
             var data = data.sort(self.sortNumber);
             $("#level_attendance").html("");
             for(var i=0;i<data.length;i++){
-                var html = "<div data-level='"+data[i]+"'><span class='level_width'>Level "+(data.length-i)+":</span> attendance lower than "+data[i]+"%   <span class='fa fa-icon-edit' style='color:#FA4659;cursor:pointer;margin-left:10px'></span></div>";
+                var html = "<div data-level='"+data[i]+"'><span class='level_width'>Level "+(data.length-i)+":</span> attendance lower than <input type='number' value='"+data[i]+"' class='form-control' style='display: inline-block'>%   <span class='fa fa-icon-edit' style='color:#FA4659;cursor:pointer;margin-left:10px'></span></div>";
                 $("#level_attendance").prepend(html)
             }
             // $("#level_attendance").append("<div id='add_new_level'><span class='level_width'></span><input placeholder='Create new Level' class='form-control' style='display:inline-block;width:178px'><span class='fa fa-save' style='color:#FA4659;cursor:pointer;margin-left:10px'></span></div>")
