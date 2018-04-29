@@ -20,4 +20,6 @@ public interface ModuleMapper {
     List<Module> selectAll();
 
     List<Module> findAllModulesForConfig();
+
+    Integer getCurrentSort();
 }

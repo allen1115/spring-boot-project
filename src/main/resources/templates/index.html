@@ -80,7 +80,7 @@
                         <ul id="menu-top" class="nav navbar-nav navbar-right">
                             <li><a class="menu-top-active" href="/index">Dashboard</a></li>
                             <li><a href="/attendance">Attendance</a></li>
-                            <li><a shiro:hasRole="admin" href="/upload">Data Upload</a></li>
+                            <li><a shiro:hasAnyPermissions="upload" href="/upload">Data Upload</a></li>
                             <li><a href="/role">Role Management</a></li>
                             <li><a href="/admin">Admin Management</a></li>
                         </ul>

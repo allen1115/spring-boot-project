@@ -22,6 +22,9 @@
     <include refid="Base_Column_List" />
     from module
   </select>
+  <select id="getCurrentSort" resultType="java.lang.Integer">
+    select max(sort) from module
+  </select>
   <select id="findAllModulesForConfig" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />

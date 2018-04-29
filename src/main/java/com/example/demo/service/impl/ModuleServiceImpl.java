@@ -30,6 +30,11 @@ public class ModuleServiceImpl implements ModuleService {
     }
 
     @Override
+    public Integer getCurrentSort() {
+        return moduleMapper.getCurrentSort();
+    }
+
+    @Override
     public int deleteModuleById(Integer id) {
         return moduleMapper.deleteByPrimaryKey(id);
     }
