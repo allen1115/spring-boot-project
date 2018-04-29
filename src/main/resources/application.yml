@@ -37,9 +37,11 @@ spring:
         content:
           enabled: true
           paths: /**
+
 mybatis:
   mapper-locations: classpath:mapping/*.xml
   type-aliases-package: com.example.demo.entity
+  cache-period: 0
 
 #pagehelper分页插件
 #pagehelper:

@@ -79,6 +79,7 @@
                         <span id="menu-title">Attendance System</span>
                         <ul id="menu-top" class="nav navbar-nav navbar-right">
                             <li><a class="menu-top-active" href="/index">Dashboard</a></li>
+                            <li><a href="/attendance">Attendance</a></li>
                             <li><a shiro:hasAnyPermissions="upload" href="/upload">Data Upload</a></li>
                             <li><a href="/role">Role Management</a></li>
                             <li><a href="/admin">Admin Management</a></li>
@@ -97,7 +98,7 @@
                     <h4 class="page-head-line">Dashboard</h4>
                 </div>
             </div>
-            <div class="row" style="padding-bottom: 30px;border-bottom: 1px solid #dddddd;margin-bottom: 20px">
+            <div class="row" style="padding-bottom: 30px;border-bottom: 1px solid #dddddd;">
                 <div id="container" class="col-md-6" style="position: relative;">
                     <canvas id="bar_chart"></canvas>
                     <div style="position: absolute;top: 0;right: 0">
@@ -113,7 +114,7 @@
                 <div id="container1" class="col-md-6" style="min-height: 500px;padding: 0 50px">
                     <div class="row">
                         <div class="right_header col-md-12">
-<span style="font-size: 16px;color: #333;border-bottom: 1px solid #333;width: 100%;display: inline-block">Recent Replies</span>
+<span style="font-size: 16px;color: #333;width: 100%;display: inline-block">Recent Replies</span>
                         </div>
                         <div class="right_body col-md-12">
 
@@ -122,19 +123,7 @@
                 </div>
 
 
-                <div id="container2" class="col-md-6">
-                    <table id="role_table" class="datatable" style="width: 100%!important;">
-                        <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Course</th>
-                            <th>Attendance</th>
-                        </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
+
             </div>
             <!--<div class="row">-->
                  <!--<div class="col-md-3 col-sm-3 col-xs-6">-->
