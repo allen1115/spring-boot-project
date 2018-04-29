@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:shiro="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
@@ -82,9 +82,9 @@
                         <ul id="menu-top" class="nav navbar-nav navbar-right">
                             <li><a href="/index">Dashboard</a></li>
                             <li><a href="/attendance">Attendance</a></li>
-                            <li><a href="/upload">Data Upload</a></li>
+                            <li><a shiro:hasAnyPermissions="upload" href="/upload">Upload Data</a></li>
                             <li><a href="/role" class="menu-top-active">Role Management</a></li>
-                            <li><a href="/admin">Admin Management</a></li>
+                            <li><a href="/admin">Configuration</a></li>
 
                         </ul>
                     </div>
@@ -105,16 +105,16 @@
             <div class="row"  style="margin-left: 0;margin-right: 0">
                 <ul class='row nav nav-tabs col-md-3' style="border-bottom: none;" id="admin_tab">
                     <li class="active">
-                        <a href="#1" data-toggle="tab">Role Assignments</a>
+                        <a href="#1" data-toggle="tab">Role Assignment</a>
                     </li>
                     <li>
-                        <a href="#6" data-toggle="tab">Role Management</a>
+                        <a href="#6" data-toggle="tab">Add Roles</a>
                     </li>
                     <li>
-                        <a href="#4" data-toggle="tab">Privilege Assignments</a>
+                        <a href="#4" data-toggle="tab">Permission Assignment</a>
                     </li>
                     <li>
-                        <a href="#5" data-toggle="tab">Privilege Management</a>
+                        <a href="#5" data-toggle="tab">Add Permissions</a>
                     </li>
 
                 </ul>

@@ -161,11 +161,9 @@ $(function(){
         initLevel:function(data) {
             // data = ["80","60","40"]
             var data = data.sort(self.sortNumber);
-            $("#level_attendance").html("");
-            for(var i=0;i<data.length;i++){
-                var html = "<div data-level='"+data[i]+"'><span class='level_width'>Level "+(data.length-i)+":</span> attendance lower than <input type='number' value='"+data[i]+"' class='form-control' style='display: inline-block'>%   <span class='fa fa-icon-edit' style='color:#FA4659;cursor:pointer;margin-left:10px'></span></div>";
-                $("#level_attendance").prepend(html)
-            }
+            $('#firstLevel').val(data[2])
+            $('#secondLevel').val(data[1])
+            $('#thirdLevel').val(data[0])
             // $("#level_attendance").append("<div id='add_new_level'><span class='level_width'></span><input placeholder='Create new Level' class='form-control' style='display:inline-block;width:178px'><span class='fa fa-save' style='color:#FA4659;cursor:pointer;margin-left:10px'></span></div>")
 
         },

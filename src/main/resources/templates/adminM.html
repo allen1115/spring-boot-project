@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:shiro="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
@@ -90,9 +90,9 @@
                     <ul id="menu-top" class="nav navbar-nav navbar-right">
                         <li><a href="/index">Dashboard</a></li>
                         <li><a href="/attendance">Attendance</a></li>
-                        <li><a href="/upload">Data Upload</a></li>
+                        <li><a shiro:hasAnyPermissions="upload" href="/upload">Upload Data</a></li>
                         <li><a href="/role">Role Management</a></li>
-                        <li><a href="/admin" class="menu-top-active">Admin Management</a></li>
+                        <li><a href="/admin" class="menu-top-active">Configuration</a></li>
                     </ul>
                 </div>
             </div>
@@ -112,7 +112,7 @@
     <div class="container">
         <div class="row page-head-line" style="margin-left: 0;margin-right: 0">
             <div class="col-md-12" style="padding-left: 0">
-                <h4 class="" style="font-size: 20px;font-weight: 900;">Admin Management</h4>
+                <h4 class="" style="font-size: 20px;font-weight: 900;">Configuration</h4>
             </div>
 
         </div>
@@ -124,7 +124,7 @@
                 </li>
                 <!--<li><a href="#4" data-toggle="tab">Percentage Thresholds</a>-->
                 <!--</li>-->
-                <li><a href="#5" data-toggle="tab">Level of Attendance</a>
+                <li><a href="#5" data-toggle="tab">Reminder Thresholds</a>
                 </li>
                 <li><a href="#6" data-toggle="tab">Email Template</a>
                 </li>
@@ -141,6 +141,10 @@
 
                     <div class='col-md-12'>
                         <div class="row">
+                            <div class="col-md-12">
+                                <span class="legend">Set the frequency of attendance checks:</span>
+                            </div>
+                            <br>
                             <div class="col-md-2">
                                 <span class="legend">Pick Time</span>
                             </div>
@@ -212,7 +216,7 @@
                     </div>
                     <div class='col-md-12'>
                         <div style="text-align:center">
-                            <div id="upload_button_time" style="width:170px">Update Configure</button>
+                            <div id="upload_button_time" style="width:170px">Update Configuration</button>
                             </div>
                         </div>
                     </div>
@@ -243,7 +247,7 @@
 
                     <div class='col-md-12'>
                         <div style="text-align:center">
-                            <div id="upload_button_days" style="width:170px">Update Configure</button>
+                            <div id="upload_button_days" style="width:170px">Update Configuration</button>
                             </div>
                         </div>
                     </div>
@@ -266,16 +270,16 @@
                 </div>
                 <div class='col-md-12 tab-pane' style="text-align:left" id='5'>
                     <div class="col-md-6" style="margin-top: 5px">
-                        Reminding email depending on the level of attendance :
+                        Send reminder emails based on level of attendance:
                     </div>
                     <div class="col-md-6" id="level_attendance">
-                        <div data-level="80"><span class="level_width">Level 1:</span> attendance lower than <input type="number" value="" class="form-control" style="display: inline-block">%   <span class="fa fa-icon-edit" style="color:#FA4659;cursor:pointer;margin-left:10px"></span></div>
-                        <div data-level="60"><span class="level_width">Level 2:</span> attendance lower than <input type="number" value="" class="form-control" style="display: inline-block">%   <span class="fa fa-icon-edit" style="color:#FA4659;cursor:pointer;margin-left:10px"></span></div>
-                        <div data-level="40"><span class="level_width">Level 3:</span> attendance lower than <input type="number" value="" class="form-control" style="display: inline-block">%   <span class="fa fa-icon-edit" style="color:#FA4659;cursor:pointer;margin-left:10px"></span></div>
+                        <div data-level="80"><span class="level_width">First level reminder:</span><input id="firstLevel" type="number" value="" class="form-control" style="display: inline-block">%   <span class="fa fa-icon-edit" style="color:#FA4659;cursor:pointer;margin-left:10px"></span></div>
+                        <div data-level="60"><span class="level_width">Second level reminder:</span><input id="secondLevel"type="number" value="" class="form-control" style="display: inline-block">%   <span class="fa fa-icon-edit" style="color:#FA4659;cursor:pointer;margin-left:10px"></span></div>
+                        <div data-level="40"><span class="level_width">Warning Reminder:</span><input id="thirdLevel"type="number" value="" class="form-control" style="display: inline-block">%   <span class="fa fa-icon-edit" style="color:#FA4659;cursor:pointer;margin-left:10px"></span></div>
                     </div>
                     <div class='col-md-12'>
                         <div style="text-align:center">
-                            <div id="upload_button_per" style="width:170px">Update Configure</button>
+                            <div id="upload_button_per" style="width:170px">Update Configuration</button>
                             </div>
                         </div>
                     </div>
