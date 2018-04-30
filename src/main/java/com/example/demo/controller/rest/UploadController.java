@@ -55,6 +55,7 @@ public class UploadController {
                     newStudent.setEmail(row.getCell(3).toString());
                     newStudent.setName(name);
                     newStudent.setStatus("ACTIVE");
+                    newStudent.setTier_4(row.getCell(2).toString().toLowerCase().equals("yes")?"TRUE":"FALSE");
                     int num = studentService.addStudent(newStudent);
                     if(num >= 1) {
                         s.setStudentId(studentService.findStudentByName(name).getId());

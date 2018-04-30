@@ -11,9 +11,10 @@
     <result column="year_of_program" jdbcType="INTEGER" property="yearOfProgram" />
     <result column="avg_attendance" jdbcType="DOUBLE" property="avgAttendance" />
     <result column="flag" jdbcType="VARCHAR" property="flag" />
-  </resultMap>
+    <result column="tier_4" jdbcType="VARCHAR" property="tier_4" />
+</resultMap>
   <sql id="Base_Column_List">
-    id, email, name, program, status, year_of_program, avg_attendance, email_log_id
+    id, email, name, program, status, year_of_program, avg_attendance, email_log_id, tier_4, flag
   </sql>
   <select id="selectAllUsersWithNullEmailId" resultMap="BaseResultMap">
     select * from student where email_log_id is null

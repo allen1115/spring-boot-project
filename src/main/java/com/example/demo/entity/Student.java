@@ -19,6 +19,16 @@ public class Student {
 
     private String flag;
 
+    private String tier_4;
+
+    public String getTier_4() {
+        return tier_4;
+    }
+
+    public void setTier_4(String tier_4) {
+        this.tier_4 = tier_4;
+    }
+
     public String getFlag() {
         return flag;
     }
