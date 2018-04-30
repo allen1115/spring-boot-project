@@ -8,6 +8,7 @@
     <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
     <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
     <result column="email_log_id" property="emailLogId" jdbcType="VARCHAR" />
+    <result column="is_sent_alert" property="isSentAlert" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, replied_email_id, is_replied, create_date, update_date, email_log_id
@@ -17,6 +18,11 @@
     <include refid="Base_Column_List" />
     from email_log
     where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from email_log
   </select>
   <select id="findEmailLogByEmailLogId" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select
@@ -57,6 +63,9 @@
       <if test="emailLogId != null" >
         email_log_id,
       </if>
+      <if test="isSentAlert != null" >
+        is_sent_alert,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -77,6 +86,9 @@
       <if test="emailLogId != null" >
         #{emailLogId,jdbcType=VARCHAR},
       </if>
+      <if test="isSentAlert != null" >
+        #{isSentAlert,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.entity.EmailLog" >
@@ -96,6 +108,9 @@
       </if>
       <if test="emailLogId != null" >
         email_log_id = #{emailLogId,jdbcType=VARCHAR},
+      </if>
+      <if test="isSentAlert != null" >
+        is_sent_alert = #{isSentAlert,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}

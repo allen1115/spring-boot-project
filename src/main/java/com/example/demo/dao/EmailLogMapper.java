@@ -2,6 +2,8 @@ package com.example.demo.dao;
 
 import com.example.demo.entity.EmailLog;
 
+import java.util.List;
+
 public interface EmailLogMapper {
     int deleteByPrimaryKey(Long id);
 
@@ -16,4 +18,6 @@ public interface EmailLogMapper {
     int updateByPrimaryKey(EmailLog record);
 
     EmailLog findEmailLogByEmailLogId(String emailLogId);
+
+    List<EmailLog> selectAll();
 }

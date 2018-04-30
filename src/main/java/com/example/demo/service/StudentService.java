@@ -23,4 +23,6 @@ public interface StudentService {
     int markAsRedById(Long aLong);
 
     int markAsBlueById(Long aLong);
+
+    Student findStudentByEmailLogId(String emailLogId);
 }

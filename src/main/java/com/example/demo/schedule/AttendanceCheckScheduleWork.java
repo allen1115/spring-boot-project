@@ -95,6 +95,7 @@ public class AttendanceCheckScheduleWork implements SchedulingConfigurer {
             emailLog.setCreateDate(new Date());
             emailLog.setUpdateDate(new Date());
             emailLog.setEmailLogId(UUIDUtil.getUUID());
+            emailLog.setIsReplied("FALSE");
             addEmailLog(emailLog);
             // update student info
             student.setEmailLogId(emailLog.getEmailLogId());

@@ -68,4 +68,9 @@ public class StudentServiceImpl implements StudentService {
     public int markAsBlueById(Long aLong) {
         return studentMapper.markAsBlueById(aLong);
     }
+
+    @Override
+    public Student findStudentByEmailLogId(String emailLogId) {
+        return studentMapper.selectStudentByEmailLogId(emailLogId);
+    }
 }

@@ -17,6 +17,16 @@ public class EmailLog {
 
     private RepliedEmailLog repliedEmailLog;
 
+    private String isSentAlert;
+
+    public String getIsSentAlert() {
+        return isSentAlert;
+    }
+
+    public void setIsSentAlert(String isSentAlert) {
+        this.isSentAlert = isSentAlert;
+    }
+
     public RepliedEmailLog getRepliedEmailLog() {
         return repliedEmailLog;
     }

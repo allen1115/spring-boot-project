@@ -27,6 +27,12 @@
     from student
     where id = #{id,jdbcType=BIGINT}
   </select>
+  <select id="selectStudentByEmailLogId" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List" />
+    from student
+    where email_log_id = #{emailLogId,jdbcType=VARCHAR}
+  </select>
   <select id="findStudentByName" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />

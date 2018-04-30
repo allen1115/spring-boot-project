@@ -6,6 +6,8 @@ import com.example.demo.service.EmailLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class EmailLogServiceImpl implements EmailLogService {
 
@@ -25,5 +27,10 @@ public class EmailLogServiceImpl implements EmailLogService {
     @Override
     public int updateSelective(EmailLog emailLog) {
         return emailLogMapper.updateByPrimaryKeySelective(emailLog);
+    }
+
+    @Override
+    public List<EmailLog> findAll() {
+        return emailLogMapper.selectAll();
     }
 }
