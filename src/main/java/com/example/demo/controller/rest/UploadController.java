@@ -55,7 +55,7 @@ public class UploadController {
                     newStudent.setEmail(row.getCell(3).toString());
                     newStudent.setName(name);
                     newStudent.setStatus("ACTIVE");
-                    newStudent.setTier_4(row.getCell(2).toString().toLowerCase().equals("yes")?"TRUE":"FALSE");
+                    newStudent.setTier_4(row.getCell(12).toString().toLowerCase().equals("yes")?"TRUE":"FALSE");
                     int num = studentService.addStudent(newStudent);
                     if(num >= 1) {
                         s.setStudentId(studentService.findStudentByName(name).getId());
@@ -109,6 +109,7 @@ public class UploadController {
                     newStudent.setEmail(ss[3]);
                     newStudent.setName(name);
                     newStudent.setStatus("ACTIVE");
+                    newStudent.setTier_4(ss[12].toLowerCase().equals("yes")?"TRUE":"FALSE");
                     int num = studentService.addStudent(newStudent);
                     if(num >= 1) {
                         s.setStudentId(studentService.findStudentByName(name).getId());

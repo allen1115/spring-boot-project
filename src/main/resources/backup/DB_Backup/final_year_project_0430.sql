@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80011
 File Encoding         : 65001
 
-Date: 2018-04-30 03:14:07
+Date: 2018-04-30 23:12:11
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -50,6 +50,21 @@ INSERT INTO `cron` VALUES ('2', '0 0 0 1/1 * ?');
 INSERT INTO `cron` VALUES ('3', '0 0 0 1/1 * ?');
 
 -- ----------------------------
+-- Table structure for email_interval
+-- ----------------------------
+DROP TABLE IF EXISTS `email_interval`;
+CREATE TABLE `email_interval` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `email_interval` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- ----------------------------
+-- Records of email_interval
+-- ----------------------------
+INSERT INTO `email_interval` VALUES ('1', '5');
+
+-- ----------------------------
 -- Table structure for email_log
 -- ----------------------------
 DROP TABLE IF EXISTS `email_log`;
@@ -60,6 +75,7 @@ CREATE TABLE `email_log` (
   `create_date` datetime DEFAULT NULL,
   `update_date` datetime DEFAULT NULL,
   `email_log_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `is_sent_alert` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   KEY `replied_email_id` (`replied_email_id`) USING BTREE,
   KEY `email_log_id` (`email_log_id`) USING BTREE,
@@ -69,7 +85,7 @@ CREATE TABLE `email_log` (
 -- ----------------------------
 -- Records of email_log
 -- ----------------------------
-INSERT INTO `email_log` VALUES ('357', '12e1139d565a4db4bbcc6618ce64d3e4', 'TRUE', '2018-04-21 22:20:11', '2018-04-21 22:20:11', '325866d0bd474389840d7a66773998e1');
+INSERT INTO `email_log` VALUES ('357', '12e1139d565a4db4bbcc6618ce64d3e4', 'TRUE', '2018-04-21 22:20:11', '2018-04-21 22:20:11', '325866d0bd474389840d7a66773998e1', 'FALSE');
 
 -- ----------------------------
 -- Table structure for email_template
@@ -202,6 +218,7 @@ CREATE TABLE `student` (
   `avg_attendance` double(255,2) DEFAULT NULL,
   `email_log_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `flag` varchar(255) DEFAULT NULL,
+  `tier_4` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   KEY `email_log_id` (`email_log_id`) USING BTREE,
   CONSTRAINT `student_ibfk_1` FOREIGN KEY (`email_log_id`) REFERENCES `email_log` (`email_log_id`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -210,8 +227,8 @@ CREATE TABLE `student` (
 -- ----------------------------
 -- Records of student
 -- ----------------------------
-INSERT INTO `student` VALUES ('1', '805383499@qq.com', 'Allen Shen', 'Computing for Business and Management', 'Active', '3', '63.00', '325866d0bd474389840d7a66773998e1', 'red');
-INSERT INTO `student` VALUES ('90', 'mmmm@qq.com', 'mmmm', 'mmmm', 'Active', '2', '52.00', null, 'blue');
+INSERT INTO `student` VALUES ('1', '805383499@qq.com', 'Allen Shen', 'Computing for Business and Management', 'Active', '3', '63.00', '325866d0bd474389840d7a66773998e1', 'red', 'TRUE');
+INSERT INTO `student` VALUES ('90', 'mmmm@qq.com', 'mmmm', 'mmmm', 'Active', '2', '52.00', null, 'blue', 'FALSE');
 
 -- ----------------------------
 -- Table structure for student_attendance
