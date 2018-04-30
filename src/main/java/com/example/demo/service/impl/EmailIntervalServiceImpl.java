@@ -16,4 +16,9 @@ public class EmailIntervalServiceImpl implements EmailIntervalService {
     public EmailInterval getEmailInterval() {
         return emailIntervalMapper.selectByPrimaryKey(1L);
     }
+
+    @Override
+    public int updateEmailInterval(EmailInterval emailInterval) {
+        return emailIntervalMapper.updateByPrimaryKey(emailInterval);
+    }
 }

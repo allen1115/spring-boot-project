@@ -40,12 +40,14 @@ $(function(){
                     return ;
                 }
                 $.ajax({
-                    url:"",
-                    data:{
+                    url:"/admin/updateEmailInterval",
+                    contentType : 'application/json',
+                    data:JSON.stringify({
                         "time":$("#no-r_time").val()
-                    },
+                    }),
                     method:"post",
                     success:function (res) {
+                        alert("Update Successfully.");
                         self.getNORES_time()
                     }
                 })
@@ -147,15 +149,13 @@ $(function(){
             //TODO
             //get info in second tab
             $.ajax({
-                url:"",
+                url:"/admin/getEmailInterval",
                 method:"get",
                 success:function(res){
                     //res.data = number
-                    self.initNORESdate(res.data)
+                    self.initNORESdate(res.interval);
                 }
-
             })
-
         },
 
         initLevel:function(data) {

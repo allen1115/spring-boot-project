@@ -5,4 +5,6 @@ import com.example.demo.entity.EmailInterval;
 public interface EmailIntervalService {
 
     EmailInterval getEmailInterval();
+
+    int updateEmailInterval(EmailInterval emailInterval);
 }

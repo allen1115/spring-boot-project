@@ -2,8 +2,10 @@ package com.example.demo.controller.rest;
 
 import com.alibaba.fastjson.JSONObject;
 import com.example.demo.entity.AttendanceThresholdConfig;
+import com.example.demo.entity.EmailInterval;
 import com.example.demo.entity.EmailTemplate;
 import com.example.demo.service.impl.AttendanceThresholdConfigServiceImpl;
+import com.example.demo.service.impl.EmailIntervalServiceImpl;
 import com.example.demo.service.impl.EmailTemplateServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,6 +25,9 @@ public class AdminController {
 
     @Autowired
     private EmailTemplateServiceImpl emailTemplateService;
+
+    @Autowired
+    private EmailIntervalServiceImpl emailIntervalService;
 
     @RequestMapping(value = "/getThresholdConfig", method = RequestMethod.GET)
     public List<Double> getThresholdConfig() {
@@ -55,5 +60,18 @@ public class AdminController {
         attendanceThresholdConfig.setSecondLevel(param.getDouble("second"));
         attendanceThresholdConfig.setThirdLevel(param.getDouble("third"));
         return attendanceThresholdConfigService.updateConfig(attendanceThresholdConfig);
+    }
+
+    @RequestMapping(value = "/getEmailInterval", method = RequestMethod.GET)
+    public EmailInterval getEmailInterval() {
+        return emailIntervalService.getEmailInterval();
+    }
+
+    @RequestMapping(value = "/updateEmailInterval", method = RequestMethod.POST)
+    public int updateEmailInterval(@RequestBody JSONObject param) {
+        EmailInterval emailInterval = new EmailInterval();
+        emailInterval.setId(1L);
+        emailInterval.setInterval(param.getInteger("time"));
+        return emailIntervalService.updateEmailInterval(emailInterval);
     }
 }
