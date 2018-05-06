@@ -663,3 +663,10 @@ width: 35%;
     border-radius: 5px;
     cursor: pointer;
 }
+.border_box{
+    padding: 10px;border: 1px solid #dddddd;
+
+}
+.border_box:hover{
+   box-shadow: 0 0 20px 3px #dddddd;
+}

@@ -2,11 +2,12 @@ $(function(){
     $(document).on("scroll",function(e){
         if($(document).scrollTop()>=91){
             $(".menu-section").css("position","fixed");
-            $("#menu-title").css("display","inline-block")
+            $("#menu-title").css("display","inline-block");
+            $(".content-wrapper").css("margin-top","80px")
         }else{
             $(".menu-section").css("position","relative");
-            $("#menu-title").css("display","none")
-            
+            $("#menu-title").css("display","none");
+            $(".content-wrapper").css("margin-top","40px")
         }
     })
 

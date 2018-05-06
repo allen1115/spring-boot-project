@@ -92,110 +92,75 @@
     </section>
     <!-- MENU SECTION END-->
     <div class="content-wrapper">
-        <div class="container">
+        <div class="container" style="width: 1400px">
             <div class="row">
                 <div class="col-md-12">
                     <h4 class="page-head-line">Dashboard</h4>
                 </div>
             </div>
-            <div class="row" style="padding-bottom: 30px;border-bottom: 1px solid #dddddd;">
-                <div id="container" class="col-md-6" style="position: relative;">
-                    <canvas id="bar_chart"></canvas>
-                    <div style="position: absolute;top: 0;right: 0">
-                        <form id="form">
-                            <div class="width150">
-                                <input type="text" id="yearInput" placeholder="Select week" readonly>
-                                <ul id="yearId" class="hide">
-                                </ul>
-                            </div>
-                        </form>
+            <div class="row" style="padding-bottom: 30px;">
+                <div id="container" class="col-md-8" style="position: relative">
+                    <div class="border_box">
+                        <canvas id="bar_chart"></canvas>
+                        <div style="position: absolute;top: 10px;right: 40px">
+                            <form id="form">
+                                <div class="width150">
+                                    <input type="text" id="yearInput" placeholder="Select week" readonly>
+                                    <ul id="yearId" class="hide">
+                                    </ul>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
-                <div id="container1" class="col-md-6" style="padding: 0 50px">
-                    <div class="row">
-                        <div class="right_header col-md-12">
-<span style="font-size: 16px;color: #333;width: 100%;display: inline-block">Recent Replies</span>
-                        </div>
-                        <div class="right_body col-md-12">
 
+                <div id="container2" class="col-md-4" style="position: relative;margin-bottom: 10px">
+                    <div class="border_box" style="padding: 10px 0!important">
+                        <div class="col-md-12">Attendance for different subject</div>
+                        <canvas id="pie_chart"></canvas>
+                        <div style="position: absolute;top: 10px;right: 40px">
+                            <form id="form1">
+                                <div class="width150">
+                                    <select name="" id="pie_Select" style="width: 150px;height: 32px;border-radius: 3px;">
+                                        <option value="1">Computer Science</option>
+                                        <option value="2">Java Development</option>
+                                        <option value="3">Web Development</option>
+                                    </select>
+                                </div>
+                            </form>
                         </div>
                     </div>
+
                 </div>
-            </div>
-            <div class="row" style="padding-bottom: 30px;border-bottom: 1px solid #dddddd;padding-top: 30px">
-                <div id="container2" class="col-md-6" style="position: relative;">
-                    <div class="col-md-12" style="text-align: center">Attendance for different subject</div>
-                    <canvas id="pie_chart"></canvas>
-                    <div style="position: absolute;top: 0;right: 0">
-                        <form id="form1">
-                            <div class="width150">
-                                <select name="" id="pie_Select" style="width: 150px;height: 32px;border-radius: 3px;">
-                                    <option value="1">Computer Science</option>
-                                    <option value="2">Java Development</option>
-                                    <option value="3">Web Development</option>
-                                </select>
-                            </div>
-                        </form>
+
+                <div id="container3" class="col-md-4">
+                    <div class="border_box" style="padding: 10px 0!important;">
+                        <canvas id="line_chart"></canvas>
                     </div>
+
                 </div>
-                <div id="container3" class="col-md-6" style="padding: 0 50px">
-                    <canvas id="line_chart"></canvas>
-                    <!--<div style="position: absolute;top: 0;right: 0">-->
-                        <!--<form id="form2">-->
-                            <!--<div class="width150">-->
-                                <!--<input type="text" id="yearInput2" placeholder="Select week" readonly>-->
-                                <!--<ul id="yearId2" class="hide">-->
-                                <!--</ul>-->
-                            <!--</div>-->
-                        <!--</form>-->
-                    <!--</div>-->
-                </div>
+
             </div>
-            <!--<div class="row">-->
-                 <!--<div class="col-md-3 col-sm-3 col-xs-6">-->
-                    <!--<div class="dashboard-div-wrapper bk-clr-one">-->
-                        <!--<div id="ave_rate" class="dashboard_text">82%</div>-->
-                        <!--&lt;!&ndash; <i  class="fa fa-venus dashboard-div-icon" ></i> &ndash;&gt;-->
-                        <!--<div class="progress progress-striped active">                               -->
-                        <!--</div>-->
-                        <!--<h5 class="dashboard_des">Average attendance rate</h5>-->
-                    <!--</div>-->
-                <!--</div>-->
-                 <!--<div class="col-md-3 col-sm-3 col-xs-6">-->
-                    <!--<div class="dashboard-div-wrapper bk-clr-two">-->
-                        <!--&lt;!&ndash; <i  class="fa fa-edit dashboard-div-icon" ></i> &ndash;&gt;-->
-                        <!--<div id="min_rate" class="dashboard_text">52%</div>                  -->
-                        <!--<div class="progress progress-striped active">                       -->
-                        <!--</div>-->
-                         <!--<h5 class="dashboard_des">Minimum attendance rate</h5>-->
-                    <!--</div>-->
-                <!--</div>-->
-                 <!--<div class="col-md-3 col-sm-3 col-xs-6">-->
-                    <!--<div class="dashboard-div-wrapper bk-clr-three">-->
-                        <!--&lt;!&ndash; <i  class="fa fa-cogs dashboard-div-icon" ></i> &ndash;&gt;-->
-                        <!--<div id="stu_high" class="dashboard_text">92%</div>                        -->
-                        <!--<div class="progress progress-striped active">                        -->
-                        <!--</div>-->
-                         <!--<h5 class="dashboard_des">Student with highest attendance</h5>-->
-                    <!--</div>-->
-                <!--</div>-->
-                <!--<div class="col-md-3 col-sm-3 col-xs-6">-->
-                    <!--<div class="dashboard-div-wrapper bk-clr-four">-->
-                        <!--&lt;!&ndash; <i  class="fa fa-bell-o dashboard-div-icon" ></i> &ndash;&gt;-->
-                        <!--<div id="stu_low" class="dashboard_text">12%</div>                        -->
-                        <!--<div class="progress progress-striped active">                               -->
-  <!--&lt;!&ndash; <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%">-->
-  <!--</div> &ndash;&gt;                      -->
-                            <!--</div>-->
-                         <!--<h5 class="dashboard_des">Student with lowest attendance</h5>-->
-                    <!--</div>-->
-                <!--</div>-->
+            <!--<div class="row" style="padding-bottom: 30px;">-->
+
 
             <!--</div>-->
-           
+            <div class="row">
+                <div class="border_box">
+                    <div id="container1" class="col-md-12" style="padding: 0 50px">
+                        <div class="row">
+                            <div class="right_header col-md-12">
+                                <span style="font-size: 16px;color: #333;width: 100%;display: inline-block">Recent Replies</span>
+                            </div>
+                            <div class="right_body col-md-12">
 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
-
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
