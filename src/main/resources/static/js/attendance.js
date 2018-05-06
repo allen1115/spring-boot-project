@@ -47,7 +47,7 @@ $(function () {
                             "data": "note",
                             render: function(data, type, row){
                                 data = data || '';
-                                return "<span style=\"display: inline-block\"><button style='background-color: transparent; border: 0' data-id='" + row.id + "'data-note=" + data + "><i class='fa fa-pencil-square-o fa-2x' aria-hidden='true' style='vertical-align: middle'></i></button></span>"
+                                return "<span style='display: inline-block;width: 100%;text-align: right'><button style='background-color: transparent; border: 0' data-id='" + row.id + "'data-note=" + data + "><i class='fa fa-pencil-square-o fa-2x' aria-hidden='true' style='vertical-align: middle'></i></button></span>"
                             }
                         }
                     ],
