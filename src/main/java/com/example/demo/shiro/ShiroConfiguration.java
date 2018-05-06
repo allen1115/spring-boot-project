@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.servlet.Filter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -29,6 +30,9 @@ public class ShiroConfiguration {
         bean.setUnauthorizedUrl("/unauthorized");
         // set privilege
         bean.setFilterChainDefinitions("");
+        Map<String, Filter> filters = bean.getFilters();
+        filters.put("hasAnyPerms", new CustomPermissionAutorizationFilter());
+        bean.setFilters(filters);
         System.err.println("ShiroInterceptorFactory wired successfully");
         return bean;
     }

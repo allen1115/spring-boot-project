@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:shiro="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:shiro="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
@@ -53,14 +54,9 @@
                         <div class="dropdown-menu dropdown-settings">
                             <div class="media">
                                 <div class="media-body">
-                                    <h4 class="media-heading">Jhon Deo Alex </h4>
-                                    <h5>Developer & Designer</h5>
-
+                                    <h4 th:text="${session.user.username}" class="media-heading"></h4>
                                 </div>
                             </div>
-                            <hr />
-                            <h5><strong>Personal Bio : </strong></h5>
-                            Anim pariatur cliche reprehen derit.
                             <hr />
                             <a href="/logout" class="btn btn-danger btn-sm">Logout</a>
 
@@ -91,8 +87,8 @@
                         <li><a href="/index">Dashboard</a></li>
                         <li><a href="/attendance">Attendance</a></li>
                         <li><a shiro:hasAnyPermissions="upload" href="/upload">Upload Data</a></li>
-                        <li><a href="/role">Role Management</a></li>
-                        <li><a href="/admin" class="menu-top-active">Configuration</a></li>
+                        <li><a shiro:hasRole="admin" href="/permission">Role Management</a></li>
+                        <li><a shiro:hasAnyPermissions="configuration" href="/admin" class="menu-top-active">Configuration</a></li>
                     </ul>
                 </div>
             </div>

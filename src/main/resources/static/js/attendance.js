@@ -42,6 +42,13 @@ $(function () {
                                     return '';
                                 }
                             }
+                        },
+                        {
+                            "data": "note",
+                            render: function(data, type, row){
+                                data = data || '';
+                                return "<span><button style='background-color: transparent; border: 0' data-id='" + row.id + "'data-note=" + data + "><i class='fa fa-pencil-square-o fa-2x' aria-hidden='true'></i></button></span>"
+                            }
                         }
                     ],
                     data: data
@@ -49,7 +56,15 @@ $(function () {
                 };
                 $("#role_table").DataTable().destroy();
                 $("#role_table").DataTable(dataTableOption);
-                $('#role_table tbody').off('click','tr').on('click', 'tr', function () {
+                $('#role_table tbody').on('click', 'button', function () {
+                    $('#note-id').val($(this)[0].dataset.id)
+                    $('#note').val($(this)[0].dataset.note);
+                    $('#myModal').modal('show');
+                } );
+                $('#role_table tbody').off('click','tr').on('click', 'td', function () {
+                    if(this.innerHTML.indexOf('button') > 0) {
+                        return;
+                    }
                     $(this).toggleClass('selected');
                 })
             }
@@ -109,7 +124,25 @@ $(function () {
                     console.error(err);
                 }
             })
+        })
 
+        $('#update_note').on('click', function(){
+            var id = $('#note-id').val();
+            var text = $('#note').val();
+            $.ajax({
+                url: "/student/updateNote",
+                method: "POSt",
+                contentType : 'application/json',
+                data: JSON.stringify({id: id, note: text}),
+                success: function(res) {
+                    alert("Add Note Successfully.");
+                    init();
+                    $('#myModal').modal('hide');
+                },
+                error: function(err) {
+                    console.error(err);
+                }
+            })
         })
     }
 })

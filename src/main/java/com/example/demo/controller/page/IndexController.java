@@ -36,7 +36,7 @@ public class IndexController {
     @RequestMapping("/upload")
     public String upload() {return "upload";}
 
-    @RequestMapping("/role")
+    @RequestMapping("/permission")
     public String role() {return "roleM";}
 
     @RequestMapping("/admin")
