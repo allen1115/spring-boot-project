@@ -12,9 +12,10 @@
     <result column="avg_attendance" jdbcType="DOUBLE" property="avgAttendance" />
     <result column="flag" jdbcType="VARCHAR" property="flag" />
     <result column="tier_4" jdbcType="VARCHAR" property="tier_4" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
 </resultMap>
   <sql id="Base_Column_List">
-    id, email, name, program, status, year_of_program, avg_attendance, email_log_id, tier_4, flag
+    id, email, name, program, status, year_of_program, avg_attendance, email_log_id, tier_4, flag, note
   </sql>
   <select id="selectAllUsersWithNullEmailId" resultMap="BaseResultMap">
     select * from student where email_log_id is null
@@ -79,6 +80,9 @@
       <if test="yearOfProgram != null">
         year_of_program,
       </if>
+      <if test="note != null">
+        note,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -98,6 +102,9 @@
       </if>
       <if test="yearOfProgram != null">
         #{yearOfProgram,jdbcType=INTEGER},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -121,6 +128,9 @@
       </if>
       <if test="emailLogId != null">
         email_log_id = #{emailLogId,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}

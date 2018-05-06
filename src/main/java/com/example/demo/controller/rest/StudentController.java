@@ -1,12 +1,10 @@
 package com.example.demo.controller.rest;
 
+import com.alibaba.fastjson.JSONObject;
 import com.example.demo.entity.Student;
 import com.example.demo.service.impl.StudentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -40,5 +38,13 @@ public class StudentController {
             total += i;
         }
         return total;
+    }
+
+    @RequestMapping(value = "/updateNote", method = RequestMethod.POST)
+    public int updateNote(@RequestBody JSONObject param) {
+        Student student = new Student();
+        student.setId(param.getLong("id"));
+        student.setNote(param.getString("note"));
+        return studentService.updateByPrimaryKeySelective(student);
     }
 }
