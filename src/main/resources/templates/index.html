@@ -81,7 +81,7 @@
                             <li><a class="menu-top-active" href="/index">Dashboard</a></li>
                             <li><a href="/attendance">Attendance</a></li>
                             <li><a shiro:hasAnyPermissions="upload" href="/upload">Upload Data</a></li>
-                            <li><a href="/role">Role Management</a></li>
+                            <li><a shiro:hasAnyPermissions="role_management" href="/permission">Role Management</a></li>
                             <li><a href="/admin">Configuration</a></li>
                         </ul>
                     </div>

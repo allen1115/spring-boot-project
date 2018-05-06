@@ -28,7 +28,7 @@
   <select id="findAllModulesForConfig" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from module where sort > 7 order by sort ASC
+    from module where sort > 8 order by sort ASC
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from module
