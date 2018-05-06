@@ -35,9 +35,9 @@ $(function () {
                             "data": "flag",
                             render : function(data) {
                                 if(data === 'red') {
-                                    return '<span><i class="fa fa-flag fa-2x pull-left" style="color: red;"></i></span>'
+                                    return '<span style="display: inline-block;vertical-align: middle"><i class="fa fa-flag fa-2x pull-left" style="color: red;"></i></span>'
                                 } else if (data === 'blue') {
-                                    return '<span><i class="fa fa-flag fa-2x pull-left" style="color: blue;"></i></span>'
+                                    return '<span style="display: inline-block;vertical-align: middle"><i class="fa fa-flag fa-2x pull-left" style="color: blue;"></i></span>'
                                 } else {
                                     return '';
                                 }
@@ -47,7 +47,7 @@ $(function () {
                             "data": "note",
                             render: function(data, type, row){
                                 data = data || '';
-                                return "<span><button style='background-color: transparent; border: 0' data-id='" + row.id + "'data-note=" + data + "><i class='fa fa-pencil-square-o fa-2x' aria-hidden='true'></i></button></span>"
+                                return "<span style=\"display: inline-block\"><button style='background-color: transparent; border: 0' data-id='" + row.id + "'data-note=" + data + "><i class='fa fa-pencil-square-o fa-2x' aria-hidden='true' style='vertical-align: middle'></i></button></span>"
                             }
                         }
                     ],
