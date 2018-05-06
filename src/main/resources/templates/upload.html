@@ -49,14 +49,9 @@
                             <div class="dropdown-menu dropdown-settings">
                                 <div class="media">
                                     <div class="media-body">
-                                        <h4 class="media-heading">Jhon Deo Alex </h4>
-                                        <h5>Developer & Designer</h5>
-
+                                        <h4 th:text="${session.user.username}" class="media-heading"></h4>
                                     </div>
                                 </div>
-                                <hr />
-                                <h5><strong>Personal Bio : </strong></h5>
-                                Anim pariatur cliche reprehen derit.
                                 <hr />
                                 <a href="/logout" class="btn btn-danger btn-sm">Logout</a>
 
@@ -80,8 +75,8 @@
                             <li><a href="/index">Dashboard</a></li>
                             <li><a href="/attendance">Attendance</a></li>
                             <li><a shiro:hasAnyPermissions="upload" href="/upload" class="menu-top-active">Upload Data</a></li>
-                            <li><a shiro:hasAnyPermissions="role_management" href="/permission">Role Management</a></li>
-                            <li><a href="/admin">Configuration</a></li>
+                            <li><a shiro:hasRole="admin" href="/permission">Role Management</a></li>
+                            <li><a shiro:hasAnyPermissions="configuration" href="/admin">Configuration</a></li>
                         </ul>
                     </div>
                 </div>

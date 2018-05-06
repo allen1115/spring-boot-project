@@ -56,9 +56,6 @@
                                     </div>
                                 </div>
                                 <hr />
-                                <h5><strong>Personal Bio : </strong></h5>
-                                Anim pariatur cliche reprehen derit.
-                                <hr />
                                 <a href="/logout" class="btn btn-danger btn-sm">Logout</a>
 
                             </div>
@@ -81,8 +78,8 @@
                             <li><a class="menu-top-active" href="/index">Dashboard</a></li>
                             <li><a href="/attendance">Attendance</a></li>
                             <li><a shiro:hasAnyPermissions="upload" href="/upload">Upload Data</a></li>
-                            <li><a shiro:hasAnyPermissions="role_management" href="/permission">Role Management</a></li>
-                            <li><a href="/admin">Configuration</a></li>
+                            <li><a shiro:hasRole="admin" href="/permission">Role Management</a></li>
+                            <li><a shiro:hasAnyPermissions="configuration" href="/admin">Configuration</a></li>
                         </ul>
                     </div>
                 </div>
