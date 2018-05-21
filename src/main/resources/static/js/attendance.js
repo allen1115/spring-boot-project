@@ -55,16 +55,16 @@ $(function () {
                 };
                 $("#role_table").DataTable().destroy();
                 $("#role_table").DataTable(dataTableOption);
-                $('#role_table tbody').on('click', 'button', function () {
+                $('#role_table tbody').off('click').on('click', 'button', function () {
                     $('#note-id').val($(this)[0].dataset.id)
                     $('#note').val($(this)[0].dataset.note);
                     $('#myModal').modal('show');
                 } );
-                $('#role_table tbody').off('click','tr').on('click', 'td', function () {
+                $('#role_table tbody').off('click','td').on('click', 'td', function () {
                     if(this.innerHTML.indexOf('button') > 0) {
                         return;
                     }
-                    $(this).toggleClass('selected');
+                    $(this).parent().toggleClass('selected');
                 })
             }
         };
@@ -117,6 +117,27 @@ $(function () {
                 data : {data: arr},
                 success : function() {
                     alert('Mark Blue Successfully.');
+                    init();
+                },
+                error : function(err){
+                    console.error(err);
+                }
+            })
+        })
+
+        $('#clear_btn').on('click', function(){
+            var Dtable = $('#role_table').DataTable();
+            var arr = [];
+            for(var i=0; i<Dtable.rows('.selected').data().length; i++) {
+                arr.push(Dtable.rows('.selected').data()[i].id)
+            }
+            console.log(arr);
+            $.ajax({
+                url : '/student/unMark',
+                method : 'POST',
+                data : {data: arr},
+                success : function() {
+                    alert('Remove Mark Successfully.');
                     init();
                 },
                 error : function(err){

@@ -1,23 +1,22 @@
-package com.example.demo.controller.page;
+package com.example.demo.controller.rest;
 
+import com.alibaba.fastjson.JSONObject;
 import com.example.demo.entity.UserLogin;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.Map;
 
-@Controller
+@RestController
 public class LoginController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(@ModelAttribute UserLogin model, Map<String, Object> map, HttpSession session) {
-        UsernamePasswordToken utoken = new UsernamePasswordToken(model.getUsername(), model.getPassword());
+    public String login(@RequestBody JSONObject param, Map<String, Object> map, HttpSession session) {
+        UsernamePasswordToken utoken = new UsernamePasswordToken(param.getString("username"), param.getString("password"));
         Subject subject = SecurityUtils.getSubject();
         try {
             subject.login(utoken); // complete login
@@ -27,9 +26,9 @@ public class LoginController {
             subject.getSession().setTimeout(1800);
             session.setMaxInactiveInterval(1800);
             map.put("user", user);
-            return "/index";
+            return "success";
         } catch (Exception e) {
-            return "login";
+            return "Invalid login, please try again!";
         }
     }
 }

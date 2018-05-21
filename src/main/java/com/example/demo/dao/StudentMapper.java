@@ -33,4 +33,6 @@ public interface StudentMapper {
     int markAsBlueById(Long aLong);
 
     Student selectStudentByEmailLogId(@Param("emailLogId")String emailLogId);
+
+    int unMark(Long aLong);
 }

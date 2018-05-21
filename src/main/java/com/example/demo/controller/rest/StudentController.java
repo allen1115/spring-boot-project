@@ -40,6 +40,16 @@ public class StudentController {
         return total;
     }
 
+    @RequestMapping(value = "/unMark", method = RequestMethod.POST)
+    public int unMark(@RequestParam(value = "data[]") Long[] param) {
+        int total = 0;
+        for (Long aParam : param) {
+            int i = studentService.unMark(aParam);
+            total += i;
+        }
+        return total;
+    }
+
     @RequestMapping(value = "/updateNote", method = RequestMethod.POST)
     public int updateNote(@RequestBody JSONObject param) {
         Student student = new Student();

@@ -288,7 +288,7 @@ $(function () {
         for (var i = 0; i < data.length; i++) {
             var html = "<div class=\"email_box\">\n" +
                 "                                <div class=\"info-name\">" + data[i].name + "</div>\n" +
-                "                                <div class=\"info-date\">" + moment(data[i].date).format('YYYY-MM-DD') + "</div>\n" +
+                "                                <div class=\"info-date\">" + moment(data[i].replied_date).format('YYYY-MM-DD') + "</div>\n" +
                 "                                <div data-email='" + data[i].email + "' data-subject='" + data[i].email_subject + "' data-content='" + data[i].absence_reason + "' ><i class=\"fa fa-eye\"></i></div>\n" +
                 "                            </div>"
             $(".right_body").append(html);

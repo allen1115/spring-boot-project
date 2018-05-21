@@ -70,6 +70,11 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public int unMark(Long aLong) {
+        return studentMapper.unMark(aLong);
+    }
+
+    @Override
     public Student findStudentByEmailLogId(String emailLogId) {
         return studentMapper.selectStudentByEmailLogId(emailLogId);
     }

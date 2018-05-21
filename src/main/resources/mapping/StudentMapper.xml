@@ -21,7 +21,7 @@
     select * from student where email_log_id is null
   </select>
   <select id="selectAllStudents" resultMap="BaseResultMap">
-    select * from student
+    select * from student order by id
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap">
     select
@@ -157,6 +157,11 @@
   <update id="markAsBlueById">
     UPDATE student
     set flag = 'blue'
+    where id = #{id}
+  </update>
+  <update id="unMark">
+    UPDATE student
+    set flag = ''
     where id = #{id}
   </update>
 </mapper>

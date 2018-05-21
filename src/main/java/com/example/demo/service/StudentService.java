@@ -24,5 +24,7 @@ public interface StudentService {
 
     int markAsBlueById(Long aLong);
 
+    int unMark(Long aLong);
+
     Student findStudentByEmailLogId(String emailLogId);
 }

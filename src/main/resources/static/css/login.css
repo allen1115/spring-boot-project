@@ -113,7 +113,7 @@ body{
 .log-bwn {
     text-align: center;
 }
-.log-bwn input[type="submit"] {
+.log-bwn input[type="button"] {
     font-size: 15px;
     font-weight: 700;
     color: #fff;
@@ -126,7 +126,7 @@ body{
     cursor:pointer;
     text-transform:uppercase;
 }
-.log-bwn input[type="submit"]:hover{
+.log-bwn input[type="button"]:hover{
     transition: all 0.3s ease;
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;

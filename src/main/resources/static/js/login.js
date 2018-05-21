@@ -1,13 +1,18 @@
 window.onload = function(){
-    $("#add-user").off("click").on("click", function(){
+    $("#login").off("click").on("click", function(){
         $.ajax({
-            url: "/user/addUser",
+            url: "/login",
             method: "post",
             data: JSON.stringify({username: $("#username").val(), password: $("#password").val()}),
             contentType: "application/json",
-            dataType: "json",
             success: function(result) {
-                alert("success " + result);
+                if(result === 'success') {
+                    window.location.href = '/';
+                } else {
+                    alert(result);
+                    $('#username').val('');
+                    $('#password').val('')
+                }
             },
             error: function(result) {
                 alert("error " + result);
