@@ -3,7 +3,6 @@ $(function () {
     event_binding();
     //init third table
     function init() {
-        // TODO add real data for student table
         var role = {
             initRoleTable: function (data) {
                 var dataTableOption = {
